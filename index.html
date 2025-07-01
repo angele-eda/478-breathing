@@ -2,79 +2,99 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>478 호흡법 오디오 가이드</title>
   <style>
     body {
-      background-color: #f0f4f8;
-      font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       height: 100vh;
       margin: 0;
-      padding: 20px;
     }
+
     h1 {
-      color: #222;
-      margin-bottom: 10px;
-      font-size: 2em;
+      color: #333;
     }
+
     p {
       color: #555;
-      margin-bottom: 20px;
-      font-size: 1em;
-      text-align: center;
     }
-    .player {
-      background-color: white;
-      padding: 20px 30px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+    .controller {
+      margin-top: 20px;
     }
-    audio {
-      width: 100%;
-      outline: none;
+
+    input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      margin-right: 10px;
     }
-    @media (max-width: 600px) {
-      body {
-        padding: 10px;
-      }
-      h1 {
-        font-size: 1.5em;
-      }
-      p {
-        font-size: 0.9em;
-      }
-      .player {
-        width: 100%;
-        padding: 15px;
-      }
+
+    button {
+      padding: 5px 10px;
+      background-color: #6c63ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #5750d3;
+    }
+
+    .status {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
     }
   </style>
 </head>
 <body>
 
   <h1>478 호흡법 오디오 가이드</h1>
-  <p>편안하게 숨을 들이쉬고, 멈추고, 내쉬어보세요.</p>
+  <p>반복 횟수를 입력하고 시작하세요.</p>
 
-  <div class="player">
-    <audio id="audio" controls>
-      <source src="478.m4a" type="audio/mp4">
-      브라우저가 오디오를 지원하지 않습니다.
-    </audio>
+  <div class="controller">
+    <input type="number" id="repeatCount" min="1" value="1">
+    <button onclick="startPlayback()">재생 시작</button>
   </div>
+
+  <audio id="audio" src="478.m4a"></audio>
+
+  <div class="status" id="status">진행 상태: 대기 중</div>
 
   <script>
     const audio = document.getElementById('audio');
-    let playCount = 0;
-    const maxPlays = 4;
+    const status = document.getElementById('status');
+    let repeatTotal = 1;
+    let currentCount = 0;
+
+    function startPlayback() {
+      repeatTotal = parseInt(document.getElementById('repeatCount').value);
+      if (isNaN(repeatTotal) || repeatTotal < 1) {
+        alert('반복 횟수를 1 이상으로 입력하세요.');
+        return;
+      }
+      currentCount = 0;
+      playAudio();
+    }
+
+    function playAudio() {
+      currentCount++;
+      status.innerText = `진행 상태: ${currentCount} / ${repeatTotal} 회 재생 중`;
+      audio.currentTime = 0;
+      audio.play();
+    }
 
     audio.addEventListener('ended', () => {
-      playCount++;
-      if (playCount < maxPlays) {
-        audio.play();
+      if (currentCount < repeatTotal) {
+        playAudio();
+      } else {
+        status.innerText = '진행 상태: 완료!';
       }
     });
   </script>
