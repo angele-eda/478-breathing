@@ -7,7 +7,7 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 100px;
+      margin: 50px;
       background-color: #f7f7f7;
     }
     h1 {
@@ -26,10 +26,24 @@
   <h1>478 호흡법 오디오 가이드</h1>
   <p>편안하게 숨을 들이쉬고, 멈추고, 내쉬어보세요.</p>
 
-  <audio controls>
+  <audio id="audioPlayer" controls>
     <source src="478.m4a" type="audio/mp4">
     브라우저가 오디오를 지원하지 않습니다.
   </audio>
+
+  <script>
+    const audio = document.getElementById('audioPlayer');
+    let playCount = 0;
+    const maxPlays = 4;
+
+    audio.addEventListener('ended', () => {
+      playCount++;
+      if (playCount < maxPlays) {
+        audio.currentTime = 0;
+        audio.play();
+      }
+    });
+  </script>
 
 </body>
 </html>
