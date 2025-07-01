@@ -2,22 +2,55 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>478 호흡법 가이드</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>478 호흡법 오디오 가이드</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 50px;
-      background-color: #f7f7f7;
+      background-color: #f0f4f8;
+      font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
     }
     h1 {
-      color: #333;
-    }
-    audio {
-      margin-top: 20px;
+      color: #222;
+      margin-bottom: 10px;
+      font-size: 2em;
     }
     p {
       color: #555;
+      margin-bottom: 20px;
+      font-size: 1em;
+      text-align: center;
+    }
+    .player {
+      background-color: white;
+      padding: 20px 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    audio {
+      width: 100%;
+      outline: none;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      h1 {
+        font-size: 1.5em;
+      }
+      p {
+        font-size: 0.9em;
+      }
+      .player {
+        width: 100%;
+        padding: 15px;
+      }
     }
   </style>
 </head>
@@ -26,20 +59,21 @@
   <h1>478 호흡법 오디오 가이드</h1>
   <p>편안하게 숨을 들이쉬고, 멈추고, 내쉬어보세요.</p>
 
-  <audio id="audioPlayer" controls>
-    <source src="478.m4a" type="audio/mp4">
-    브라우저가 오디오를 지원하지 않습니다.
-  </audio>
+  <div class="player">
+    <audio id="audio" controls>
+      <source src="478.m4a" type="audio/mp4">
+      브라우저가 오디오를 지원하지 않습니다.
+    </audio>
+  </div>
 
   <script>
-    const audio = document.getElementById('audioPlayer');
+    const audio = document.getElementById('audio');
     let playCount = 0;
     const maxPlays = 4;
 
     audio.addEventListener('ended', () => {
       playCount++;
       if (playCount < maxPlays) {
-        audio.currentTime = 0;
         audio.play();
       }
     });
