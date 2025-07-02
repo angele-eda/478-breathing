@@ -1,93 +1,76 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!DOCTYPE html><html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#000000" />
-  <title>478 Breathing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>4-7-8 Breathing</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      font-family: Arial, sans-serif;
+      overflow: hidden;
       background: #000;
       color: #fff;
+      font-family: 'Arial', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
     }
-    .container {
-      text-align: center;
-      padding: 2rem;
+    #circle {
+      width: 200px;
+      height: 200px;
+      background: #4CAF50;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      animation: none;
+      transition: all 0.3s ease-in-out;
     }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
+    @keyframes inhale {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.5); }
     }
-    .phase {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
+    @keyframes hold {
+      0% { transform: scale(1.5); }
+      100% { transform: scale(1.5); }
     }
-    .timer {
-      font-size: 4rem;
-      font-weight: bold;
-    }
-    @media (max-width: 600px) {
-      h1 { font-size: 1.5rem; }
-      .timer { font-size: 3rem; }
-      .phase { font-size: 1.2rem; }
+    @keyframes exhale {
+      0% { transform: scale(1.5); }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>478 호흡</h1>
-    <div class="phase" id="phase">들이마시세요</div>
-    <div class="timer" id="timer">4</div>
-  </div>
+  <div id="circle">Start</div>  <script>
+    const circle = document.getElementById('circle');
 
-  <script>
-    let phase = 'inhale';
-    let timeLeft = 4;
-    const phaseText = document.getElementById('phase');
-    const timerText = document.getElementById('timer');
-
-    function nextPhase() {
-      if (phase === 'inhale') {
-        phase = 'hold';
-        timeLeft = 7;
-        phaseText.textContent = '참으세요';
-      } else if (phase === 'hold') {
-        phase = 'exhale';
-        timeLeft = 8;
-        phaseText.textContent = '내쉬세요';
-      } else {
-        phase = 'inhale';
-        timeLeft = 4;
-        phaseText.textContent = '들이마시세요';
-      }
-      timerText.textContent = timeLeft;
+    function startBreathing() {
+      inhale();
     }
 
-    function countdown() {
-      if (timeLeft > 0) {
-        timeLeft--;
-        timerText.textContent = timeLeft;
-      } else {
-        nextPhase();
-      }
+    function inhale() {
+      circle.textContent = 'Inhale (4)';
+      circle.style.animation = 'inhale 4s ease-in-out forwards';
+      setTimeout(hold, 4000);
     }
 
-    setInterval(countdown, 1000);
+    function hold() {
+      circle.textContent = 'Hold (7)';
+      circle.style.animation = 'hold 7s ease-in-out forwards';
+      setTimeout(exhale, 7000);
+    }
 
-    // 주소창 자동 숨기기 (모바일)
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        window.scrollTo(0, 1);
-      }, 0);
-    });
-  </script>
-</body>
+    function exhale() {
+      circle.textContent = 'Exhale (8)';
+      circle.style.animation = 'exhale 8s ease-in-out forwards';
+      setTimeout(startBreathing, 8000);
+    }
+
+    circle.addEventListener('click', startBreathing);
+  </script></body>
 </html>
