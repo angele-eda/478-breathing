@@ -1,76 +1,143 @@
-<!DOCTYPE html><html lang="ko">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="mobile-web-app-capable" content="yes">
-  <title>4-7-8 Breathing</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>478 호흡법 오디오 가이드</title>
   <style>
-    html, body {
+    body {
+      background-color: #f0f4f8;
+      font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      background: #000;
-      color: #fff;
-      font-family: 'Arial', sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      color: #222;
+      margin-bottom: 10px;
+      font-size: 2em;
+    }
+    p {
+      color: #555;
+      margin-bottom: 20px;
+      font-size: 1em;
+      text-align: center;
+    }
+    .player {
+      background-color: white;
+      padding: 20px 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      max-width: 400px;
+      width: 100%;
+    }
+    .controller {
+      margin-top: 15px;
       display: flex;
+      gap: 10px;
       justify-content: center;
-      align-items: center;
+      flex-wrap: wrap;
     }
-    #circle {
-      width: 200px;
-      height: 200px;
-      background: #4CAF50;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
-      animation: none;
-      transition: all 0.3s ease-in-out;
+    input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      text-align: center;
     }
-    @keyframes inhale {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.5); }
+    button {
+      padding: 6px 14px;
+      background-color: #6c63ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
     }
-    @keyframes hold {
-      0% { transform: scale(1.5); }
-      100% { transform: scale(1.5); }
+    button:hover {
+      background-color: #5750d3;
     }
-    @keyframes exhale {
-      0% { transform: scale(1.5); }
-      100% { transform: scale(1); }
+    .status {
+      margin-top: 10px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      h1 {
+        font-size: 1.6em;
+      }
+      p {
+        font-size: 0.9em;
+      }
+      .player {
+        padding: 15px;
+      }
+      button {
+        padding: 5px 10px;
+      }
     }
   </style>
 </head>
 <body>
-  <div id="circle">Start</div>  <script>
-    const circle = document.getElementById('circle');
 
-    function startBreathing() {
-      inhale();
+  <h1>478 호흡법 오디오 가이드</h1>
+  <p>반복 횟수를 입력하고 시작하세요.<br>편안하게 숨을 들이쉬고, 멈추고, 내쉬어보세요.</p>
+
+  <div class="player">
+    <audio id="audio" controls>
+      <source src="478.m4a" type="audio/mp4">
+      브라우저가 오디오를 지원하지 않습니다.
+    </audio>
+
+    <div class="controller">
+      <input type="number" id="repeatCount" min="1" value="1">
+      <button onclick="startPlayback()">재생 시작</button>
+    </div>
+
+    <div class="status" id="status">진행 상태: 대기 중</div>
+  </div>
+
+  <script>
+    const audio = document.getElementById('audio');
+    const status = document.getElementById('status');
+    const repeatInput = document.getElementById('repeatCount');
+
+    let repeatTotal = 1;
+    let currentCount = 0;
+
+    function startPlayback() {
+      repeatTotal = parseInt(repeatInput.value);
+      if (isNaN(repeatTotal) || repeatTotal < 1) {
+        alert('반복 횟수를 1 이상으로 입력하세요.');
+        return;
+      }
+      currentCount = 0;
+      playAudio();
     }
 
-    function inhale() {
-      circle.textContent = 'Inhale (4)';
-      circle.style.animation = 'inhale 4s ease-in-out forwards';
-      setTimeout(hold, 4000);
+    function playAudio() {
+      currentCount++;
+      status.innerText = `진행 상태: ${currentCount} / ${repeatTotal} 회 재생 중`;
+      audio.currentTime = 0;
+      audio.play();
     }
 
-    function hold() {
-      circle.textContent = 'Hold (7)';
-      circle.style.animation = 'hold 7s ease-in-out forwards';
-      setTimeout(exhale, 7000);
-    }
+    audio.addEventListener('ended', () => {
+      if (currentCount < repeatTotal) {
+        playAudio();
+      } else {
+        status.innerText = '진행 상태: 완료!';
+      }
+    });
+  </script>
 
-    function exhale() {
-      circle.textContent = 'Exhale (8)';
-      circle.style.animation = 'exhale 8s ease-in-out forwards';
-      setTimeout(startBreathing, 8000);
-    }
-
-    circle.addEventListener('click', startBreathing);
-  </script></body>
+</body>
 </html>
