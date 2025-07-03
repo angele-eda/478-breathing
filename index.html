@@ -3,21 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <title>478 호흡법 가이드</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 50px;
-      background-color: #f7f7f7;
-    }
-    h1 {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: #f0f4f8;
       color: #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      box-sizing: border-box;
+      text-align: center;
     }
-    audio {
-      margin-top: 20px;
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
+
     p {
+      font-size: 1.2rem;
       color: #555;
+      margin-bottom: 2rem;
+    }
+
+    .phase {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .timer {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    audio {
+      margin-top: 2rem;
+    }
+
+    /* 이퀄라이저 스타일 */
+    .equalizer {
+      display: flex;
+      gap: 6px;
+      margin-top: 40px;
+      height: 40px;
+      align-items: flex-end;
+    }
+
+    .bar {
+      width: 8px;
+      height: 100%;
+      background: #00aaff;
+      animation: bounce 1.2s infinite ease-in-out;
+    }
+
+    .bar:nth-child(1) { animation-delay: 0s; }
+    .bar:nth-child(2) { animation-delay: 0.1s; }
+    .bar:nth-child(3) { animation-delay: 0.2s; }
+    .bar:nth-child(4) { animation-delay: 0.3s; }
+    .bar:nth-child(5) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 100% { height: 10%; }
+      50% { height: 100%; }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.5rem; }
+      p, .phase { font-size: 1rem; }
+      .timer { font-size: 2.5rem; }
     }
   </style>
 </head>
@@ -26,12 +84,57 @@
   <h1>478 호흡법 오디오 가이드</h1>
   <p>편안하게 숨을 들이쉬고, 멈추고, 내쉬어보세요.</p>
 
+  <div class="phase" id="phase">들이마시세요</div>
+  <div class="timer" id="timer">4</div>
+
   <audio id="audioPlayer" controls>
     <source src="love.wav" type="audio/wav">
     브라우저가 오디오를 지원하지 않습니다.
   </audio>
 
+  <div class="equalizer">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+
   <script>
+    let phase = 'inhale';
+    let timeLeft = 4;
+    const phaseText = document.getElementById('phase');
+    const timerText = document.getElementById('timer');
+
+    function nextPhase() {
+      if (phase === 'inhale') {
+        phase = 'hold';
+        timeLeft = 7; // 수정: 8초 → 7초
+        phaseText.textContent = '참으세요';
+      } else if (phase === 'hold') {
+        phase = 'exhale';
+        timeLeft = 8;
+        phaseText.textContent = '내쉬세요';
+      } else {
+        phase = 'inhale';
+        timeLeft = 4;
+        phaseText.textContent = '들이마시세요';
+      }
+      timerText.textContent = timeLeft;
+    }
+
+    function countdown() {
+      if (timeLeft > 0) {
+        timeLeft--;
+        timerText.textContent = timeLeft;
+      } else {
+        nextPhase();
+      }
+    }
+
+    setInterval(countdown, 1000);
+
+    // 오디오 4회 반복
     const audio = document.getElementById('audioPlayer');
     let playCount = 0;
     const maxPlays = 4;
