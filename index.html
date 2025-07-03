@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#000000" />
-  <title>478 Breathing</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="manifest" href="manifest.json" />
+  <title>478 호흡</title>
   <style>
     html, body {
       margin: 0;
@@ -42,6 +46,11 @@
   </style>
 </head>
 <body>
+  <audio id="bgm" autoplay loop>
+    <source src="love.wav" type="audio/wav" />
+    브라우저가 오디오 태그를 지원하지 않습니다.
+  </audio>
+
   <div class="container">
     <h1>478 호흡</h1>
     <div class="phase" id="phase">들이마시세요</div>
