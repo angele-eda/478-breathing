@@ -1,102 +1,49 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#000000" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <link rel="manifest" href="manifest.json" />
-  <title>478 호흡</title>
+  <meta charset="UTF-8">
+  <title>478 호흡법 가이드</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
+    body {
       font-family: Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-    .container {
       text-align: center;
-      padding: 2rem;
+      margin: 50px;
+      background-color: #f7f7f7;
     }
     h1 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
+      color: #333;
     }
-    .phase {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
+    audio {
+      margin-top: 20px;
     }
-    .timer {
-      font-size: 4rem;
-      font-weight: bold;
-    }
-    @media (max-width: 600px) {
-      h1 { font-size: 1.5rem; }
-      .timer { font-size: 3rem; }
-      .phase { font-size: 1.2rem; }
+    p {
+      color: #555;
     }
   </style>
 </head>
 <body>
-  <audio id="bgm" autoplay loop>
-    <source src="love.wav" type="audio/wav" />
-    브라우저가 오디오 태그를 지원하지 않습니다.
+
+  <h1>478 호흡법 오디오 가이드</h1>
+  <p>편안하게 숨을 들이쉬고, 멈추고, 내쉬어보세요.</p>
+
+  <audio id="audioPlayer" controls>
+    <source src="love.wav" type="audio/wav">
+    브라우저가 오디오를 지원하지 않습니다.
   </audio>
 
-  <div class="container">
-    <h1>478 호흡</h1>
-    <div class="phase" id="phase">들이마시세요</div>
-    <div class="timer" id="timer">4</div>
-  </div>
-
   <script>
-    let phase = 'inhale';
-    let timeLeft = 4;
-    const phaseText = document.getElementById('phase');
-    const timerText = document.getElementById('timer');
+    const audio = document.getElementById('audioPlayer');
+    let playCount = 0;
+    const maxPlays = 4;
 
-    function nextPhase() {
-      if (phase === 'inhale') {
-        phase = 'hold';
-        timeLeft = 7;
-        phaseText.textContent = '참으세요';
-      } else if (phase === 'hold') {
-        phase = 'exhale';
-        timeLeft = 8;
-        phaseText.textContent = '내쉬세요';
-      } else {
-        phase = 'inhale';
-        timeLeft = 4;
-        phaseText.textContent = '들이마시세요';
+    audio.addEventListener('ended', () => {
+      playCount++;
+      if (playCount < maxPlays) {
+        audio.currentTime = 0;
+        audio.play();
       }
-      timerText.textContent = timeLeft;
-    }
-
-    function countdown() {
-      if (timeLeft > 0) {
-        timeLeft--;
-        timerText.textContent = timeLeft;
-      } else {
-        nextPhase();
-      }
-    }
-
-    setInterval(countdown, 1000);
-
-    // 주소창 자동 숨기기 (모바일)
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        window.scrollTo(0, 1);
-      }, 0);
     });
   </script>
+
 </body>
 </html>
