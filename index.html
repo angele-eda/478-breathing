@@ -3,31 +3,31 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Breath • 4-7-8 호흡</title>
-  <meta name="description" content="4-7-8 호흡, 박스 호흡, 커스텀 타이머. 스트레스 완화용 고급 UX 호흡 앱 (정적/로컬 실행)." />
+  <title>Breath • 4-7-8</title>
+  <meta name="description" content="4-7-8 · Box · Custom. 스트레스 내려주는 호흡 리듬. 부드러운 음성 안내 + 종소리 전환." />
   <meta name="theme-color" content="#0b0f17" />
   <meta name="robots" content="index,follow" />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --bg:#070a10;
-      --panel: rgba(255,255,255,.05);
+      --panel: rgba(255,255,255,.055);
       --panel2: rgba(255,255,255,.075);
       --stroke: rgba(255,255,255,.10);
-      --stroke2: rgba(255,255,255,.14);
-      --text: rgba(255,255,255,.90);
+      --stroke2: rgba(255,255,255,.16);
+      --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.62);
       --muted2: rgba(255,255,255,.50);
+
       --good: rgba(130,255,210,.95);
-      --warn: rgba(255,214,117,.95);
-      --bad: rgba(255,128,144,.95);
-      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --cool: rgba(119,168,255,.92);
+      --warm: rgba(255,214,117,.92);
+
+      --shadow: 0 18px 60px rgba(0,0,0,.46);
       --r: 18px;
       --r2: 22px;
       --focus: 0 0 0 3px rgba(130,255,210,.22);
@@ -40,174 +40,194 @@
       font-family: Inter, "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(1200px 700px at 20% 10%, rgba(130,255,210,.08), transparent 60%),
-        radial-gradient(900px 600px at 80% 30%, rgba(119,168,255,.08), transparent 55%),
-        radial-gradient(900px 600px at 55% 95%, rgba(255,214,117,.06), transparent 55%),
+        radial-gradient(1200px 700px at 20% 10%, rgba(130,255,210,.09), transparent 60%),
+        radial-gradient(900px 650px at 80% 25%, rgba(119,168,255,.09), transparent 58%),
+        radial-gradient(900px 650px at 50% 95%, rgba(255,214,117,.07), transparent 60%),
         linear-gradient(180deg, #060810, #070a10 40%, #070a10);
       overflow-x:hidden;
     }
-
     a{ color:inherit; text-decoration:none; }
-    button, input, select { font: inherit; }
+    button, input { font: inherit; }
+
     .wrap{
       max-width: 980px;
       margin: 0 auto;
-      padding: 22px 18px 28px;
+      padding: 18px 16px 22px;
     }
 
-    /* Top bar */
+    /* Top bar (minimal) */
     .top{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .brand{
       display:flex;
       align-items:center;
       gap:12px;
       user-select:none;
+      min-width: 0;
     }
     .logo{
       width:38px; height:38px;
-      border-radius: 12px;
+      border-radius: 14px;
       background:
-        radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,.40), transparent 60%),
+        radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,.38), transparent 60%),
         linear-gradient(135deg, rgba(130,255,210,.95), rgba(119,168,255,.90));
       box-shadow: 0 10px 30px rgba(0,0,0,.35);
       position:relative;
       overflow:hidden;
+      flex:0 0 auto;
     }
     .logo:after{
       content:"";
-      position:absolute; inset:-40%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+      position:absolute; inset:-55%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
       transform: rotate(25deg);
-      animation: sheen 5.4s linear infinite;
+      animation: sheen 6.0s linear infinite;
       opacity:.7;
     }
     @keyframes sheen{
       0%{ transform: translateX(-40%) rotate(25deg); }
       100%{ transform: translateX(40%) rotate(25deg); }
     }
+    .brandTxt{ min-width:0; }
     .brand h1{
       font-size: 16px;
       margin:0;
-      letter-spacing: .2px;
-      font-weight: 800;
-      line-height: 1.1;
+      font-weight: 900;
+      letter-spacing:.2px;
+      line-height:1.1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
     .brand p{
-      margin:0;
+      margin:4px 0 0;
       font-size: 12px;
       color: var(--muted);
-      letter-spacing: .2px;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
     .topActions{
       display:flex;
       align-items:center;
       gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
+      flex:0 0 auto;
     }
-    .pill{
-      display:flex; align-items:center; gap:8px;
-      padding: 10px 12px;
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 9px 12px;
       border-radius: 999px;
       border: 1px solid var(--stroke);
       background: rgba(255,255,255,.04);
-      box-shadow: 0 10px 30px rgba(0,0,0,.22);
       backdrop-filter: blur(10px);
-    }
-    .pill small{ color: var(--muted); font-weight:600; }
-    .pill strong{ font-weight:800; letter-spacing:.2px; }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding: 11px 14px;
-      border-radius: 14px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      cursor:pointer;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,.22);
+      font-weight: 800;
+      font-size: 12px;
+      color: rgba(255,255,255,.84);
       user-select:none;
       white-space:nowrap;
     }
-    .btn:hover{ transform: translateY(-1px); border-color: var(--stroke2); background: rgba(255,255,255,.06); }
-    .btn:active{ transform: translateY(0px) scale(.99); }
-    .btn:focus-visible{ outline: none; box-shadow: var(--focus); }
-    .btn.primary{
-      border-color: rgba(130,255,210,.22);
-      background: linear-gradient(135deg, rgba(130,255,210,.18), rgba(119,168,255,.14));
-    }
-    .btn.danger{
-      border-color: rgba(255,128,144,.22);
-      background: linear-gradient(135deg, rgba(255,128,144,.16), rgba(255,214,117,.10));
-    }
-    .btn svg{ width:18px; height:18px; opacity:.92; }
-
-    /* Layout */
-    .grid{
-      display:grid;
-      grid-template-columns: 1.25fr .85fr;
-      gap: 14px;
-      align-items:stretch;
-    }
-    @media (max-width: 900px){
-      .grid{ grid-template-columns: 1fr; }
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: rgba(255,255,255,.30);
+      box-shadow: 0 0 0 2px rgba(255,255,255,.06);
     }
 
+    .btnIcon{
+      width: 42px; height: 42px;
+      display:grid; place-items:center;
+      border-radius: 14px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,.22);
+      backdrop-filter: blur(10px);
+    }
+    .btnIcon:hover{ transform: translateY(-1px); border-color: var(--stroke2); background: rgba(255,255,255,.06); }
+    .btnIcon:active{ transform: translateY(0) scale(.99); }
+    .btnIcon:focus-visible{ outline:none; box-shadow: var(--focus); }
+    .btnIcon svg{ width:18px; height:18px; opacity:.9; }
+
+    /* Main card */
     .card{
       border-radius: var(--r2);
       border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.045);
+      background: rgba(255,255,255,.05);
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
       overflow:hidden;
       position:relative;
     }
-    .card .hdr{
-      padding: 16px 16px 12px;
+    .cardHdr{
+      padding: 14px 16px 12px;
       border-bottom: 1px solid rgba(255,255,255,.06);
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
       gap:12px;
     }
-    .title{
+    .cardHdr .title{
       margin:0;
-      font-size: 14px;
-      letter-spacing: .2px;
-      font-weight: 800;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing:.2px;
     }
-    .sub{
+    .cardHdr .sub{
       margin:6px 0 0;
       font-size: 12px;
       color: var(--muted);
       line-height:1.5;
+      max-width: 54ch;
     }
 
-    .content{ padding: 14px 16px 16px; }
-
-    /* Breath stage */
-    .stage{
-      display:flex;
+    .kbdHint{
+      display:none;
       align-items:center;
-      justify-content:center;
-      padding: 14px 12px 10px;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px dashed rgba(255,255,255,.18);
+      background: rgba(255,255,255,.03);
+      color: rgba(255,255,255,.78);
+      font-weight: 800;
+      font-size: 12px;
+      user-select:none;
+      white-space:nowrap;
+      flex:0 0 auto;
     }
+    @media (hover:hover) and (pointer:fine){
+      .kbdHint{ display:inline-flex; }
+    }
+
+    .content{
+      padding: 14px 16px 16px;
+    }
+
+    /* Orb stage */
+    .stage{
+      display:grid;
+      grid-template-columns: 1fr;
+      place-items:center;
+      padding: 12px 0 4px;
+    }
+
     .orbWrap{
-      width: min(420px, 92vw);
+      width: min(480px, 92vw);
       aspect-ratio: 1 / 1;
+      position:relative;
       display:grid;
       place-items:center;
-      position:relative;
     }
 
     .ring{
@@ -223,7 +243,8 @@
       box-shadow:
         inset 0 0 0 1px rgba(255,255,255,.06),
         0 26px 70px rgba(0,0,0,.55);
-      position:relative;
+      position:absolute;
+      inset:0;
       overflow:hidden;
     }
     .ring:before{
@@ -237,19 +258,19 @@
         rgba(130,255,210,.12)
       );
       filter: blur(10px);
-      animation: swirl 10s linear infinite;
-      opacity:.85;
+      animation: swirl 12s linear infinite;
+      opacity:.82;
     }
     @keyframes swirl{ to{ transform: rotate(360deg); } }
 
     .orb{
-      width: 54%;
-      height: 54%;
+      width: 56%;
+      height: 56%;
       border-radius: 999px;
       background:
-        radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), rgba(255,255,255,.08) 45%, transparent 65%),
-        radial-gradient(circle at 65% 75%, rgba(130,255,210,.35), transparent 55%),
-        radial-gradient(circle at 40% 75%, rgba(119,168,255,.25), transparent 55%),
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.33), rgba(255,255,255,.08) 45%, transparent 65%),
+        radial-gradient(circle at 65% 75%, rgba(130,255,210,.34), transparent 55%),
+        radial-gradient(circle at 40% 75%, rgba(119,168,255,.24), transparent 55%),
         rgba(255,255,255,.02);
       border: 1px solid rgba(255,255,255,.14);
       box-shadow:
@@ -259,47 +280,53 @@
       display:grid;
       place-items:center;
       transform: scale(1);
-      transition: transform 420ms cubic-bezier(.2,.8,.2,1);
+      transition: transform 520ms cubic-bezier(.2,.8,.2,1), filter 520ms cubic-bezier(.2,.8,.2,1);
       z-index:2;
     }
 
     .phase{
       text-align:center;
-      padding: 10px 12px;
+      padding: 10px 14px;
+      width: 100%;
     }
     .phase .label{
       font-size: 12px;
-      color: var(--muted);
+      color: rgba(255,255,255,.70);
       letter-spacing: .28em;
       text-transform: uppercase;
-      font-weight: 800;
+      font-weight: 900;
     }
     .phase .big{
-      margin-top:8px;
-      font-size: 34px;
-      letter-spacing: .2px;
-      font-weight: 900;
+      margin-top:10px;
+      font-size: 36px;
+      font-weight: 950;
+      letter-spacing:.2px;
       line-height:1.05;
     }
-    .phase .count{
-      margin-top: 10px;
-      font-variant-numeric: tabular-nums;
-      font-size: 16px;
+    .phase .hint{
+      margin-top:10px;
+      font-size: 13px;
       color: rgba(255,255,255,.80);
-      letter-spacing:.2px;
       font-weight: 800;
+      letter-spacing:.2px;
+      line-height:1.35;
+      min-height: 2.7em;
     }
-
-    /* progress */
-    .progressRow{
+    .metaRow{
+      margin-top: 12px;
       display:flex;
       align-items:center;
-      justify-content:space-between;
+      justify-content:center;
       gap:10px;
-      margin-top: 6px;
+      font-size: 12px;
+      color: rgba(255,255,255,.66);
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
     }
+
     .bar{
-      flex:1;
+      margin: 14px auto 0;
+      width: min(560px, 92vw);
       height: 10px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.10);
@@ -313,48 +340,172 @@
       width:0%;
       background: linear-gradient(90deg, rgba(130,255,210,.75), rgba(119,168,255,.75));
       border-radius: 999px;
-      transition: width 160ms linear;
-    }
-    .meta{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      white-space:nowrap;
+      transition: width 140ms linear;
     }
 
-    /* Right panel controls */
+    /* Primary controls (brand-first) */
+    .ctaRow{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 14px 0 6px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 12px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      user-select:none;
+      white-space:nowrap;
+      font-weight: 900;
+      letter-spacing:.2px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.28);
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: var(--stroke2); background: rgba(255,255,255,.06); }
+    .btn:active{ transform: translateY(0) scale(.99); }
+    .btn:focus-visible{ outline:none; box-shadow: var(--focus); }
+    .btn svg{ width:18px; height:18px; opacity:.92; }
+
+    .btn.primary{
+      min-width: 190px;
+      border-color: rgba(130,255,210,.24);
+      background: linear-gradient(135deg, rgba(130,255,210,.20), rgba(119,168,255,.14));
+    }
+    .btn.ghost{
+      border-color: rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      color: rgba(255,255,255,.86);
+    }
+
+    /* Bottom sheet */
+    .sheetBackdrop{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.55);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease;
+      z-index: 50;
+    }
+    .sheetBackdrop.on{
+      opacity:1;
+      pointer-events:auto;
+    }
+    .sheet{
+      position:fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -8px;
+      width: min(980px, 100vw);
+      border-radius: 22px 22px 0 0;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(12,16,24,.88);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 -22px 80px rgba(0,0,0,.55);
+      z-index: 60;
+      max-height: 82vh;
+      overflow:hidden;
+      translate: 0 100%;
+      transition: translate .22s ease;
+    }
+    .sheet.on{ translate: 0 0; }
+
+    .sheetHdr{
+      padding: 12px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .grab{
+      width: 44px; height: 5px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+      margin: 2px auto 10px;
+    }
+    .sheetTitle{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
+    .sheetTitle b{
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing:.2px;
+    }
+    .sheetTitle span{
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .sheetClose{
+      width: 42px; height: 42px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      display:grid; place-items:center;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease;
+    }
+    .sheetClose:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); }
+    .sheetClose:active{ transform: translateY(0) scale(.99); }
+    .sheetClose:focus-visible{ outline:none; box-shadow: var(--focus); }
+    .sheetClose svg{ width:18px; height:18px; opacity:.9; }
+
+    .sheetBody{
+      padding: 14px 16px 18px;
+      overflow:auto;
+      max-height: calc(82vh - 64px);
+    }
+
     .seg{
       display:flex;
       gap:8px;
       flex-wrap:wrap;
+      margin-bottom: 12px;
     }
-    .chip{
+    .seg .segBtn{
       padding: 10px 12px;
       border-radius: 999px;
-      border: 1px solid var(--stroke);
+      border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       cursor:pointer;
-      user-select:none;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
       font-size: 12px;
-      font-weight: 800;
-      color: rgba(255,255,255,.82);
+      font-weight: 950;
+      color: rgba(255,255,255,.84);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      user-select:none;
     }
-    .chip:hover{ transform: translateY(-1px); border-color: var(--stroke2); background: rgba(255,255,255,.06); }
-    .chip[aria-pressed="true"]{
+    .seg .segBtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); }
+    .seg .segBtn[aria-pressed="true"]{
       border-color: rgba(130,255,210,.22);
       background: linear-gradient(135deg, rgba(130,255,210,.16), rgba(119,168,255,.12));
       color: rgba(255,255,255,.92);
     }
-    .row{
+
+    .grid2{
       display:grid;
       grid-template-columns: 1fr;
       gap:10px;
-      margin-top: 14px;
     }
+    @media (min-width: 820px){
+      .grid2{ grid-template-columns: 1fr 1fr; }
+    }
+
     .field{
       display:flex;
       align-items:center;
@@ -363,24 +514,25 @@
       padding: 12px 12px;
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.10);
-    }
-    .field label{
-      font-size: 12px;
-      font-weight: 800;
-      color: rgba(255,255,255,.82);
-      letter-spacing:.2px;
-    }
-    .field .hint{
-      font-size: 11px;
-      color: var(--muted2);
-      margin-top:4px;
-      font-weight:700;
+      background: rgba(0,0,0,.12);
     }
     .field .left{
       display:flex;
       flex-direction:column;
       gap:2px;
+      min-width:0;
+    }
+    .field label{
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing:.2px;
+      color: rgba(255,255,255,.86);
+    }
+    .field .hint{
+      font-size: 11px;
+      color: var(--muted2);
+      font-weight: 700;
+      line-height:1.35;
     }
 
     .num{
@@ -389,15 +541,16 @@
       gap:8px;
       min-width: 170px;
       justify-content:flex-end;
+      flex: 0 0 auto;
     }
     .num input{
-      width: 86px;
+      width: 88px;
       padding: 10px 10px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       color: rgba(255,255,255,.92);
-      font-weight: 900;
+      font-weight: 950;
       text-align:right;
       outline:none;
     }
@@ -405,15 +558,18 @@
     .unit{
       font-size: 12px;
       color: var(--muted);
-      font-weight: 800;
+      font-weight: 900;
     }
 
     .toggle{
-      display:flex; align-items:center; gap:10px; justify-content:space-between;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
       padding: 12px 12px;
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.10);
+      background: rgba(0,0,0,.12);
     }
     .switch{
       width: 46px; height: 28px;
@@ -439,23 +595,13 @@
     }
     .switch[data-on="true"] i{ left: 22px; background: rgba(130,255,210,.95); }
 
-    .footerNote{
+    .note{
       margin-top: 12px;
       font-size: 12px;
       color: var(--muted);
-      line-height: 1.55;
+      line-height: 1.6;
     }
-    .k{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px dashed rgba(255,255,255,.18);
-      background: rgba(255,255,255,.03);
-      font-weight: 800;
-      margin-top: 10px;
-    }
+
     .srOnly{
       position:absolute !important;
       height:1px; width:1px;
@@ -464,221 +610,257 @@
       white-space:nowrap;
     }
 
-    /* reduced motion */
     @media (prefers-reduced-motion: reduce){
       *{ animation:none !important; transition:none !important; }
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
+    <!-- Top -->
     <div class="top">
-      <div class="brand" aria-label="Breath App">
+      <div class="brand">
         <div class="logo" aria-hidden="true"></div>
-        <div>
+        <div class="brandTxt">
           <h1>Breath</h1>
           <p>4-7-8 · Box · Custom — 스트레스 내려주는 리듬</p>
         </div>
       </div>
 
       <div class="topActions">
-        <div class="pill" title="현재 상태">
-          <small>Phase</small>
-          <strong id="pillPhase">Ready</strong>
+        <div class="chip" title="현재 단계">
+          <span class="dot" id="phaseDot" aria-hidden="true"></span>
+          <span id="phaseChipText">Ready</span>
         </div>
-        <button class="btn" id="btnReset" type="button" title="초기화">
+        <button class="btnIcon" id="btnSheet" type="button" title="설정">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M21 12a9 9 0 1 1-3.2-6.9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M21 3v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" stroke="currentColor" stroke-width="2"/>
+            <path d="M19.4 15a7.8 7.8 0 0 0 .1-1l2-1.2-2-3.4-2.3.6a7.7 7.7 0 0 0-1.7-1l-.3-2.4H9.8l-.3 2.4a7.7 7.7 0 0 0-1.7 1l-2.3-.6-2 3.4 2 1.2a7.8 7.8 0 0 0 .1 1 7.8 7.8 0 0 0-.1 1l-2 1.2 2 3.4 2.3-.6c.5.4 1.1.7 1.7 1l.3 2.4h4.4l.3-2.4c.6-.3 1.2-.6 1.7-1l2.3.6 2-3.4-2-1.2a7.8 7.8 0 0 0-.1-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
           </svg>
-          Reset
-        </button>
-        <button class="btn primary" id="btnStart" type="button" title="시작/일시정지">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path id="iconPlay" d="M9 7l10 5-10 5V7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            <path id="iconPause" d="M7 6v12M17 6v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"/>
-          </svg>
-          <span id="btnStartText">Start</span>
         </button>
       </div>
     </div>
 
-    <div class="grid">
-      <!-- Main stage -->
-      <section class="card" aria-label="Breathing stage">
-        <div class="hdr">
-          <div>
-            <h2 class="title">가이드</h2>
-            <p class="sub">
-              화면의 지시에 맞춰 천천히 호흡하세요. 어지러우면 즉시 중단하고 <b>4-4-6</b>처럼 더 짧게 조정해도 됩니다.
-            </p>
-          </div>
-          <div class="k" title="단축키">
-            ⌨️ <span>Space 시작/정지 · R 리셋</span>
-          </div>
+    <!-- Main -->
+    <section class="card" aria-label="Breathing stage">
+      <div class="cardHdr">
+        <div>
+          <h2 class="title">가이드</h2>
+          <p class="sub">
+            화면의 지시에 맞춰 천천히 호흡하세요. 어지러우면 즉시 중단하고 4-4-6처럼 더 짧게 조정해도 됩니다.
+          </p>
         </div>
+        <div class="kbdHint" title="단축키(PC)">
+          ⌨️ <span>Space 시작/정지 · R 리셋</span>
+        </div>
+      </div>
 
-        <div class="content">
-          <div class="stage">
-            <div class="orbWrap">
-              <div class="ring" aria-hidden="true"></div>
-              <div class="orb" id="orb">
-                <div class="phase" role="status" aria-live="polite" aria-atomic="true">
-                  <div class="label" id="phaseLabel">READY</div>
-                  <div class="big" id="phaseText">준비</div>
-                  <div class="count" id="countText">—</div>
-
-                  <div class="progressRow" aria-label="progress">
-                    <div class="bar" aria-hidden="true"><i id="barFill"></i></div>
-                    <div class="meta">
-                      <span id="cycleText">0 / 4 cycles</span>
-                      <span>•</span>
-                      <span id="totalText">00:00</span>
-                    </div>
-                  </div>
+      <div class="content">
+        <div class="stage">
+          <div class="orbWrap">
+            <div class="ring" aria-hidden="true"></div>
+            <div class="orb" id="orb">
+              <div class="phase" role="status" aria-live="polite" aria-atomic="true">
+                <div class="label" id="phaseLabel">READY</div>
+                <div class="big" id="phaseText">준비</div>
+                <div class="hint" id="phaseHint">Start를 눌러 시작하세요</div>
+                <div class="metaRow">
+                  <span id="cycleText">0 / 4 cycles</span>
+                  <span>•</span>
+                  <span id="totalText">00:00</span>
                 </div>
               </div>
-
-              <p class="srOnly" id="srAnnounce"></p>
             </div>
+            <p class="srOnly" id="srAnnounce"></p>
+          </div>
+
+          <div class="bar" aria-hidden="true">
+            <i id="barFill"></i>
+          </div>
+
+          <div class="ctaRow">
+            <button class="btn ghost" id="btnReset" type="button" title="리셋">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M21 12a9 9 0 1 1-3.2-6.9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M21 3v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Reset
+            </button>
+
+            <button class="btn primary" id="btnStart" type="button" title="시작/일시정지">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path id="iconPlay" d="M9 7l10 5-10 5V7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <path id="iconPause" d="M7 6v12M17 6v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"/>
+              </svg>
+              <span id="btnStartText">Start</span>
+            </button>
           </div>
         </div>
-      </section>
-
-      <!-- Controls -->
-      <aside class="card" aria-label="Controls">
-        <div class="hdr">
-          <div>
-            <h2 class="title">프로토콜</h2>
-            <p class="sub">4-7-8(기본) / 박스 / 커스텀. 횟수·진동·사운드까지.</p>
-          </div>
-        </div>
-
-        <div class="content">
-          <div class="seg" role="group" aria-label="Select protocol">
-            <button class="chip" type="button" data-mode="478" aria-pressed="true">4-7-8</button>
-            <button class="chip" type="button" data-mode="box" aria-pressed="false">Box</button>
-            <button class="chip" type="button" data-mode="custom" aria-pressed="false">Custom</button>
-          </div>
-
-          <div class="row">
-            <div class="field">
-              <div class="left">
-                <label for="inSec">들이마시기</label>
-                <div class="hint">코로 천천히</div>
-              </div>
-              <div class="num">
-                <input id="inSec" type="number" min="1" max="20" step="1" value="4" inputmode="numeric" />
-                <span class="unit">sec</span>
-              </div>
-            </div>
-
-            <div class="field">
-              <div class="left">
-                <label for="holdSec">멈춤(홀드)</label>
-                <div class="hint">힘주지 말고 정지</div>
-              </div>
-              <div class="num">
-                <input id="holdSec" type="number" min="0" max="30" step="1" value="7" inputmode="numeric" />
-                <span class="unit">sec</span>
-              </div>
-            </div>
-
-            <div class="field">
-              <div class="left">
-                <label for="outSec">내쉬기</label>
-                <div class="hint">입으로 길게</div>
-              </div>
-              <div class="num">
-                <input id="outSec" type="number" min="1" max="30" step="1" value="8" inputmode="numeric" />
-                <span class="unit">sec</span>
-              </div>
-            </div>
-
-            <div class="field">
-              <div class="left">
-                <label for="cycles">반복 횟수</label>
-                <div class="hint">기본 4회 (필요시 2~6)</div>
-              </div>
-              <div class="num">
-                <input id="cycles" type="number" min="1" max="20" step="1" value="4" inputmode="numeric" />
-                <span class="unit">cycles</span>
-              </div>
-            </div>
-
-            <div class="toggle">
-              <div class="left">
-                <label>진동(모바일)</label>
-                <div class="hint">단계 전환 시 짧게</div>
-              </div>
-              <div class="switch" id="swVibe" data-on="true" role="switch" aria-checked="true" tabindex="0" title="Toggle vibration">
-                <i aria-hidden="true"></i>
-              </div>
-            </div>
-
-            <div class="toggle">
-              <div class="left">
-                <label>사운드(비프)</label>
-                <div class="hint">단계 전환 시 짧게</div>
-              </div>
-              <div class="switch" id="swBeep" data-on="false" role="switch" aria-checked="false" tabindex="0" title="Toggle beep">
-                <i aria-hidden="true"></i>
-              </div>
-            </div>
-
-            <div class="footerNote">
-              <b>팁:</b> 스트레스가 강하면 <b>4-4-6</b>으로 낮춰서 시작하고,
-              안정되면 4-7-8로 올리면 몸이 훨씬 편해져요.
-            </div>
-          </div>
-        </div>
-      </aside>
-    </div>
+      </div>
+    </section>
   </div>
 
+  <!-- Bottom Sheet -->
+  <div class="sheetBackdrop" id="sheetBackdrop" aria-hidden="true"></div>
+  <section class="sheet" id="sheet" aria-label="Settings panel" role="dialog" aria-modal="true">
+    <div class="grab" aria-hidden="true"></div>
+    <div class="sheetHdr">
+      <div class="sheetTitle">
+        <b>프로토콜</b>
+        <span>4-7-8(기본) · Box · Custom · 음성/종소리</span>
+      </div>
+      <button class="sheetClose" id="btnSheetClose" type="button" title="닫기">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="sheetBody">
+      <div class="seg" role="group" aria-label="Select protocol">
+        <button class="segBtn" type="button" data-mode="478" aria-pressed="true">4-7-8</button>
+        <button class="segBtn" type="button" data-mode="box" aria-pressed="false">Box</button>
+        <button class="segBtn" type="button" data-mode="custom" aria-pressed="false">Custom</button>
+      </div>
+
+      <div class="grid2">
+        <div class="field">
+          <div class="left">
+            <label for="inSec">들이마시기</label>
+            <div class="hint">코로 천천히</div>
+          </div>
+          <div class="num">
+            <input id="inSec" type="number" min="1" max="20" step="1" value="4" inputmode="numeric" />
+            <span class="unit">sec</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="left">
+            <label for="holdSec">멈춤(홀드)</label>
+            <div class="hint">힘주지 말고 정지</div>
+          </div>
+          <div class="num">
+            <input id="holdSec" type="number" min="0" max="30" step="1" value="7" inputmode="numeric" />
+            <span class="unit">sec</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="left">
+            <label for="outSec">내쉬기</label>
+            <div class="hint">입으로 길게</div>
+          </div>
+          <div class="num">
+            <input id="outSec" type="number" min="1" max="30" step="1" value="8" inputmode="numeric" />
+            <span class="unit">sec</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="left">
+            <label for="cycles">반복 횟수</label>
+            <div class="hint">기본 4회 (필요시 2~6)</div>
+          </div>
+          <div class="num">
+            <input id="cycles" type="number" min="1" max="20" step="1" value="4" inputmode="numeric" />
+            <span class="unit">cycles</span>
+          </div>
+        </div>
+
+        <div class="toggle">
+          <div class="left">
+            <label>음성 안내</label>
+            <div class="hint">단계 시작만 부드럽게 (숫자 카운트 없음)</div>
+          </div>
+          <div class="switch" id="swVoice" data-on="true" role="switch" aria-checked="true" tabindex="0" title="Toggle voice">
+            <i aria-hidden="true"></i>
+          </div>
+        </div>
+
+        <div class="toggle">
+          <div class="left">
+            <label>종소리(Chime)</label>
+            <div class="hint">단계 전환 시 아주 짧게</div>
+          </div>
+          <div class="switch" id="swChime" data-on="true" role="switch" aria-checked="true" tabindex="0" title="Toggle chime">
+            <i aria-hidden="true"></i>
+          </div>
+        </div>
+
+        <div class="toggle">
+          <div class="left">
+            <label>진동(모바일)</label>
+            <div class="hint">단계 전환 시 짧게</div>
+          </div>
+          <div class="switch" id="swVibe" data-on="true" role="switch" aria-checked="true" tabindex="0" title="Toggle vibration">
+            <i aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="note">
+        <b>브랜드 팁:</b> 스트레스가 강하면 <b>4-4-6</b>으로 낮춰서 시작하고, 안정되면 4-7-8로 올리면 몸이 훨씬 편해져요.
+      </div>
+    </div>
+  </section>
+
   <script>
-    // ====== Breath App (Pro UX, single file) ======
+    // ====== Breath (Brand UX) - single file ======
     const $ = (s)=>document.querySelector(s);
     const $$ = (s)=>Array.from(document.querySelectorAll(s));
 
     const el = {
-      pillPhase: $("#pillPhase"),
+      // top
+      phaseDot: $("#phaseDot"),
+      phaseChipText: $("#phaseChipText"),
+      btnSheet: $("#btnSheet"),
+
+      // stage
+      orb: $("#orb"),
+      phaseLabel: $("#phaseLabel"),
+      phaseText: $("#phaseText"),
+      phaseHint: $("#phaseHint"),
+      cycleText: $("#cycleText"),
+      totalText: $("#totalText"),
+      barFill: $("#barFill"),
+      sr: $("#srAnnounce"),
+
+      // buttons
       btnStart: $("#btnStart"),
       btnStartText: $("#btnStartText"),
       btnReset: $("#btnReset"),
       iconPlay: $("#iconPlay"),
       iconPause: $("#iconPause"),
 
-      phaseLabel: $("#phaseLabel"),
-      phaseText: $("#phaseText"),
-      countText: $("#countText"),
-
-      barFill: $("#barFill"),
-      cycleText: $("#cycleText"),
-      totalText: $("#totalText"),
-      orb: $("#orb"),
-      sr: $("#srAnnounce"),
+      // sheet
+      sheet: $("#sheet"),
+      sheetBackdrop: $("#sheetBackdrop"),
+      btnSheetClose: $("#btnSheetClose"),
+      modeBtns: $$("[data-mode]"),
 
       inSec: $("#inSec"),
       holdSec: $("#holdSec"),
       outSec: $("#outSec"),
       cycles: $("#cycles"),
 
+      swVoice: $("#swVoice"),
+      swChime: $("#swChime"),
       swVibe: $("#swVibe"),
-      swBeep: $("#swBeep"),
-      chips: $$("[data-mode]")
     };
 
     const state = {
       running: false,
       mode: "478",
-      vibe: true,
-      beep: false,
-
       inSec: 4,
       holdSec: 7,
       outSec: 8,
       cycles: 4,
+
+      voice: true,
+      chime: true,
+      vibe: true,
 
       phaseIndex: 0,
       phaseLeft: 0,
@@ -686,16 +868,19 @@
 
       totalElapsed: 0,
       raf: null,
-      timer: null,
       lastTick: 0,
+      _acc: 0,
 
-      audioCtx: null
+      audioCtx: null,
+      voiceReady: false,
+      selectedVoice: null,
     };
 
-    const phases = [
-      { key:"in",   label:"INHALE", text:"들이마시기", scale: 1.12, accent:"good" },
-      { key:"hold", label:"HOLD",   text:"멈춤",     scale: 1.00, accent:"warn" },
-      { key:"out",  label:"EXHALE", text:"내쉬기",   scale: 0.88, accent:"good" }
+    // Brand phases (no counting voice; voice only at phase start)
+    const phase3 = [
+      { key:"in",   label:"INHALE", text:"들이마시기", hint:"코로 천천히 들이마십니다", scale: 1.14, dot: "good" },
+      { key:"hold", label:"HOLD",   text:"멈춤",     hint:"힘주지 말고 고요히 멈춥니다", scale: 1.00, dot: "warm" },
+      { key:"out",  label:"EXHALE", text:"내쉬기",   hint:"입으로 길게 내쉽니다",     scale: 0.88, dot: "cool" }
     ];
 
     function pad2(n){ return String(n).padStart(2,"0"); }
@@ -704,7 +889,6 @@
       const s = Math.floor(sec%60);
       return `${pad2(m)}:${pad2(s)}`;
     }
-
     function clampInt(v, min, max){
       v = Number.isFinite(+v) ? Math.round(+v) : min;
       return Math.max(min, Math.min(max, v));
@@ -716,40 +900,45 @@
       state.outSec  = clampInt(el.outSec.value, 1, 30);
       state.cycles  = clampInt(el.cycles.value, 1, 20);
 
-      // reflect sanitized values back
       el.inSec.value = state.inSec;
       el.holdSec.value = state.holdSec;
       el.outSec.value = state.outSec;
       el.cycles.value = state.cycles;
     }
 
-    function applyMode(mode){
-      state.mode = mode;
+    function phaseCount(){
+      return state.mode === "box" ? 4 : 3;
+    }
 
-      // Set defaults per protocol
-      if(mode === "478"){
-        el.inSec.value = 4;
-        el.holdSec.value = 7;
-        el.outSec.value = 8;
-        // keep cycles
-      } else if(mode === "box"){
-        // Box breathing: In-Hold-Out-Hold (we'll map to 3-phase by duplicating hold)
-        el.inSec.value = 4;
-        el.holdSec.value = 4;
-        el.outSec.value = 4;
+    function phaseDuration(idx){
+      if(state.mode !== "box"){
+        if(idx === 0) return state.inSec;
+        if(idx === 1) return state.holdSec;
+        return state.outSec;
       } else {
-        // custom: don't overwrite
+        // box: inhale-hold-exhale-hold
+        if(idx === 0) return state.inSec;
+        if(idx === 1) return state.holdSec;
+        if(idx === 2) return state.outSec;
+        return state.holdSec;
       }
+    }
 
-      // chip ui
-      el.chips.forEach(c=>{
-        const on = c.dataset.mode === mode;
-        c.setAttribute("aria-pressed", on ? "true" : "false");
-      });
+    function phaseMeta(idx){
+      if(state.mode !== "box") return phase3[idx];
+      if(idx === 0) return phase3[0];
+      if(idx === 1) return phase3[1];
+      if(idx === 2) return phase3[2];
+      return phase3[1];
+    }
 
-      readInputs();
-      reset(false);
-      renderReady();
+    function setDot(kind){
+      let c = "rgba(255,255,255,.30)";
+      if(kind === "good") c = "rgba(130,255,210,.95)";
+      if(kind === "cool") c = "rgba(119,168,255,.92)";
+      if(kind === "warm") c = "rgba(255,214,117,.92)";
+      el.phaseDot.style.background = c;
+      el.phaseDot.style.boxShadow = `0 0 0 2px rgba(255,255,255,.06), 0 0 18px ${c.replace(")",", .22)")}`;
     }
 
     function setRunning(r){
@@ -759,14 +948,94 @@
       el.iconPause.style.display = r ? "" : "none";
     }
 
-    function toggleSwitch(elSw, key){
-      const on = elSw.dataset.on === "true";
-      const next = !on;
-      elSw.dataset.on = next ? "true" : "false";
-      elSw.setAttribute("aria-checked", next ? "true" : "false");
-      state[key] = next;
-      // micro feedback
-      if(next) pulseHaptic(10);
+    function announce(msg){
+      el.sr.textContent = msg;
+    }
+
+    // ===== Voice (Web Speech API) — phase start only =====
+    function initVoices(){
+      if(!("speechSynthesis" in window)) return;
+      const pick = ()=>{
+        const voices = speechSynthesis.getVoices() || [];
+        if(!voices.length) return;
+
+        // Prefer Korean voices; many devices have multiple. We choose the "most natural" by simple heuristics.
+        const ko = voices.filter(v => (v.lang||"").toLowerCase().startsWith("ko"));
+        const pool = ko.length ? ko : voices;
+
+        // Heuristics: avoid "Google US English" etc if KO exists; prefer names that look local.
+        const preferred = pool.find(v => /korean|ko-kr|한국|korea/i.test(v.name))
+                        || pool.find(v => (v.lang||"").toLowerCase()==="ko-kr")
+                        || pool[0];
+
+        state.selectedVoice = preferred || null;
+        state.voiceReady = true;
+      };
+
+      pick();
+      speechSynthesis.onvoiceschanged = pick;
+    }
+
+    function speak(text){
+      if(!state.voice) return;
+      if(!("speechSynthesis" in window)) return;
+      try{
+        // Cancel any queued speech to keep guidance clean
+        speechSynthesis.cancel();
+
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = "ko-KR";
+        u.rate = 0.88;   // slower / calmer
+        u.pitch = 1.05;  // slightly softer
+        u.volume = 0.92;
+
+        if(state.selectedVoice) u.voice = state.selectedVoice;
+
+        speechSynthesis.speak(u);
+      }catch(e){}
+    }
+
+    // ===== Chime (Web Audio) — subtle phase transition =====
+    function ensureAudio(){
+      if(state.audioCtx) return state.audioCtx;
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(!AC) return null;
+      state.audioCtx = new AC();
+      return state.audioCtx;
+    }
+
+    function playChime(){
+      if(!state.chime) return;
+      const ctx = ensureAudio();
+      if(!ctx) return;
+
+      // soft, short, premium "ding"
+      const now = ctx.currentTime;
+      const o1 = ctx.createOscillator();
+      const o2 = ctx.createOscillator();
+      const g = ctx.createGain();
+
+      o1.type = "sine";
+      o2.type = "triangle";
+
+      // two-tone for warmth
+      o1.frequency.setValueAtTime(880, now);
+      o2.frequency.setValueAtTime(1320, now);
+
+      // envelope
+      g.gain.setValueAtTime(0.0001, now);
+      g.gain.exponentialRampToValueAtTime(0.06, now + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+
+      o1.connect(g);
+      o2.connect(g);
+      g.connect(ctx.destination);
+
+      o1.start(now);
+      o2.start(now);
+
+      o1.stop(now + 0.20);
+      o2.stop(now + 0.20);
     }
 
     function pulseHaptic(ms=12){
@@ -774,69 +1043,16 @@
       if(navigator.vibrate) navigator.vibrate(ms);
     }
 
-    function beep(){
-      if(!state.beep) return;
-      try{
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if(!AudioContext) return;
-        if(!state.audioCtx) state.audioCtx = new AudioContext();
-        const ctx = state.audioCtx;
-        const o = ctx.createOscillator();
-        const g = ctx.createGain();
-        o.type = "sine";
-        o.frequency.value = 880;
-        g.gain.value = 0.05;
-        o.connect(g);
-        g.connect(ctx.destination);
-        o.start();
-        o.stop(ctx.currentTime + 0.06);
-      }catch(e){ /* ignore */ }
-    }
-
-    function announce(msg){
-      el.sr.textContent = msg;
-    }
-
-    function phaseDuration(idx){
-      // For box mode, we simulate: inhale -> hold -> exhale -> hold
-      // Our UI is 3-phase; we'll implement 4-phase internally by phaseIndex 0..3
-      if(state.mode !== "box"){
-        if(idx === 0) return state.inSec;
-        if(idx === 1) return state.holdSec;
-        return state.outSec;
-      } else {
-        // box: [in, hold, out, hold]
-        if(idx === 0) return state.inSec;
-        if(idx === 1) return state.holdSec;
-        if(idx === 2) return state.outSec;
-        return state.holdSec;
-      }
-    }
-
-    function phaseMeta(idx){
-      if(state.mode !== "box"){
-        return phases[idx];
-      } else {
-        // 4-phase meta, last is HOLD
-        if(idx === 0) return phases[0];
-        if(idx === 1) return phases[1];
-        if(idx === 2) return phases[2];
-        return phases[1];
-      }
-    }
-
-    function phaseCount(){
-      return state.mode === "box" ? 4 : 3;
-    }
-
+    // ===== Render =====
     function renderReady(){
-      el.pillPhase.textContent = "Ready";
+      el.phaseChipText.textContent = "Ready";
+      setDot(null);
       el.phaseLabel.textContent = "READY";
       el.phaseText.textContent = "준비";
-      el.countText.textContent = "Start를 누르세요";
-      el.barFill.style.width = "0%";
+      el.phaseHint.textContent = "Start를 눌러 시작하세요";
       el.cycleText.textContent = `0 / ${state.cycles} cycles`;
       el.totalText.textContent = "00:00";
+      el.barFill.style.width = "0%";
       el.orb.style.transform = "scale(1)";
       announce("준비. 시작 버튼을 누르세요.");
     }
@@ -846,29 +1062,57 @@
       const dur = phaseDuration(state.phaseIndex);
       const left = state.phaseLeft;
 
-      el.pillPhase.textContent = meta.text;
+      el.phaseChipText.textContent = meta.text;
+      setDot(meta.dot);
+
       el.phaseLabel.textContent = meta.label;
       el.phaseText.textContent = meta.text;
-      el.countText.textContent = `${left}s`;
+      // NOTE: hint is constant phrase, not counting
+      el.phaseHint.textContent = meta.hint;
 
-      // orb scale
       el.orb.style.transform = `scale(${meta.scale})`;
 
-      // progress within current phase
       const done = Math.max(0, dur - left);
       const pct = dur === 0 ? 0 : Math.min(100, Math.max(0, (done / dur) * 100));
       el.barFill.style.width = pct.toFixed(1) + "%";
 
-      el.cycleText.textContent = `${state.cycleNow} / ${state.cycles} cycles`;
+      el.cycleText.textContent = `${Math.max(0, state.cycleNow)} / ${state.cycles} cycles`;
       el.totalText.textContent = mmss(state.totalElapsed);
 
-      announce(`${meta.text} ${left}초`);
+      announce(`${meta.text}`);
+    }
+
+    function finish(){
+      stopTimer();
+      setRunning(false);
+
+      el.phaseChipText.textContent = "Done";
+      setDot("good");
+      el.phaseLabel.textContent = "DONE";
+      el.phaseText.textContent = "완료";
+      el.phaseHint.textContent = "좋았어. 천천히 눈 감고 10초.";
+      el.barFill.style.width = "100%";
+      el.orb.style.transform = "scale(1)";
+
+      // voice only once
+      speak("완료. 좋아요.");
+      playChime();
+      pulseHaptic(22);
+      announce("호흡 완료.");
+    }
+
+    function phaseStartGuidance(){
+      // brand guidance: speak only at phase start, no counting
+      const meta = phaseMeta(state.phaseIndex);
+      if(meta.key === "in") speak("천천히 들이마십니다.");
+      else if(meta.key === "hold") speak("멈춥니다.");
+      else if(meta.key === "out") speak("길게 내쉽니다.");
     }
 
     function nextPhase(){
-      // Transition
-      pulseHaptic(12);
-      beep();
+      // transition feedback (subtle)
+      pulseHaptic(10);
+      playChime();
 
       state.phaseIndex += 1;
       if(state.phaseIndex >= phaseCount()){
@@ -881,59 +1125,9 @@
         return;
       }
 
-      const dur = phaseDuration(state.phaseIndex);
-      state.phaseLeft = dur;
+      state.phaseLeft = phaseDuration(state.phaseIndex);
       renderPhase();
-    }
-
-    function finish(){
-      stopTimer();
-      setRunning(false);
-
-      el.pillPhase.textContent = "Done";
-      el.phaseLabel.textContent = "DONE";
-      el.phaseText.textContent = "완료";
-      el.countText.textContent = "좋았어. 천천히 눈 감고 10초.";
-      el.barFill.style.width = "100%";
-      el.orb.style.transform = "scale(1)";
-      announce("호흡 완료.");
-      pulseHaptic(24);
-    }
-
-    function start(){
-      readInputs();
-      if(state.cycles < 1) state.cycles = 1;
-      reset(false);
-
-      state.running = true;
-      setRunning(true);
-
-      state.cycleNow = 1;
-      state.phaseIndex = 0;
-      state.phaseLeft = phaseDuration(0);
-      state.totalElapsed = 0;
-
-      renderPhase();
-      startTimer();
-    }
-
-    function pause(){
-      stopTimer();
-      setRunning(false);
-      state.running = false;
-      el.pillPhase.textContent = "Paused";
-      announce("일시정지.");
-    }
-
-    function resume(){
-      if(state.cycleNow === 0){
-        start();
-        return;
-      }
-      setRunning(true);
-      state.running = true;
-      startTimer();
-      announce("재개.");
+      phaseStartGuidance();
     }
 
     function reset(alsoStop=true){
@@ -946,8 +1140,48 @@
       state.phaseLeft = 0;
       state.cycleNow = 0;
       state.totalElapsed = 0;
+      state.lastTick = 0;
+      state._acc = 0;
       el.barFill.style.width = "0%";
       el.orb.style.transform = "scale(1)";
+    }
+
+    function start(){
+      readInputs();
+      reset(false);
+
+      // unlock audio on first user gesture if needed
+      ensureAudio();
+      if("speechSynthesis" in window) { try{ speechSynthesis.cancel(); }catch(e){} }
+
+      state.running = true;
+      setRunning(true);
+
+      state.cycleNow = 1;
+      state.phaseIndex = 0;
+      state.phaseLeft = phaseDuration(0);
+      state.totalElapsed = 0;
+
+      renderPhase();
+      phaseStartGuidance(); // speak once at start
+      startTimer();
+    }
+
+    function pause(){
+      stopTimer();
+      setRunning(false);
+      state.running = false;
+      el.phaseChipText.textContent = "Paused";
+      announce("일시정지.");
+      try{ if("speechSynthesis" in window) speechSynthesis.cancel(); }catch(e){}
+    }
+
+    function resume(){
+      setRunning(true);
+      state.running = true;
+      startTimer();
+      announce("재개.");
+      // no voice on resume to avoid breaking flow
     }
 
     function tick(){
@@ -956,8 +1190,7 @@
       const dt = (now - state.lastTick) / 1000;
       state.lastTick = now;
 
-      // We tick in whole seconds for clarity, but keep elapsed smooth
-      state._acc = (state._acc || 0) + dt;
+      state._acc += dt;
       if(state._acc >= 1){
         const steps = Math.floor(state._acc);
         state._acc -= steps;
@@ -968,14 +1201,13 @@
 
           if(state.phaseLeft <= 0){
             nextPhase();
-            // nextPhase renders; but if finished, break
             if(!state.running) break;
           } else {
+            // render without voice
             renderPhase();
           }
         }
       } else {
-        // update time display even between seconds
         el.totalText.textContent = mmss(state.totalElapsed);
       }
 
@@ -995,7 +1227,59 @@
       state._acc = 0;
     }
 
-    // ====== events ======
+    // ===== Sheet UX =====
+    function openSheet(){
+      el.sheetBackdrop.classList.add("on");
+      el.sheet.classList.add("on");
+    }
+    function closeSheet(){
+      el.sheetBackdrop.classList.remove("on");
+      el.sheet.classList.remove("on");
+    }
+
+    function toggleSwitch(sw, key){
+      const on = sw.dataset.on === "true";
+      const next = !on;
+      sw.dataset.on = next ? "true" : "false";
+      sw.setAttribute("aria-checked", next ? "true" : "false");
+      state[key] = next;
+
+      // tiny feedback
+      if(next) pulseHaptic(8);
+      if(key === "voice" && !next){
+        try{ if("speechSynthesis" in window) speechSynthesis.cancel(); }catch(e){}
+      }
+    }
+
+    function applyMode(mode){
+      state.mode = mode;
+
+      if(mode === "478"){
+        el.inSec.value = 4;
+        el.holdSec.value = 7;
+        el.outSec.value = 8;
+      } else if(mode === "box"){
+        el.inSec.value = 4;
+        el.holdSec.value = 4;
+        el.outSec.value = 4;
+      } // custom: keep current
+
+      el.modeBtns.forEach(b=>{
+        const on = b.dataset.mode === mode;
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+
+      readInputs();
+
+      // if running, do not hard interrupt; pause + reset for safety
+      if(state.running){
+        pause();
+      }
+      reset(true);
+      renderReady();
+    }
+
+    // ===== Events =====
     el.btnStart.addEventListener("click", ()=>{
       if(!state.running){
         if(state.cycleNow === 0) start();
@@ -1009,32 +1293,45 @@
       readInputs();
       reset(true);
       renderReady();
-      pulseHaptic(12);
+      pulseHaptic(10);
+      playChime();
     });
 
-    el.chips.forEach(ch=>{
-      ch.addEventListener("click", ()=>{
-        applyMode(ch.dataset.mode);
-        pulseHaptic(10);
+    el.btnSheet.addEventListener("click", ()=>openSheet());
+    el.btnSheetClose.addEventListener("click", ()=>closeSheet());
+    el.sheetBackdrop.addEventListener("click", ()=>closeSheet());
+
+    el.modeBtns.forEach(b=>{
+      b.addEventListener("click", ()=>{
+        applyMode(b.dataset.mode);
       });
     });
 
     [el.inSec, el.holdSec, el.outSec, el.cycles].forEach(inp=>{
       inp.addEventListener("change", ()=>{
         readInputs();
-        // If running, do not hard reset; just apply next cycle
         if(state.cycleNow === 0){
           renderReady();
         }
       });
     });
 
+    el.swVoice.addEventListener("click", ()=>toggleSwitch(el.swVoice, "voice"));
+    el.swChime.addEventListener("click", ()=>toggleSwitch(el.swChime, "chime"));
     el.swVibe.addEventListener("click", ()=>toggleSwitch(el.swVibe, "vibe"));
-    el.swBeep.addEventListener("click", ()=>toggleSwitch(el.swBeep, "beep"));
-    el.swVibe.addEventListener("keydown", (e)=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); toggleSwitch(el.swVibe,"vibe"); }});
-    el.swBeep.addEventListener("keydown", (e)=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); toggleSwitch(el.swBeep,"beep"); }});
 
-    // keyboard shortcuts
+    [el.swVoice, el.swChime, el.swVibe].forEach(sw=>{
+      sw.addEventListener("keydown", (e)=>{
+        if(e.key==="Enter"||e.key===" "){
+          e.preventDefault();
+          if(sw===el.swVoice) toggleSwitch(el.swVoice,"voice");
+          if(sw===el.swChime) toggleSwitch(el.swChime,"chime");
+          if(sw===el.swVibe) toggleSwitch(el.swVibe,"vibe");
+        }
+      });
+    });
+
+    // keyboard shortcuts (desktop)
     window.addEventListener("keydown", (e)=>{
       if(e.target && ["INPUT","TEXTAREA","SELECT"].includes(e.target.tagName)) return;
       if(e.key === " "){
@@ -1043,12 +1340,14 @@
       } else if(e.key.toLowerCase() === "r"){
         e.preventDefault();
         el.btnReset.click();
+      } else if(e.key === "Escape"){
+        closeSheet();
       }
     });
 
     // init
+    initVoices();
     readInputs();
-    applyMode("478");
     renderReady();
   </script>
 </body>
