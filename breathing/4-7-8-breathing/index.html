@@ -5,22 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>4-7-8 Breathing Timer (Sleep & Calm) | Breath24</title>
-  <meta name="description" content="Free 4-7-8 breathing timer: inhale 4 seconds, hold 7, exhale 8. Great for sleep and calming stress." />
+  <meta name="description" content="Free 4-7-8 breathing timer: inhale 4 seconds, hold 7, exhale 8. A simple rhythm many people use for sleep and calming stress." />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#0b0f17" />
 
-  <link rel="canonical" href="https://breath24.com/breathing/4-7-8/" />
+  <link rel="canonical" href="https://breath24.com/breathing/4-7-8-breathing/" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="4-7-8 Breathing Timer | Breath24" />
+  <meta property="og:title" content="4-7-8 Breathing Timer (Sleep & Calm) | Breath24" />
   <meta property="og:description" content="Inhale 4 • hold 7 • exhale 8 — a classic breathing exercise for sleep and calm." />
-  <meta property="og:url" content="https://breath24.com/breathing/4-7-8/" />
+  <meta property="og:url" content="https://breath24.com/breathing/4-7-8-breathing/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4-7-8 Breathing Timer | Breath24" />
+  <meta name="twitter:description" content="Inhale 4 • hold 7 • exhale 8 — simple timer for sleep and calm." />
 
   <style>
     :root{
       --bg:#0b0f17;--text:#eaf0ff;--muted:#a9b4d0;--line:rgba(255,255,255,.10);
       --card:rgba(255,255,255,.05);--btn:#1f2d4a;--btn2:#223559;
-      --good:#7ee7c2;--warn:#ffd27a;--bad:#ff9aa5;
     }
     *{box-sizing:border-box}
     body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text)}
@@ -31,22 +34,20 @@
     .logo{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg, rgba(126,231,194,.35), rgba(255,210,122,.25));border:1px solid var(--line)}
     h1{margin:0;font-size:16px}
     .sub{margin:2px 0 0;font-size:12px;color:var(--muted)}
-    .nav{display:flex;gap:10px;flex-wrap:wrap}
+    .nav{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
     .pill{padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-size:13px;color:var(--muted)}
+    .langSel{
+      padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.06);
+      border:1px solid var(--line);font-size:13px;color:var(--text);
+      outline:none; appearance:none; -webkit-appearance:none; -moz-appearance:none;
+      cursor:pointer;
+    }
     .panel{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));padding:16px}
     .title{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
     .title h2{margin:0;font-size:20px}
     .title p{margin:6px 0 0;color:var(--muted);line-height:1.5}
-    .timer{
-      margin-top:12px;
-      display:grid;grid-template-columns: 1fr;gap:12px;
-    }
-    .big{
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:rgba(0,0,0,.18);
-      padding:16px;
-    }
+    .timer{margin-top:12px;display:grid;grid-template-columns: 1fr;gap:12px}
+    .big{border:1px solid var(--line);border-radius:18px;background:rgba(0,0,0,.18);padding:16px}
     .phase{font-size:13px;color:var(--muted);letter-spacing:.2px}
     .count{font-size:54px;line-height:1;margin:8px 0 6px;font-weight:700}
     .barWrap{height:10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);overflow:hidden}
@@ -58,10 +59,7 @@
       display:inline-flex;align-items:center;justify-content:center;gap:8px;
     }
     .btn:hover{background:var(--btn2)}
-    .ctrl{
-      display:grid;grid-template-columns: repeat(12, 1fr);gap:10px;
-      margin-top:12px;
-    }
+    .ctrl{display:grid;grid-template-columns: repeat(12, 1fr);gap:10px;margin-top:12px}
     .field{grid-column: span 6;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
     label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}
     input,select{
@@ -69,12 +67,29 @@
       background:rgba(0,0,0,.18);color:var(--text);font-size:14px;outline:none
     }
     .hint{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.45}
+    .more{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+    .linkbtn{
+      padding:9px 12px;border-radius:12px;background:rgba(255,255,255,.06);
+      border:1px solid var(--line);font-size:13px;color:var(--muted)
+    }
+    .linkbtn:hover{color:var(--text)}
     footer{margin-top:16px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line)}
     @media (max-width:720px){
       .count{font-size:48px}
       .field{grid-column: span 12}
     }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"4-7-8 Breathing Timer",
+    "url":"https://breath24.com/breathing/4-7-8-breathing/",
+    "description":"Free 4-7-8 breathing timer: inhale 4 seconds, hold 7, exhale 8. Great for sleep and calming stress.",
+    "isPartOf":{"@type":"WebSite","name":"Breath24","url":"https://breath24.com/"}
+  }
+  </script>
 
   <script type="application/ld+json">
   {
@@ -98,28 +113,37 @@
         <span class="logo" aria-hidden="true"></span>
         <span>
           <h1>Breath24</h1>
-          <div class="sub">4-7-8 breathing</div>
+          <div class="sub" id="t_sub">4-7-8 breathing</div>
         </span>
       </a>
+
       <nav class="nav">
-        <a class="pill" href="/breathing/">Library</a>
-        <a class="pill" href="/guide/">Guide</a>
-        <a class="pill" href="/about.html">About</a>
+        <a class="pill" href="/breathing/" id="t_nav_library">Library</a>
+        <a class="pill" href="/guide/" id="t_nav_guide">Guide</a>
+        <a class="pill" href="/about.html" id="t_nav_about">About</a>
+
+        <!-- Language -->
+        <select class="langSel" id="langSelect" aria-label="Select language">
+          <option value="en">English</option>
+          <option value="ko">한국어</option>
+          <option value="ja">日本語</option>
+          <option value="es">Español</option>
+        </select>
       </nav>
     </header>
 
     <section class="panel">
       <div class="title">
         <div>
-          <h2>4-7-8 Breathing Timer</h2>
-          <p>Inhale 4 • Hold 7 • Exhale 8. A simple rhythm many people use for sleep and calming stress.</p>
+          <h2 id="t_title">4-7-8 Breathing Timer</h2>
+          <p id="t_desc">Inhale 4 • Hold 7 • Exhale 8. A simple rhythm many people use for sleep and calming stress.</p>
         </div>
       </div>
 
       <div class="timer">
         <div class="big">
           <div class="phase" id="phaseLabel">Ready</div>
-          <div class="count" id="count">—</div>
+          <div class="count" id="count" aria-live="polite">—</div>
           <div class="barWrap" aria-hidden="true"><div class="bar" id="bar"></div></div>
 
           <div class="row">
@@ -130,19 +154,29 @@
 
           <div class="ctrl">
             <div class="field">
-              <label for="rounds">Rounds</label>
-              <input id="rounds" type="number" min="1" max="50" value="6" />
+              <label for="rounds" id="t_rounds_label">Rounds</label>
+              <input id="rounds" type="number" min="1" max="50" value="6" inputmode="numeric" />
             </div>
+
             <div class="field">
-              <label for="sound">Sound</label>
+              <label for="sound" id="t_sound_label">Sound</label>
               <select id="sound">
-                <option value="off">Off</option>
-                <option value="soft" selected>Soft beep</option>
+                <option value="off" id="t_sound_off">Off</option>
+                <option value="beep" selected id="t_sound_beep">Beep</option>
               </select>
+              <div class="hint" style="margin-top:8px" id="t_sound_hint">
+                If you don’t hear sound on iPhone/Safari, press Start once (it unlocks audio).
+              </div>
             </div>
           </div>
 
           <div class="hint" id="statusHint">Tip: Keep shoulders relaxed. If you feel dizzy, stop and breathe normally.</div>
+
+          <div class="more" aria-label="More breathing timers">
+            <a class="linkbtn" href="/breathing/" id="t_back">← Back to Library</a>
+            <a class="linkbtn" href="/breathing/box-breathing/" id="t_box">Box Breathing</a>
+            <a class="linkbtn" href="/breathing/4-4-6-breathing/" id="t_446">4-4-6 Breathing</a>
+          </div>
         </div>
       </div>
     </section>
@@ -150,29 +184,241 @@
     <footer>
       <div>© <span id="y"></span> Breath24</div>
       <div>
-        <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a>
+        <a href="/privacy.html" id="t_privacy">Privacy</a> · <a href="/terms.html" id="t_terms">Terms</a>
       </div>
     </footer>
   </div>
 
 <script>
 (() => {
+  // ===== i18n =====
+  const I18N = {
+    en: {
+      sub: "4-7-8 breathing",
+      nav_library: "Library",
+      nav_guide: "Guide",
+      nav_about: "About",
+      title: "4-7-8 Breathing Timer",
+      desc: "Inhale 4 • Hold 7 • Exhale 8. A simple rhythm many people use for sleep and calming stress.",
+      rounds_label: "Rounds",
+      sound_label: "Sound",
+      sound_off: "Off",
+      sound_beep: "Beep",
+      sound_hint: "If you don’t hear sound on iPhone/Safari, press Start once (it unlocks audio).",
+      tip_ready: "Tip: Keep shoulders relaxed. If you feel dizzy, stop and breathe normally.",
+      tip_running: "Follow the cue. If uncomfortable, pause or reset.",
+      tip_paused: "Paused. Resume when ready.",
+      tip_back: "Back to rhythm.",
+      tip_done: "Nice. Return to normal breathing for a moment.",
+      tip_idle: "Ready when you are.",
+      start: "Start",
+      running: "Running...",
+      pause: "Pause",
+      resume: "Resume",
+      reset: "Reset",
+      phase_ready: "Ready",
+      phase_done: "Done",
+      inhale: "Inhale",
+      hold: "Hold",
+      exhale: "Exhale",
+      round_word: "Round",
+      back: "← Back to Library",
+      box: "Box Breathing",
+      b446: "4-4-6 Breathing",
+      privacy: "Privacy",
+      terms: "Terms"
+    },
+    ko: {
+      sub: "4-7-8 호흡",
+      nav_library: "라이브러리",
+      nav_guide: "가이드",
+      nav_about: "소개",
+      title: "4-7-8 호흡 타이머",
+      desc: "들이마시기 4 • 멈춤 7 • 내쉬기 8. 수면과 긴장 완화에 자주 쓰는 간단한 리듬입니다.",
+      rounds_label: "라운드",
+      sound_label: "소리",
+      sound_off: "끄기",
+      sound_beep: "비프음",
+      sound_hint: "아이폰/사파리에서 소리가 안 나면 Start를 한 번 눌러 오디오를 활성화하세요.",
+      tip_ready: "팁: 어깨 힘을 빼세요. 어지러우면 중단하고 정상 호흡으로 돌아가세요.",
+      tip_running: "표시에 따라 호흡하세요. 불편하면 일시정지 또는 리셋하세요.",
+      tip_paused: "일시정지됨. 준비되면 재개하세요.",
+      tip_back: "리듬으로 복귀합니다.",
+      tip_done: "좋아요. 잠시 정상 호흡으로 돌아가세요.",
+      tip_idle: "준비되면 시작하세요.",
+      start: "시작",
+      running: "진행 중...",
+      pause: "일시정지",
+      resume: "재개",
+      reset: "리셋",
+      phase_ready: "준비",
+      phase_done: "완료",
+      inhale: "들이마시기",
+      hold: "멈춤",
+      exhale: "내쉬기",
+      round_word: "라운드",
+      back: "← 라이브러리로",
+      box: "박스 호흡",
+      b446: "4-4-6 호흡",
+      privacy: "개인정보처리방침",
+      terms: "이용약관"
+    },
+    ja: {
+      sub: "4-7-8 呼吸",
+      nav_library: "ライブラリ",
+      nav_guide: "ガイド",
+      nav_about: "概要",
+      title: "4-7-8 呼吸タイマー",
+      desc: "吸う 4 • 止める 7 • 吐く 8。睡眠やリラックスに使われるシンプルなリズムです。",
+      rounds_label: "回数",
+      sound_label: "サウンド",
+      sound_off: "オフ",
+      sound_beep: "ビープ音",
+      sound_hint: "iPhone/Safariで音が出ない場合は、Startを一度押して音声を有効化してください。",
+      tip_ready: "ヒント: 肩の力を抜いて。めまいを感じたら中止して通常の呼吸に戻ってください。",
+      tip_running: "合図に合わせて呼吸。無理なら一時停止またはリセット。",
+      tip_paused: "一時停止。準備できたら再開してください。",
+      tip_back: "リズムに戻ります。",
+      tip_done: "いい感じ。少し通常の呼吸に戻りましょう。",
+      tip_idle: "準備できたら開始してください。",
+      start: "開始",
+      running: "実行中...",
+      pause: "一時停止",
+      resume: "再開",
+      reset: "リセット",
+      phase_ready: "準備",
+      phase_done: "完了",
+      inhale: "吸う",
+      hold: "止める",
+      exhale: "吐く",
+      round_word: "ラウンド",
+      back: "← ライブラリへ",
+      box: "ボックス呼吸",
+      b446: "4-4-6 呼吸",
+      privacy: "プライバシー",
+      terms: "利用規約"
+    },
+    es: {
+      sub: "Respiración 4-7-8",
+      nav_library: "Biblioteca",
+      nav_guide: "Guía",
+      nav_about: "Acerca de",
+      title: "Temporizador de respiración 4-7-8",
+      desc: "Inhala 4 • Mantén 7 • Exhala 8. Un ritmo simple para dormir y calmar el estrés.",
+      rounds_label: "Rondas",
+      sound_label: "Sonido",
+      sound_off: "Apagado",
+      sound_beep: "Bip",
+      sound_hint: "Si no oyes sonido en iPhone/Safari, pulsa Start una vez para activar el audio.",
+      tip_ready: "Consejo: Relaja los hombros. Si te mareas, detente y respira normal.",
+      tip_running: "Sigue la señal. Si es incómodo, pausa o reinicia.",
+      tip_paused: "En pausa. Reanuda cuando estés listo.",
+      tip_back: "De vuelta al ritmo.",
+      tip_done: "Bien. Vuelve a la respiración normal un momento.",
+      tip_idle: "Listo cuando tú lo estés.",
+      start: "Start",
+      running: "En curso...",
+      pause: "Pausa",
+      resume: "Reanudar",
+      reset: "Reiniciar",
+      phase_ready: "Listo",
+      phase_done: "Hecho",
+      inhale: "Inhala",
+      hold: "Mantén",
+      exhale: "Exhala",
+      round_word: "Ronda",
+      back: "← Volver a la biblioteca",
+      box: "Respiración cuadrada",
+      b446: "Respiración 4-4-6",
+      privacy: "Privacidad",
+      terms: "Términos"
+    }
+  };
+
+  function detectLang(){
+    const qs = new URLSearchParams(location.search);
+    const q = (qs.get("lang") || "").toLowerCase();
+    if (I18N[q]) return q;
+
+    const saved = (localStorage.getItem("b24_lang") || "").toLowerCase();
+    if (I18N[saved]) return saved;
+
+    const nav = (navigator.language || "en").toLowerCase();
+    if (nav.startsWith("ko")) return "ko";
+    if (nav.startsWith("ja")) return "ja";
+    if (nav.startsWith("es")) return "es";
+    return "en";
+  }
+
+  function applyLang(lang, {pushUrl=true} = {}){
+    if (!I18N[lang]) lang = "en";
+    localStorage.setItem("b24_lang", lang);
+    document.documentElement.lang = lang;
+
+    const t = I18N[lang];
+    // header + nav
+    document.getElementById("t_sub").textContent = t.sub;
+    document.getElementById("t_nav_library").textContent = t.nav_library;
+    document.getElementById("t_nav_guide").textContent = t.nav_guide;
+    document.getElementById("t_nav_about").textContent = t.nav_about;
+
+    // main copy
+    document.getElementById("t_title").textContent = t.title;
+    document.getElementById("t_desc").textContent = t.desc;
+
+    // controls
+    document.getElementById("t_rounds_label").textContent = t.rounds_label;
+    document.getElementById("t_sound_label").textContent = t.sound_label;
+    document.getElementById("t_sound_off").textContent = t.sound_off;
+    document.getElementById("t_sound_beep").textContent = t.sound_beep;
+    document.getElementById("t_sound_hint").textContent = t.sound_hint;
+
+    // buttons
+    startBtn.textContent = (running && !paused) ? t.running : t.start;
+    pauseBtn.textContent = paused ? t.resume : t.pause;
+    resetBtn.textContent = t.reset;
+
+    // footer / links
+    document.getElementById("t_back").textContent = t.back;
+    document.getElementById("t_box").textContent = t.box;
+    document.getElementById("t_446").textContent = t.b446;
+    document.getElementById("t_privacy").textContent = t.privacy;
+    document.getElementById("t_terms").textContent = t.terms;
+
+    // hint baseline (only if not running)
+    if (!running){
+      hint.textContent = t.tip_ready;
+      phaseLabel.textContent = t.phase_ready;
+    }
+
+    // sync select
+    langSelect.value = lang;
+
+    if (pushUrl){
+      const url = new URL(location.href);
+      url.searchParams.set("lang", lang);
+      history.replaceState({}, "", url.toString());
+    }
+  }
+
+  // ===== timer logic =====
   const pattern = [
-    { key:"inhale", label:"Inhale", seconds:4 },
-    { key:"hold",   label:"Hold",   seconds:7 },
-    { key:"exhale", label:"Exhale", seconds:8 }
+    { key:"inhale", seconds:4 },
+    { key:"hold",   seconds:7 },
+    { key:"exhale", seconds:8 }
   ];
 
   const phaseLabel = document.getElementById('phaseLabel');
   const countEl = document.getElementById('count');
   const bar = document.getElementById('bar');
   const roundsInput = document.getElementById('rounds');
-  const soundSel = document.getElementById('sound');
   const hint = document.getElementById('statusHint');
 
   const startBtn = document.getElementById('startBtn');
   const pauseBtn = document.getElementById('pauseBtn');
   const resetBtn = document.getElementById('resetBtn');
+  const soundSel = document.getElementById('sound');
+  const langSelect = document.getElementById('langSelect');
 
   let timer = null;
   let running = false;
@@ -183,25 +429,77 @@
   let remaining = pattern[0].seconds;
   let phaseTotal = pattern[0].seconds;
 
-  function beep(){
-    if (soundSel.value === 'off') return;
+  // Audio: keep ONE AudioContext and unlock it on user gesture
+  let audioCtx = null;
+
+  function getCtx(){
+    if (!audioCtx){
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      audioCtx = new AC();
+    }
+    return audioCtx;
+  }
+
+  async function unlockAudio(){
+    const ctx = getCtx();
+    if (!ctx) return;
     try{
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      if (ctx.state === "suspended") await ctx.resume();
+      // tiny silent click to ensure output path is primed
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      g.gain.value = 0.00001;
+      o.frequency.value = 1;
+      o.connect(g); g.connect(ctx.destination);
+      o.start();
+      o.stop(ctx.currentTime + 0.01);
+    }catch(e){}
+  }
+
+  function beep(){
+    if (soundSel.value !== 'beep') return;
+
+    const ctx = getCtx();
+    if (!ctx) return;
+
+    // if iOS/Safari: might still be suspended unless unlocked
+    if (ctx.state === "suspended") return;
+
+    try{
       const o = ctx.createOscillator();
       const g = ctx.createGain();
       o.type = 'sine';
       o.frequency.value = 880;
-      g.gain.value = 0.03;
+      // slightly louder than before (still gentle)
+      g.gain.setValueAtTime(0.0001, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.045, ctx.currentTime + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.10);
+
       o.connect(g); g.connect(ctx.destination);
       o.start();
-      setTimeout(() => { o.stop(); ctx.close(); }, 80);
+      o.stop(ctx.currentTime + 0.12);
     }catch(e){}
   }
 
+  function labelForPhase(key){
+    const lang = (localStorage.getItem("b24_lang") || detectLang());
+    const t = I18N[lang] || I18N.en;
+    if (key === "inhale") return t.inhale;
+    if (key === "hold") return t.hold;
+    return t.exhale;
+  }
+
   function setUI(){
+    const maxRounds = Math.max(1, parseInt(roundsInput.value || '1', 10));
     const p = pattern[phaseIdx];
-    phaseLabel.textContent = `${p.label}  •  Round ${round}/${Math.max(1, parseInt(roundsInput.value||'1',10))}`;
+
+    const lang = (localStorage.getItem("b24_lang") || detectLang());
+    const t = I18N[lang] || I18N.en;
+
+    phaseLabel.textContent = `${labelForPhase(p.key)}  •  ${t.round_word} ${round}/${maxRounds}`;
     countEl.textContent = String(remaining);
+
     const pct = phaseTotal ? ((phaseTotal - remaining) / phaseTotal) * 100 : 0;
     bar.style.width = `${Math.max(0, Math.min(100, pct))}%`;
   }
@@ -212,15 +510,16 @@
     setUI();
 
     if (remaining <= 0){
-      // phase change
+      // phase change + beep
       beep();
+
       phaseIdx++;
       if (phaseIdx >= pattern.length){
         phaseIdx = 0;
         round++;
       }
 
-      const maxRounds = Math.max(1, parseInt(roundsInput.value||'1',10));
+      const maxRounds = Math.max(1, parseInt(roundsInput.value || '1', 10));
       if (round > maxRounds){
         stop(true);
         return;
@@ -238,6 +537,9 @@
   function start(){
     if (running && !paused) return;
 
+    // unlock audio on user gesture
+    unlockAudio();
+
     if (!running){
       round = 1;
       phaseIdx = 0;
@@ -248,24 +550,36 @@
     running = true;
     paused = false;
 
-    startBtn.textContent = "Running...";
+    const lang = (localStorage.getItem("b24_lang") || detectLang());
+    const t = I18N[lang] || I18N.en;
+
+    startBtn.textContent = t.running;
     startBtn.disabled = true;
     pauseBtn.disabled = false;
 
-    hint.textContent = "Follow the cue. If uncomfortable, pause or reset.";
+    hint.textContent = t.tip_running;
     setUI();
 
+    if (timer) clearInterval(timer);
     timer = setInterval(tick, 1000);
     tick();
   }
 
   function pause(){
     if (!running) return;
+
+    // ensure audio remains unlocked after resume
+    unlockAudio();
+
     paused = !paused;
-    pauseBtn.textContent = paused ? "Resume" : "Pause";
+
+    const lang = (localStorage.getItem("b24_lang") || detectLang());
+    const t = I18N[lang] || I18N.en;
+
+    pauseBtn.textContent = paused ? t.resume : t.pause;
     startBtn.disabled = paused ? false : true;
-    startBtn.textContent = paused ? "Start" : "Running...";
-    hint.textContent = paused ? "Paused. Resume when ready." : "Back to rhythm.";
+    startBtn.textContent = paused ? t.start : t.running;
+    hint.textContent = paused ? t.tip_paused : t.tip_back;
   }
 
   function stop(completed=false){
@@ -274,15 +588,18 @@
     if (timer) clearInterval(timer);
     timer = null;
 
-    startBtn.disabled = false;
-    startBtn.textContent = "Start";
-    pauseBtn.disabled = true;
-    pauseBtn.textContent = "Pause";
+    const lang = (localStorage.getItem("b24_lang") || detectLang());
+    const t = I18N[lang] || I18N.en;
 
-    phaseLabel.textContent = completed ? "Done" : "Ready";
+    startBtn.disabled = false;
+    startBtn.textContent = t.start;
+    pauseBtn.disabled = true;
+    pauseBtn.textContent = t.pause;
+
+    phaseLabel.textContent = completed ? t.phase_done : t.phase_ready;
     countEl.textContent = "—";
     bar.style.width = "0%";
-    hint.textContent = completed ? "Nice. Return to normal breathing for a moment." : "Ready when you are.";
+    hint.textContent = completed ? t.tip_done : t.tip_idle;
   }
 
   function reset(){
@@ -293,7 +610,20 @@
   pauseBtn.addEventListener('click', pause);
   resetBtn.addEventListener('click', reset);
 
+  // iOS/Safari extra: any tap unlocks audio
+  document.addEventListener('pointerdown', unlockAudio, {passive:true});
+
   document.getElementById('y').textContent = new Date().getFullYear();
+
+  // init language
+  const initial = detectLang();
+  applyLang(initial, {pushUrl:true});
+
+  langSelect.addEventListener("change", (e) => {
+    applyLang(e.target.value, {pushUrl:true});
+    // refresh phase line after language change
+    if (running) setUI();
+  });
 })();
 </script>
 </body>
