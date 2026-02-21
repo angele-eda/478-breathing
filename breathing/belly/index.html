@@ -1,1 +1,222 @@
+<!doctype html>
+<html lang="en" translate="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <title>Belly Breathing Timer (Diaphragmatic) | Breath24</title>
+  <meta name="description" content="Free belly breathing (diaphragmatic) timer with gentle pacing cues. Relax your body and support calm breathing." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b0f17" />
+  <link rel="canonical" href="https://breath24.com/breathing/belly/" />
+
+  <style>
+    :root{--bg:#0b0f17;--text:#eaf0ff;--muted:#a9b4d0;--line:rgba(255,255,255,.10);--card:rgba(255,255,255,.05);--btn:#1f2d4a;--btn2:#223559}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:860px;margin:0 auto;padding:18px 16px 40px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0 14px}
+    .brand{display:flex;gap:10px;align-items:center}
+    .logo{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg, rgba(126,231,194,.35), rgba(255,210,122,.25));border:1px solid var(--line)}
+    h1{margin:0;font-size:16px}
+    .sub{margin:2px 0 0;font-size:12px;color:var(--muted)}
+    .nav{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-size:13px;color:var(--muted)}
+    .panel{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));padding:16px}
+    .title h2{margin:0;font-size:20px}
+    .title p{margin:8px 0 0;color:var(--muted);line-height:1.5}
+    .big{margin-top:12px;border:1px solid var(--line);border-radius:18px;background:rgba(0,0,0,.18);padding:16px}
+    .phase{font-size:13px;color:var(--muted)}
+    .count{font-size:54px;line-height:1;margin:8px 0 6px;font-weight:700}
+    .barWrap{height:10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);overflow:hidden}
+    .bar{height:100%;width:0%;background:linear-gradient(90deg, rgba(126,231,194,.85), rgba(255,210,122,.75))}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{padding:10px 12px;border-radius:12px;background:var(--btn);border:1px solid var(--line);color:var(--text);font-size:13px}
+    .btn:hover{background:var(--btn2)}
+    .ctrl{display:grid;grid-template-columns:repeat(12,1fr);gap:10px;margin-top:12px}
+    .field{grid-column:span 6;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+    label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}
+    input,select{width:100%;padding:10px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.18);color:var(--text);font-size:14px;outline:none}
+    .hint{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.45}
+    footer{margin-top:16px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line)}
+    @media (max-width:720px){.count{font-size:48px}.field{grid-column:span 12}}
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/"><span class="logo" aria-hidden="true"></span><span><h1>Breath24</h1><div class="sub">belly breathing</div></span></a>
+    <nav class="nav">
+      <a class="pill" href="/breathing/">Library</a>
+      <a class="pill" href="/guide/">Guide</a>
+      <a class="pill" href="/about.html">About</a>
+    </nav>
+  </header>
+
+  <section class="panel">
+    <div class="title">
+      <h2>Belly (Diaphragmatic) Breathing Timer</h2>
+      <p>Gentle cues to breathe into the belly. Keep the chest relaxed and let the diaphragm do the work.</p>
+    </div>
+
+    <div class="big">
+      <div class="phase" id="phaseLabel">Ready</div>
+      <div class="count" id="count">—</div>
+      <div class="barWrap"><div class="bar" id="bar"></div></div>
+
+      <div class="row">
+        <button class="btn" id="startBtn">Start</button>
+        <button class="btn" id="pauseBtn" disabled>Pause</button>
+        <button class="btn" id="resetBtn">Reset</button>
+      </div>
+
+      <div class="ctrl">
+        <div class="field">
+          <label for="inhale">Inhale (sec)</label>
+          <input id="inhale" type="number" min="2" max="10" value="4" />
+        </div>
+        <div class="field">
+          <label for="exhale">Exhale (sec)</label>
+          <input id="exhale" type="number" min="2" max="12" value="6" />
+        </div>
+        <div class="field">
+          <label for="minutes">Duration (minutes)</label>
+          <input id="minutes" type="number" min="1" max="60" value="5" />
+        </div>
+        <div class="field">
+          <label for="sound">Sound</label>
+          <select id="sound">
+            <option value="off">Off</option>
+            <option value="soft" selected>Soft beep</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="hint" id="statusHint">Tip: One hand on belly, one on chest. Belly hand should move more.</div>
+    </div>
+  </section>
+
+  <footer>
+    <div>© <span id="y"></span> Breath24</div>
+    <div><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></div>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const phaseLabel=document.getElementById('phaseLabel');
+  const countEl=document.getElementById('count');
+  const bar=document.getElementById('bar');
+
+  const inhaleInput=document.getElementById('inhale');
+  const exhaleInput=document.getElementById('exhale');
+  const minutesInput=document.getElementById('minutes');
+  const soundSel=document.getElementById('sound');
+  const hint=document.getElementById('statusHint');
+
+  const startBtn=document.getElementById('startBtn');
+  const pauseBtn=document.getElementById('pauseBtn');
+  const resetBtn=document.getElementById('resetBtn');
+
+  let pattern=[];
+  let timer=null, running=false, paused=false;
+  let phaseIdx=0, remaining=0, phaseTotal=0;
+  let endAtMs=0;
+
+  function rebuild(){
+    const inh = Math.max(2, parseInt(inhaleInput.value||'4',10));
+    const exh = Math.max(2, parseInt(exhaleInput.value||'6',10));
+    pattern = [
+      { label:"Inhale (belly)", seconds:inh },
+      { label:"Exhale (slow)", seconds:exh }
+    ];
+  }
+
+  function beep(){
+    if (soundSel.value==='off') return;
+    try{
+      const ctx=new (window.AudioContext||window.webkitAudioContext)();
+      const o=ctx.createOscillator(); const g=ctx.createGain();
+      o.type='sine'; o.frequency.value=880; g.gain.value=0.03;
+      o.connect(g); g.connect(ctx.destination);
+      o.start(); setTimeout(()=>{o.stop(); ctx.close();}, 80);
+    }catch(e){}
+  }
+
+  function setUI(){
+    const p=pattern[phaseIdx];
+    phaseLabel.textContent = p.label;
+    countEl.textContent = String(remaining);
+    const pct = phaseTotal ? ((phaseTotal-remaining)/phaseTotal)*100 : 0;
+    bar.style.width = `${Math.max(0, Math.min(100, pct))}%`;
+  }
+
+  function tick(){
+    if(!running || paused) return;
+    if(Date.now() >= endAtMs){ stop(true); return; }
+
+    setUI();
+
+    if(remaining<=0){
+      beep();
+      phaseIdx = (phaseIdx+1) % pattern.length;
+      remaining = pattern[phaseIdx].seconds;
+      phaseTotal = remaining;
+      setUI();
+      return;
+    }
+    remaining -= 1;
+  }
+
+  function start(){
+    if(running && !paused) return;
+    rebuild();
+
+    if(!running){
+      phaseIdx=0;
+      remaining=pattern[0].seconds;
+      phaseTotal=remaining;
+      const mins=Math.max(1, parseInt(minutesInput.value||'5',10));
+      endAtMs = Date.now() + mins*60*1000;
+    }
+
+    running=true; paused=false;
+    startBtn.textContent="Running..."; startBtn.disabled=true;
+    pauseBtn.disabled=false;
+    hint.textContent="Keep it gentle. No need for big breaths.";
+    timer=setInterval(tick,1000);
+    tick();
+  }
+
+  function pause(){
+    if(!running) return;
+    paused=!paused;
+    pauseBtn.textContent=paused?"Resume":"Pause";
+    startBtn.disabled=paused?false:true;
+    startBtn.textContent=paused?"Start":"Running...";
+    hint.textContent=paused?"Paused. Resume when ready.":"Back to gentle belly breathing.";
+  }
+
+  function stop(done=false){
+    running=false; paused=false;
+    if(timer) clearInterval(timer);
+    timer=null;
+    startBtn.disabled=false; startBtn.textContent="Start";
+    pauseBtn.disabled=true; pauseBtn.textContent="Pause";
+    phaseLabel.textContent=done?"Done":"Ready";
+    countEl.textContent="—"; bar.style.width="0%";
+    hint.textContent=done?"Nice. Notice your shoulders and jaw soften.":"Ready when you are.";
+  }
+
+  function reset(){ stop(false); }
+
+  startBtn.addEventListener('click', start);
+  pauseBtn.addEventListener('click', pause);
+  resetBtn.addEventListener('click', reset);
+  document.getElementById('y').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
