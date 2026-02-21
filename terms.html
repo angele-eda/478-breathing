@@ -1,31 +1,172 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en" translate="no">
 <head>
-  <meta charset="utf-8">
-  <title>이용약관 | Breath</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Terms of Service | Breath24</title>
+  <meta name="description" content="Terms of service for Breath24 breathing timers. Usage rules, disclaimers, and limitation of liability." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b0f17" />
+
+  <link rel="canonical" href="https://breath24.com/terms.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Terms of Service | Breath24" />
+  <meta property="og:description" content="Terms of service for Breath24." />
+  <meta property="og:url" content="https://breath24.com/terms.html" />
+
+  <style>
+    :root{
+      --bg:#0b0f17; --text:#eaf0ff; --muted:#a9b4d0; --line:rgba(255,255,255,.10);
+      --btn:#1f2d4a; --btn2:#223559;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(126,231,194,.10), transparent 50%),
+                  radial-gradient(900px 500px at 90% 10%, rgba(255,210,122,.10), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:980px; margin:0 auto; padding:22px 16px 44px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0 18px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{
+      width:36px;height:36px;border-radius:12px;
+      background: linear-gradient(135deg, rgba(126,231,194,.35), rgba(255,210,122,.25));
+      border:1px solid var(--line);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .brand h1{font-size:18px;margin:0}
+    .brand p{margin:2px 0 0;font-size:12px;color:var(--muted)}
+    .nav{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{
+      padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.06);
+      border:1px solid var(--line);font-size:13px;color:var(--muted)
+    }
+    .pill:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px 16px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.25);
+    }
+    h2{margin:0;font-size:22px}
+    .meta{margin:6px 0 0;color:var(--muted);font-size:12px}
+    h3{margin:16px 0 6px;font-size:15px}
+    p,li{color:var(--muted);line-height:1.65;font-size:13px}
+    ul{margin:8px 0 0 18px}
+    .note{
+      margin-top:12px;padding:12px;border-radius:14px;
+      border:1px dashed rgba(255,255,255,.18);
+      background:rgba(0,0,0,.15);
+      color:var(--muted);font-size:12px;line-height:1.6;
+    }
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:10px 12px;border-radius:12px;background:var(--btn);
+      border:1px solid var(--line);font-size:13px
+    }
+    .btn:hover{background:var(--btn2)}
+    footer{
+      margin-top:18px;color:var(--muted);font-size:12px;
+      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      padding-top:16px;border-top:1px solid var(--line)
+    }
+    .links{display:flex;gap:12px;flex-wrap:wrap}
+    .links a{color:var(--muted)}
+    .links a:hover{color:var(--text)}
+    @media (max-width:720px){h2{font-size:20px}}
+  </style>
 </head>
-<body style="font-family: Arial, sans-serif; line-height:1.7; max-width:800px; margin:40px auto; padding:20px;">
 
-<h1>이용약관</h1>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/">
+      <span class="logo" aria-hidden="true"></span>
+      <span>
+        <h1>Breath24</h1>
+        <p>Terms of service</p>
+      </span>
+    </a>
+    <nav class="nav">
+      <a class="pill" href="/">Home</a>
+      <a class="pill" href="/breathing/">Breathing Library</a>
+      <a class="pill" href="/guide/">Guide</a>
+      <a class="pill" href="/about.html">About</a>
+    </nav>
+  </header>
 
-<p>본 웹사이트(Breath)는 호흡 가이드 및 타이머 기능을 제공하는 정보 제공 서비스입니다.</p>
+  <section class="panel">
+    <h2>Terms of Service</h2>
+    <div class="meta">Last updated: <span id="d"></span></div>
 
-<h2>1. 서비스 목적</h2>
-<p>본 사이트는 일반적인 건강 정보 및 호흡 가이드를 제공하며, 의료 행위를 대체하지 않습니다.</p>
+    <p>
+      By using Breath24, you agree to these terms. If you do not agree, please do not use the site.
+    </p>
 
-<h2>2. 책임 제한</h2>
-<p>사이트 이용으로 발생하는 모든 결과에 대한 책임은 사용자에게 있습니다.
-신체적 불편감이 있을 경우 즉시 사용을 중단하고 전문가와 상담하시기 바랍니다.</p>
+    <h3>1) Educational use only</h3>
+    <p>
+      Breath24 provides breathing timers for general informational and educational purposes only.
+      It is not medical advice, diagnosis, or treatment.
+    </p>
 
-<h2>3. 지적재산권</h2>
-<p>본 사이트의 모든 콘텐츠는 운영자에게 귀속됩니다.</p>
+    <h3>2) Safety disclaimer</h3>
+    <ul>
+      <li>Stop immediately if you feel dizzy, short of breath, pain, or discomfort.</li>
+      <li>Do not practice breath holds if you have a medical condition that could be affected by breathing exercises.</li>
+      <li>If you have concerns, consult a qualified healthcare professional.</li>
+    </ul>
 
-<h2>4. 약관 변경</h2>
-<p>운영자는 필요 시 약관을 수정할 수 있으며, 변경 시 본 페이지에 공지합니다.</p>
+    <h3>3) No warranties</h3>
+    <p>
+      The site is provided “as is” without warranties of any kind. We do not guarantee uninterrupted or error-free operation.
+    </p>
 
-<hr>
-<p>최종 수정일: 2026-02</p>
+    <h3>4) Limitation of liability</h3>
+    <p>
+      To the maximum extent permitted by law, Breath24 and its operators are not liable for any damages arising from your use of the site.
+    </p>
 
+    <h3>5) Changes</h3>
+    <p>
+      We may update these terms from time to time. Continued use of the site means you accept the updated terms.
+    </p>
+
+    <div class="note">
+      <b>Note:</b> If you add user accounts, payments, ads, or data collection later,
+      you should update these terms to match.
+    </div>
+
+    <div class="btnrow">
+      <a class="btn" href="/privacy.html">View Privacy</a>
+      <a class="btn" href="/about.html">About</a>
+      <a class="btn" href="/breathing/">Breathing Library</a>
+    </div>
+  </section>
+
+  <footer>
+    <div>© <span id="y"></span> Breath24</div>
+    <div class="links">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/about.html">About</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+  const dt = new Date();
+  const pad = (n) => String(n).padStart(2,'0');
+  document.getElementById('d').textContent =
+    `${dt.getFullYear()}-${pad(dt.getMonth()+1)}-${pad(dt.getDate())}`;
+</script>
 </body>
 </html>
