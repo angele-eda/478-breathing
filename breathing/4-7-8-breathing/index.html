@@ -22,318 +22,410 @@
 
   <style>
     :root{
-      --bg:#0b0f17;
-      --text:#eaf0ff;
-      --muted:#a9b4d0;
-      --line:rgba(255,255,255,.10);
-      --card:rgba(255,255,255,.05);
-      --btn:#1f2d4a;
-      --btn2:#223559;
+      --bg:#070a12;
+      --bg2:#0b0f17;
+      --card: rgba(255,255,255,.06);
+      --line: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.62);
+      --muted2: rgba(255,255,255,.45);
 
-      --accent1: rgba(126,231,194,.95);
-      --accent2: rgba(255,210,122,.85);
+      --a: rgba(126,231,194,.70); /* mint */
+      --b: rgba(255,210,122,.65); /* amber */
+      --c: rgba(99,102,241,.40);  /* indigo */
 
-      /* Phase accents (subtle) */
-      --p1: rgba(126,231,194,.12); /* inhale */
-      --p2: rgba(255,210,122,.10); /* hold */
-      --p3: rgba(99,102,241,.10);  /* exhale */
-
-      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --btn: rgba(255,255,255,.06);
+      --btn2: rgba(255,255,255,.10);
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
+      --r: 22px;
     }
+
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color:var(--text);
-      background: var(--bg);
+      color: var(--text);
+      background:
+        radial-gradient(1100px 650px at 20% 0%, rgba(126,231,194,.10), transparent 55%),
+        radial-gradient(900px 550px at 90% 15%, rgba(255,210,122,.10), transparent 60%),
+        radial-gradient(900px 600px at 55% 110%, rgba(99,102,241,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
       overflow-x:hidden;
-      transition: background .35s ease;
     }
-
-    /* Subtle phase background layer */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:-1;
-      background:
-        radial-gradient(1200px 600px at 20% 0%, rgba(126,231,194,.08), transparent 55%),
-        radial-gradient(900px 500px at 90% 10%, rgba(255,210,122,.08), transparent 60%);
-      opacity: 1;
-      transition: opacity .35s ease, filter .35s ease;
-      filter: saturate(1) contrast(1);
-    }
-    body::after{
-      content:"";
-      position:fixed;
-      inset:-20px;
-      pointer-events:none;
-      z-index:-1;
-      background:
-        radial-gradient(900px 520px at 30% 8%, var(--phaseA, rgba(126,231,194,.10)), transparent 60%),
-        radial-gradient(900px 520px at 82% 16%, var(--phaseB, rgba(255,210,122,.08)), transparent 62%),
-        radial-gradient(900px 520px at 55% 85%, var(--phaseC, rgba(99,102,241,.08)), transparent 65%);
-      opacity: .85;
-      transition: opacity .45s ease, transform .65s ease;
-      transform: translate3d(0,0,0);
-    }
-
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:900px;margin:0 auto;padding:18px 16px 44px}
+
+    /* subtle breathing background overlay */
+    .bgBreath{
+      position: fixed;
+      inset: 0;
+      pointer-events:none;
+      opacity: .9;
+      background:
+        radial-gradient(800px 500px at 50% 35%, rgba(126,231,194,.12), transparent 60%),
+        radial-gradient(900px 600px at 70% 60%, rgba(255,210,122,.10), transparent 62%),
+        radial-gradient(900px 650px at 30% 70%, rgba(99,102,241,.10), transparent 65%);
+      filter: blur(0px);
+      transform: scale(1);
+    }
+
+    .wrap{
+      width: min(980px, calc(100% - 34px));
+      margin: 0 auto;
+      padding: 18px 0 44px;
+      position: relative;
+      z-index: 2;
+    }
 
     header{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:8px 0 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 10px 4px 14px;
     }
-    .brand{display:flex;gap:10px;align-items:center}
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 0;
+    }
     .logo{
-      width:34px;height:34px;border-radius:12px;
-      background:linear-gradient(135deg, rgba(126,231,194,.35), rgba(255,210,122,.25));
+      width:36px;height:36px;border-radius:14px;
+      background: linear-gradient(135deg, rgba(126,231,194,.35), rgba(255,210,122,.25));
       border:1px solid var(--line);
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      box-shadow: 0 10px 28px rgba(0,0,0,.28);
+      flex: 0 0 auto;
     }
-    h1{margin:0;font-size:16px}
-    .sub{margin:2px 0 0;font-size:12px;color:var(--muted)}
-    .nav{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .brandTxt{min-width:0}
+    .brandTxt h1{margin:0;font-size:16px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brandTxt .sub{margin:2px 0 0;font-size:12px;color:var(--muted)}
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
     .pill{
-      padding:9px 12px;border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--line);
-      font-size:13px;color:var(--muted);
-      display:inline-flex;align-items:center;gap:8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
-    .pill:hover{color:var(--text)}
-    .lang{
-      padding:9px 10px;border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--line);
-      color:var(--muted);
-      font-size:13px;
-      outline:none;
+    .pill:hover{background: rgba(255,255,255,.09); color: var(--text)}
+    .langPill{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .langPill .globe{
+      width: 28px; height: 28px;
+      border-radius: 12px;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.88);
+      font-size: 14px;
+    }
+    select{
+      appearance:none; -webkit-appearance:none; -moz-appearance:none;
+      border:none; outline:none; background:transparent;
+      color: rgba(255,255,255,.88);
+      font-weight: 800;
+      font-size: 13px;
       cursor:pointer;
+      padding-right: 4px;
+    }
+    .caret{
+      width: 26px; height: 26px;
+      border-radius: 12px;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.65);
+      user-select:none;
+      font-weight: 900;
+      font-size: 12px;
     }
 
     .panel{
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      padding:16px;
+      margin-top: 6px;
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      overflow:hidden;
     }
 
-    .title{
-      display:flex;align-items:flex-start;justify-content:space-between;
-      gap:12px;flex-wrap:wrap;
+    .head{
+      padding: 16px 16px 10px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 14px;
+      flex-wrap:wrap;
     }
-    .title h2{margin:0;font-size:20px;letter-spacing:.1px}
+    .title h2{margin:0;font-size:22px;letter-spacing:-0.02em}
     .title p{margin:6px 0 0;color:var(--muted);line-height:1.55}
 
-    .layout{
-      margin-top:14px;
+    .content{
+      padding: 6px 16px 16px;
       display:grid;
-      grid-template-columns: 1fr 320px;
-      gap:14px;
-      align-items:stretch;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      align-items: stretch;
     }
 
     .stage{
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:rgba(0,0,0,.16);
-      padding:16px;
-      position:relative;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 20px;
+      background: rgba(0,0,0,.18);
+      padding: 16px;
+      position: relative;
       overflow:hidden;
-      min-height: 360px;
+      min-height: 320px;
     }
 
-    /* --- Circle breathing visual --- */
+    .stageTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-bottom: 12px;
+    }
+    .phase{
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing:.2px;
+    }
+    .round{
+      color: var(--muted2);
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+
     .circleWrap{
       display:grid;
       place-items:center;
-      margin-top: 6px;
-      padding: 8px 0 2px;
+      margin-top: 8px;
     }
 
-    .ring{
-      width: 260px;
-      height: 260px;
+    .circle{
+      width: min(360px, 70vw);
+      aspect-ratio: 1/1;
       border-radius: 999px;
       position: relative;
       display:grid;
       place-items:center;
-      background:
-        radial-gradient(circle at 50% 45%, rgba(255,255,255,.07), transparent 55%),
-        conic-gradient(var(--accent1) 0deg, rgba(255,255,255,.06) 0deg);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 18px 60px rgba(0,0,0,.35);
-      transition: box-shadow .25s ease, transform .35s ease;
-      transform: translateZ(0);
+      transform: scale(1);
+      will-change: transform, filter;
+      filter: drop-shadow(0 18px 60px rgba(0,0,0,.55));
     }
 
-    .bubble{
-      width: 168px;
-      height: 168px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 25%, rgba(255,255,255,.12), rgba(255,255,255,.04) 60%, rgba(0,0,0,.18));
+    .circle::before{
+      content:"";
+      position:absolute;
+      inset: 0;
+      border-radius:999px;
+      background:
+        radial-gradient(circle at 30% 28%, rgba(255,255,255,.18), transparent 55%),
+        radial-gradient(circle at 65% 70%, rgba(255,255,255,.10), transparent 55%),
+        radial-gradient(circle at 50% 50%, rgba(126,231,194,.22), rgba(255,210,122,.10) 45%, rgba(99,102,241,.10) 75%, rgba(0,0,0,0) 78%);
       border: 1px solid rgba(255,255,255,.12);
       box-shadow:
-        0 0 0 1px rgba(255,255,255,.06) inset,
-        0 18px 55px rgba(0,0,0,.35);
-      transform: scale(0.86);
-      will-change: transform;
+        inset 0 0 0 1px rgba(255,255,255,.06),
+        0 10px 50px rgba(0,0,0,.35);
+      opacity: .95;
     }
 
-    .ringGlow{
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,.08) inset,
-        0 18px 70px rgba(0,0,0,.45),
-        0 0 42px rgba(126,231,194,.18);
-    }
-
-    .centerText{
+    .ring{
       position:absolute;
-      inset:0;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      pointer-events:none;
+      inset: -10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        conic-gradient(from 180deg, rgba(126,231,194,.35), rgba(255,210,122,.28), rgba(99,102,241,.25), rgba(126,231,194,.35));
+      filter: blur(12px);
+      opacity: .65;
+      transform: scale(1);
     }
-    .phase{
-      font-size:13px;
-      color:var(--muted);
-      letter-spacing:.2px;
-      margin-bottom: 4px;
+
+    .center{
+      position: relative;
+      z-index: 2;
+      text-align:center;
+      padding: 12px 10px;
     }
     .count{
-      font-size:58px;
-      line-height:1;
-      font-weight:800;
+      font-size: 56px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing:-0.02em;
       margin: 0;
     }
-    .roundsInfo{
-      font-size:12px;
-      color:rgba(255,255,255,.55);
+    .cue{
       margin-top: 8px;
+      color: rgba(255,255,255,.78);
+      font-weight: 700;
+      letter-spacing:.2px;
+    }
+    .micro{
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height:1.45;
+    }
+
+    .barWrap{
+      margin-top: 14px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+    }
+    .bar{
+      height:100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(126,231,194,.85), rgba(255,210,122,.75));
     }
 
     .row{
       display:flex;
-      gap:10px;
+      gap: 10px;
       flex-wrap:wrap;
-      margin-top:14px;
-      align-items:center;
+      margin-top: 12px;
     }
     .btn{
-      padding:10px 12px;border-radius:12px;
-      background:var(--btn);
-      border:1px solid var(--line);
-      color:var(--text);
-      font-size:13px;
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      border:none;
+      padding: 11px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.90);
+      font-size: 13px;
+      font-weight: 800;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
       cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
       user-select:none;
     }
-    .btn:hover{background:var(--btn2)}
-    .btn:disabled{opacity:.55;cursor:not-allowed}
+    .btn:hover{background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.16)}
+    .btn:active{transform: translateY(1px)}
+    .btn[disabled]{opacity:.45; cursor:not-allowed}
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(126,231,194,.18), rgba(255,255,255,.06));
+      border-color: rgba(126,231,194,.22);
+    }
 
     .side{
-      border:1px solid var(--line);
-      border-radius:18px;
-      background: rgba(255,255,255,.03);
-      padding:14px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 20px;
+      background: rgba(0,0,0,.14);
+      padding: 14px;
     }
-
-    .ctrl{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:10px;
+    .side h3{
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing:.2px;
+      color: rgba(255,255,255,.85);
     }
     .field{
-      grid-column: span 12;
-      background: var(--card);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding: 12px;
+      margin-top: 10px;
     }
-    .field2{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-    }
-    label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}
-    input,select{
+    label{display:block;font-size:12px;color: var(--muted);margin-bottom:8px}
+    input[type="number"], input[type="range"], select.setting{
       width:100%;
-      padding:10px 10px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.18);
-      color:var(--text);
-      font-size:14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: rgba(255,255,255,.90);
+      padding: 10px 10px;
+      font-size: 14px;
       outline:none;
     }
-    .hint{
-      margin-top:10px;
-      color:var(--muted);
-      font-size:12px;
-      line-height:1.5;
+    .row2{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .tiny{
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+      margin-top: 10px;
     }
 
     .more{
-      margin-top:12px;
-      display:flex;gap:10px;flex-wrap:wrap;
+      margin-top: 12px;
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
     }
     .linkbtn{
-      padding:9px 12px;border-radius:12px;
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--line);
-      font-size:13px;color:var(--muted);
+      padding: 9px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size: 13px;
     }
-    .linkbtn:hover{color:var(--text)}
-
-    .seoBlock{
-      margin-top:14px;
-      padding:14px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      color: rgba(255,255,255,.70);
-      line-height:1.65;
-    }
-    .seoBlock h3{
-      margin:0 0 8px;
-      font-size:14px;
-      color: rgba(255,255,255,.88);
-      letter-spacing:-.01em;
-    }
-    .seoBlock p{margin:0;font-size:12.5px;color: rgba(255,255,255,.65)}
+    .linkbtn:hover{color: var(--text); background: rgba(255,255,255,.08)}
 
     footer{
-      margin-top:16px;
-      color:var(--muted);
-      font-size:12px;
+      margin-top: 14px;
+      padding: 14px 4px 0;
+      color: var(--muted);
+      font-size: 12px;
       display:flex;
       justify-content:space-between;
-      gap:12px;
+      gap: 12px;
       flex-wrap:wrap;
-      padding-top:14px;
-      border-top:1px solid var(--line)
+      border-top: 1px solid rgba(255,255,255,.10);
     }
+    footer a{color: var(--muted); text-decoration: underline; text-underline-offset: 3px}
+    footer a:hover{color: var(--text)}
 
-    @media (max-width: 920px){
-      .layout{grid-template-columns:1fr}
+    @media (max-width: 860px){
+      .content{grid-template-columns: 1fr; }
       .stage{min-height: 340px}
     }
     @media (max-width: 520px){
-      .ring{width: 240px; height: 240px}
-      .bubble{width: 154px; height: 154px}
-      .count{font-size:52px}
+      .count{font-size: 50px}
     }
   </style>
 
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -361,104 +453,113 @@
 </head>
 
 <body>
+  <div class="bgBreath" id="bgBreath" aria-hidden="true"></div>
+
   <div class="wrap">
     <header>
       <a class="brand" href="/">
         <span class="logo" aria-hidden="true"></span>
-        <span>
+        <span class="brandTxt">
           <h1>Breath24</h1>
-          <div class="sub" id="t_subhead">4-7-8 breathing</div>
+          <div class="sub" id="t_sub">4-7-8 breathing</div>
         </span>
       </a>
 
       <nav class="nav">
-        <a class="pill" href="/breathing/" id="t_nav_library">Library</a>
-        <a class="pill" href="/guide/" id="t_nav_guide">Guide</a>
-        <a class="pill" href="/about.html" id="t_nav_about">About</a>
+        <a class="pill" href="/breathing/" id="t_navLibrary">Library</a>
+        <a class="pill" href="/guide/" id="t_navGuide">Guide</a>
+        <a class="pill" href="/about.html" id="t_navAbout">About</a>
 
-        <select class="lang" id="langSelect" aria-label="Language">
-          <option value="en">EN</option>
-          <option value="ko">KO</option>
-          <option value="ja">JA</option>
-          <option value="es">ES</option>
-        </select>
+        <div class="langPill" aria-label="language">
+          <div class="globe">🌐</div>
+          <select id="langSelect" aria-label="Select language">
+            <option value="en">English</option>
+            <option value="ko">한국어</option>
+            <option value="ja">日本語</option>
+            <option value="es">Español</option>
+          </select>
+          <div class="caret">▾</div>
+        </div>
       </nav>
     </header>
 
     <section class="panel">
-      <div class="title">
-        <div>
+      <div class="head">
+        <div class="title">
           <h2 id="t_title">4-7-8 Breathing Timer</h2>
           <p id="t_desc">Inhale 4 • Hold 7 • Exhale 8. A simple rhythm many people use for sleep and calming stress.</p>
         </div>
       </div>
 
-      <div class="layout">
-        <!-- Main stage -->
+      <div class="content">
+        <!-- MAIN STAGE -->
         <div class="stage">
+          <div class="stageTop">
+            <div class="phase" id="phaseLabel">Ready</div>
+            <div class="round" id="roundLabel">Round 1/6</div>
+          </div>
+
           <div class="circleWrap">
-            <div class="ring" id="ring" aria-hidden="true">
-              <div class="bubble" id="bubble"></div>
-              <div class="centerText">
-                <div>
-                  <div class="phase" id="phaseLabel">Ready</div>
-                  <div class="count" id="count" aria-live="polite">—</div>
-                  <div class="roundsInfo" id="roundInfo">Round 1/6</div>
-                </div>
+            <div class="circle" id="circle">
+              <div class="ring" id="ring" aria-hidden="true"></div>
+              <div class="center">
+                <p class="count" id="count" aria-live="polite">—</p>
+                <div class="cue" id="cue">Ready</div>
+                <div class="micro" id="micro">Tap Start to begin.</div>
               </div>
             </div>
           </div>
 
-          <div class="row">
-            <button class="btn" id="startBtn">Start</button>
-            <button class="btn" id="pauseBtn" disabled>Pause</button>
-            <button class="btn" id="resetBtn">Reset</button>
-          </div>
+          <div class="barWrap" aria-hidden="true"><div class="bar" id="bar"></div></div>
 
-          <div class="hint" id="statusHint">Tip: Keep shoulders relaxed. If you feel dizzy, stop and breathe normally.</div>
+          <div class="row">
+            <button class="btn primary" id="startBtn">▶ Start</button>
+            <button class="btn" id="pauseBtn" disabled>⏸ Pause</button>
+            <button class="btn" id="resetBtn">↺ Reset</button>
+          </div>
 
           <div class="more" aria-label="More breathing timers">
             <a class="linkbtn" href="/breathing/" id="t_back">← Back to Library</a>
-            <a class="linkbtn" href="/breathing/box-breathing/" id="t_more_box">Box Breathing</a>
-            <a class="linkbtn" href="/breathing/4-4-6-breathing/" id="t_more_446">4-4-6 Breathing</a>
-          </div>
-
-          <div class="seoBlock" aria-label="SEO">
-            <h3 id="t_seoTitle">What is 4-7-8 breathing?</h3>
-            <p id="t_seoText">
-              4-7-8 breathing is a simple pattern: inhale for 4 seconds, hold for 7 seconds, and exhale for 8 seconds.
-              Many people use it to relax before sleep or to calm stress.
-            </p>
+            <a class="linkbtn" href="/breathing/box-breathing/" id="t_more1">Box Breathing</a>
+            <a class="linkbtn" href="/breathing/4-4-6-breathing/" id="t_more2">4-4-6 Breathing</a>
           </div>
         </div>
 
-        <!-- Settings side -->
+        <!-- SETTINGS -->
         <aside class="side">
-          <div class="ctrl">
-            <div class="field">
-              <div class="field2">
-                <div>
-                  <label for="rounds" id="t_rounds">Rounds</label>
-                  <input id="rounds" type="number" min="1" max="50" value="6" inputmode="numeric" />
-                </div>
-                <div>
-                  <label for="sound" id="t_sound">Sound</label>
-                  <select id="sound">
-                    <option value="off" id="t_sound_off">Off</option>
-                    <option value="soft" id="t_sound_soft" selected>Soft beep</option>
-                  </select>
-                </div>
-              </div>
-              <div class="hint" id="t_sound_note" style="margin-top:10px">
-                Sound starts after you press Start (mobile browsers require a tap).
-              </div>
-            </div>
+          <h3 id="t_settings">Settings</h3>
 
-            <div class="field">
-              <label id="t_tipLabel">Safety</label>
-              <div class="hint" id="t_tipText">
-                If you feel dizzy or uncomfortable, stop and breathe normally.
-              </div>
+          <div class="field">
+            <label for="rounds" id="t_rounds">Rounds</label>
+            <input id="rounds" type="number" min="1" max="50" value="6" inputmode="numeric" />
+            <div class="row2">
+              <span id="t_roundsHint">Recommended: 4–8 rounds</span>
+              <span id="totalTime">—</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="soundMode" id="t_sound">Sound</label>
+            <select class="setting" id="soundMode">
+              <option value="off" id="t_soundOff">Off</option>
+              <option value="soft" selected id="t_soundSoft">Soft</option>
+              <option value="clear" id="t_soundClear">Clear</option>
+            </select>
+
+            <div class="row2">
+              <span id="t_volume">Volume</span>
+              <span id="volPct">60%</span>
+            </div>
+            <input id="volume" type="range" min="0" max="100" value="60" />
+            <div class="tiny" id="t_soundNote">
+              If you don’t hear beeps on iPhone/Safari, press Start once (audio unlock).
+            </div>
+          </div>
+
+          <div class="field">
+            <label id="t_tipTitle">Tip</label>
+            <div class="tiny" id="t_tip">
+              Keep shoulders relaxed. If you feel dizzy, stop and breathe normally.
             </div>
           </div>
         </aside>
@@ -468,554 +569,617 @@
     <footer>
       <div>© <span id="y"></span> Breath24</div>
       <div>
-        <a href="/privacy.html" id="t_privacy">Privacy</a> · <a href="/terms.html" id="t_terms">Terms</a>
+        <a href="/privacy.html" id="t_privacy">Privacy</a> ·
+        <a href="/terms.html" id="t_terms">Terms</a>
       </div>
     </footer>
   </div>
 
 <script>
 (() => {
-  // ---- I18N ----
+  // ========== i18n ==========
   const I18N = {
     en: {
-      subhead:"4-7-8 breathing",
-      nav:{library:"Library", guide:"Guide", about:"About"},
+      sub: "4-7-8 breathing",
+      navLibrary:"Library", navGuide:"Guide", navAbout:"About",
       title:"4-7-8 Breathing Timer",
       desc:"Inhale 4 • Hold 7 • Exhale 8. A simple rhythm many people use for sleep and calming stress.",
-      phase:{ready:"Ready", done:"Done", inhale:"Inhale", hold:"Hold", exhale:"Exhale"},
-      buttons:{start:"Start", running:"Running...", pause:"Pause", resume:"Resume", reset:"Reset"},
+      settings:"Settings",
       rounds:"Rounds",
+      roundsHint:"Recommended: 4–8 rounds",
       sound:"Sound",
       soundOff:"Off",
-      soundSoft:"Soft beep",
-      soundNote:"Sound starts after you press Start (mobile browsers require a tap).",
-      hintReady:"Tip: Keep shoulders relaxed. If you feel dizzy, stop and breathe normally.",
-      hintRun:"Follow the cue. If uncomfortable, pause or reset.",
-      hintPaused:"Paused. Resume when ready.",
-      hintBack:"Back to rhythm.",
-      hintDone:"Nice. Return to normal breathing for a moment.",
+      soundSoft:"Soft",
+      soundClear:"Clear",
+      volume:"Volume",
+      soundNote:"If you don’t hear beeps on iPhone/Safari, press Start once (audio unlock).",
+      tipTitle:"Tip",
+      tip:"Keep shoulders relaxed. If you feel dizzy, stop and breathe normally.",
       back:"← Back to Library",
-      moreBox:"Box Breathing",
-      more446:"4-4-6 Breathing",
-      seoTitle:"What is 4-7-8 breathing?",
-      seoText:"4-7-8 breathing is a simple pattern: inhale for 4 seconds, hold for 7 seconds, and exhale for 8 seconds. Many people use it to relax before sleep or to calm stress.",
-      tipLabel:"Safety",
-      tipText:"If you feel dizzy or uncomfortable, stop and breathe normally.",
+      more1:"Box Breathing",
+      more2:"4-4-6 Breathing",
       privacy:"Privacy",
       terms:"Terms",
-      metaTitle:"4-7-8 Breathing Timer (Sleep & Calm) | Breath24",
-      metaDesc:"Free 4-7-8 breathing timer: inhale 4 seconds, hold 7, exhale 8. A simple rhythm many people use for sleep and calming stress."
+      start:"▶ Start",
+      running:"⏵ Running…",
+      pause:"⏸ Pause",
+      resume:"⏵ Resume",
+      reset:"↺ Reset",
+      ready:"Ready",
+      done:"Done",
+      microReady:"Tap Start to begin.",
+      microFollow:"Follow the cue. If uncomfortable, pause or reset.",
+      microPaused:"Paused. Resume when ready.",
+      microDone:"Nice. Return to normal breathing for a moment.",
+      cueReady:"Ready",
+      cueInhale:"Inhale",
+      cueHold:"Hold",
+      cueExhale:"Exhale"
     },
     ko: {
-      subhead:"4-7-8 호흡",
-      nav:{library:"라이브러리", guide:"가이드", about:"소개"},
+      sub: "4-7-8 호흡",
+      navLibrary:"라이브러리", navGuide:"가이드", navAbout:"소개",
       title:"4-7-8 호흡 타이머",
-      desc:"4초 들숨 • 7초 멈춤 • 8초 날숨. 수면과 긴장 완화에 자주 쓰는 간단한 리듬입니다.",
-      phase:{ready:"준비", done:"완료", inhale:"들이마시기", hold:"멈춤", exhale:"내쉬기"},
-      buttons:{start:"시작", running:"진행중...", pause:"일시정지", resume:"계속", reset:"리셋"},
-      rounds:"라운드",
-      sound:"사운드",
+      desc:"들숨 4 • 멈춤 7 • 날숨 8. 수면과 긴장 완화에 많이 쓰는 간단한 리듬입니다.",
+      settings:"설정",
+      rounds:"라운드(회)",
+      roundsHint:"추천: 4–8회",
+      sound:"소리",
       soundOff:"끔",
-      soundSoft:"부드러운 비프음",
-      soundNote:"모바일 브라우저는 ‘시작’ 터치 후에만 소리가 납니다.",
-      hintReady:"팁: 어깨 힘을 빼고 편하게 하세요. 어지러우면 중단하고 정상 호흡하세요.",
-      hintRun:"표시를 따라가세요. 불편하면 일시정지 또는 리셋하세요.",
-      hintPaused:"일시정지됨. 준비되면 다시 시작하세요.",
-      hintBack:"리듬으로 복귀.",
-      hintDone:"좋아요. 잠시 정상 호흡으로 돌아가세요.",
+      soundSoft:"부드럽게",
+      soundClear:"선명하게",
+      volume:"볼륨",
+      soundNote:"아이폰/사파리에서 소리가 안 나면 Start를 한 번 눌러 오디오가 활성화되게 해주세요.",
+      tipTitle:"팁",
+      tip:"어깨 힘을 빼고 편하게. 어지러우면 중단하고 평소 호흡으로 돌아가세요.",
       back:"← 라이브러리로",
-      moreBox:"박스 호흡",
-      more446:"4-4-6 호흡",
-      seoTitle:"4-7-8 호흡이란?",
-      seoText:"4-7-8 호흡은 4초 들숨, 7초 멈춤, 8초 날숨으로 구성된 간단한 호흡 패턴입니다. 수면 전 이완이나 스트레스 완화에 자주 사용됩니다.",
-      tipLabel:"주의",
-      tipText:"어지럽거나 불편하면 중단하고 정상 호흡을 하세요.",
+      more1:"박스 호흡",
+      more2:"4-4-6 호흡",
       privacy:"개인정보처리방침",
       terms:"이용약관",
-      metaTitle:"4-7-8 호흡 타이머(수면/이완) | Breath24",
-      metaDesc:"무료 4-7-8 호흡 타이머: 4초 들숨, 7초 멈춤, 8초 날숨. 수면과 스트레스 완화에 도움이 됩니다."
+      start:"▶ 시작",
+      running:"⏵ 진행중…",
+      pause:"⏸ 일시정지",
+      resume:"⏵ 재개",
+      reset:"↺ 리셋",
+      ready:"준비",
+      done:"완료",
+      microReady:"시작을 눌러 시작하세요.",
+      microFollow:"표시를 따라가세요. 불편하면 일시정지 또는 리셋.",
+      microPaused:"정지됨. 준비되면 재개하세요.",
+      microDone:"좋아요. 잠시 자연 호흡으로 돌아가세요.",
+      cueReady:"준비",
+      cueInhale:"들이마시기",
+      cueHold:"멈춤",
+      cueExhale:"내쉬기"
     },
     ja: {
-      subhead:"4-7-8 呼吸",
-      nav:{library:"ライブラリ", guide:"ガイド", about:"紹介"},
+      sub: "4-7-8 呼吸",
+      navLibrary:"ライブラリ", navGuide:"ガイド", navAbout:"概要",
       title:"4-7-8 呼吸タイマー",
-      desc:"4秒吸う • 7秒止める • 8秒吐く。睡眠やリラックスに使われるシンプルなリズムです。",
-      phase:{ready:"準備", done:"完了", inhale:"吸う", hold:"止める", exhale:"吐く"},
-      buttons:{start:"開始", running:"実行中...", pause:"一時停止", resume:"再開", reset:"リセット"},
-      rounds:"ラウンド",
+      desc:"吸う 4 • 止める 7 • 吐く 8。睡眠や落ち着きに使われるシンプルなリズムです。",
+      settings:"設定",
+      rounds:"回数",
+      roundsHint:"おすすめ: 4〜8回",
       sound:"サウンド",
       soundOff:"オフ",
-      soundSoft:"ソフトビープ",
-      soundNote:"モバイルでは「開始」タップ後に音が有効になります。",
-      hintReady:"ヒント: 肩の力を抜いて。めまいがしたら中止して通常呼吸に戻してください。",
-      hintRun:"合図に従ってください。無理なら一時停止/リセット。",
-      hintPaused:"一時停止中。準備ができたら再開。",
-      hintBack:"リズムに戻りました。",
-      hintDone:"よくできました。少し通常呼吸に戻しましょう。",
+      soundSoft:"やさしく",
+      soundClear:"はっきり",
+      volume:"音量",
+      soundNote:"iPhone/Safariで音が出ない場合は、Startを一度押してオーディオを有効化してください。",
+      tipTitle:"ヒント",
+      tip:"肩の力を抜いて。めまいを感じたら中止して通常の呼吸に戻してください。",
       back:"← ライブラリへ",
-      moreBox:"ボックス呼吸",
-      more446:"4-4-6 呼吸",
-      seoTitle:"4-7-8 呼吸とは？",
-      seoText:"4-7-8 呼吸は、4秒吸って、7秒止めて、8秒吐くシンプルなパターンです。就寝前のリラックスやストレス軽減に使われます。",
-      tipLabel:"注意",
-      tipText:"めまいや不快感があれば中止し、通常呼吸をしてください。",
+      more1:"ボックス呼吸",
+      more2:"4-4-6 呼吸",
       privacy:"プライバシー",
       terms:"利用規約",
-      metaTitle:"4-7-8 呼吸タイマー(睡眠/リラックス) | Breath24",
-      metaDesc:"無料 4-7-8 呼吸タイマー: 4秒吸う、7秒止める、8秒吐く。睡眠と落ち着きに。"
+      start:"▶ 開始",
+      running:"⏵ 実行中…",
+      pause:"⏸ 一時停止",
+      resume:"⏵ 再開",
+      reset:"↺ リセット",
+      ready:"準備",
+      done:"完了",
+      microReady:"Startを押して開始。",
+      microFollow:"合図に合わせて。無理なら停止/リセット。",
+      microPaused:"停止中。準備できたら再開。",
+      microDone:"いいね。しばらく自然な呼吸へ。",
+      cueReady:"準備",
+      cueInhale:"吸う",
+      cueHold:"止める",
+      cueExhale:"吐く"
     },
     es: {
-      subhead:"Respiración 4-7-8",
-      nav:{library:"Biblioteca", guide:"Guía", about:"Acerca de"},
+      sub: "Respiración 4-7-8",
+      navLibrary:"Biblioteca", navGuide:"Guía", navAbout:"Acerca de",
       title:"Temporizador de respiración 4-7-8",
       desc:"Inhala 4 • Mantén 7 • Exhala 8. Un ritmo simple para dormir y calmar el estrés.",
-      phase:{ready:"Listo", done:"Hecho", inhale:"Inhala", hold:"Mantén", exhale:"Exhala"},
-      buttons:{start:"Empezar", running:"En curso...", pause:"Pausar", resume:"Reanudar", reset:"Reiniciar"},
+      settings:"Ajustes",
       rounds:"Rondas",
+      roundsHint:"Recomendado: 4–8 rondas",
       sound:"Sonido",
       soundOff:"Apagado",
-      soundSoft:"Pitido suave",
-      soundNote:"El sonido se activa tras pulsar Empezar (móvil requiere toque).",
-      hintReady:"Consejo: Relaja los hombros. Si te mareas, detente y respira normal.",
-      hintRun:"Sigue la guía. Si incomoda, pausa o reinicia.",
-      hintPaused:"Pausado. Reanuda cuando estés listo.",
-      hintBack:"De vuelta al ritmo.",
-      hintDone:"Bien. Vuelve a respiración normal un momento.",
+      soundSoft:"Suave",
+      soundClear:"Claro",
+      volume:"Volumen",
+      soundNote:"Si no oyes pitidos en iPhone/Safari, pulsa Start una vez (desbloqueo de audio).",
+      tipTitle:"Consejo",
+      tip:"Relaja los hombros. Si sientes mareo, detente y respira normal.",
       back:"← Volver a la biblioteca",
-      moreBox:"Respiración en caja",
-      more446:"Respiración 4-4-6",
-      seoTitle:"¿Qué es la respiración 4-7-8?",
-      seoText:"La respiración 4-7-8 es un patrón simple: inhala 4 segundos, mantén 7 y exhala 8. Se usa para relajarse antes de dormir o calmar el estrés.",
-      tipLabel:"Seguridad",
-      tipText:"Si te mareas o te sientes mal, detente y respira normalmente.",
+      more1:"Respiración en caja",
+      more2:"Respiración 4-4-6",
       privacy:"Privacidad",
       terms:"Términos",
-      metaTitle:"Temporizador 4-7-8 (Sueño y calma) | Breath24",
-      metaDesc:"Temporizador gratis 4-7-8: inhala 4, mantén 7, exhala 8. Útil para dormir y calmar el estrés."
+      start:"▶ Iniciar",
+      running:"⏵ Ejecutando…",
+      pause:"⏸ Pausa",
+      resume:"⏵ Reanudar",
+      reset:"↺ Reiniciar",
+      ready:"Listo",
+      done:"Hecho",
+      microReady:"Pulsa Start para comenzar.",
+      microFollow:"Sigue la señal. Si no es cómodo, pausa o reinicia.",
+      microPaused:"En pausa. Reanuda cuando quieras.",
+      microDone:"Bien. Vuelve a respirar normal un momento.",
+      cueReady:"Listo",
+      cueInhale:"Inhala",
+      cueHold:"Mantén",
+      cueExhale:"Exhala"
     }
   };
 
+  const els = {
+    sub: document.getElementById('t_sub'),
+    navLibrary: document.getElementById('t_navLibrary'),
+    navGuide: document.getElementById('t_navGuide'),
+    navAbout: document.getElementById('t_navAbout'),
+    title: document.getElementById('t_title'),
+    desc: document.getElementById('t_desc'),
+    settings: document.getElementById('t_settings'),
+    rounds: document.getElementById('t_rounds'),
+    roundsHint: document.getElementById('t_roundsHint'),
+    sound: document.getElementById('t_sound'),
+    soundOff: document.getElementById('t_soundOff'),
+    soundSoft: document.getElementById('t_soundSoft'),
+    soundClear: document.getElementById('t_soundClear'),
+    volume: document.getElementById('t_volume'),
+    soundNote: document.getElementById('t_soundNote'),
+    tipTitle: document.getElementById('t_tipTitle'),
+    tip: document.getElementById('t_tip'),
+    back: document.getElementById('t_back'),
+    more1: document.getElementById('t_more1'),
+    more2: document.getElementById('t_more2'),
+    privacy: document.getElementById('t_privacy'),
+    terms: document.getElementById('t_terms'),
+  };
+
+  const langSelect = document.getElementById('langSelect');
+
   function detectLang(){
     const qs = new URLSearchParams(location.search);
-    const q = (qs.get("lang")||"").toLowerCase();
+    const q = (qs.get('lang') || '').toLowerCase();
     if (I18N[q]) return q;
-    const saved = (localStorage.getItem("b24_lang")||"").toLowerCase();
+    const saved = (localStorage.getItem('b24_lang') || '').toLowerCase();
     if (I18N[saved]) return saved;
-    const nav = (navigator.language || "en").toLowerCase();
-    if (nav.startsWith("ko")) return "ko";
-    if (nav.startsWith("ja")) return "ja";
-    if (nav.startsWith("es")) return "es";
-    return "en";
+    const nav = (navigator.language || 'en').toLowerCase();
+    if (nav.startsWith('ko')) return 'ko';
+    if (nav.startsWith('ja')) return 'ja';
+    if (nav.startsWith('es')) return 'es';
+    return 'en';
   }
 
-  function setMeta(title, desc){
-    document.title = title;
-    const md = document.querySelector('meta[name="description"]');
-    if (md) md.setAttribute("content", desc);
+  let L = detectLang();
+  function setLang(lang, {pushUrl=true} = {}){
+    if (!I18N[lang]) lang = 'en';
+    L = lang;
+    localStorage.setItem('b24_lang', lang);
+    document.documentElement.lang = lang;
+    langSelect.value = lang;
 
-    const ogt = document.querySelector('meta[property="og:title"]');
-    const ogd = document.querySelector('meta[property="og:description"]');
-    if (ogt) ogt.setAttribute("content", title);
-    if (ogd) ogd.setAttribute("content", desc);
+    const t = I18N[lang];
+    els.sub.textContent = t.sub;
+    els.navLibrary.textContent = t.navLibrary;
+    els.navGuide.textContent = t.navGuide;
+    els.navAbout.textContent = t.navAbout;
+    els.title.textContent = t.title;
+    els.desc.textContent = t.desc;
+    els.settings.textContent = t.settings;
+    els.rounds.textContent = t.rounds;
+    els.roundsHint.textContent = t.roundsHint;
+    els.sound.textContent = t.sound;
+    els.soundOff.textContent = t.soundOff;
+    els.soundSoft.textContent = t.soundSoft;
+    els.soundClear.textContent = t.soundClear;
+    els.volume.textContent = t.volume;
+    els.soundNote.textContent = t.soundNote;
+    els.tipTitle.textContent = t.tipTitle;
+    els.tip.textContent = t.tip;
+    els.back.textContent = t.back;
+    els.more1.textContent = t.more1;
+    els.more2.textContent = t.more2;
+    els.privacy.textContent = t.privacy;
+    els.terms.textContent = t.terms;
 
-    const twt = document.querySelector('meta[name="twitter:title"]');
-    const twd = document.querySelector('meta[name="twitter:description"]');
-    if (twt) twt.setAttribute("content", title);
-    if (twd) twd.setAttribute("content", desc);
+    // dynamic labels
+    startBtn.textContent = t.start;
+    pauseBtn.textContent = t.pause;
+    resetBtn.textContent = t.reset;
+
+    if (pushUrl){
+      const url = new URL(location.href);
+      url.searchParams.set('lang', lang);
+      history.replaceState({}, "", url.toString());
+    }
+
+    // update cue text to current phase immediately
+    refreshPhaseText();
+    refreshRoundLabel();
+    updateMicroText();
   }
 
-  // ---- Breathing logic ----
+  langSelect.addEventListener('change', (e) => setLang(e.target.value, {pushUrl:true}));
+
+  // ========== timer / animation ==========
   const pattern = [
     { key:"inhale", seconds:4 },
     { key:"hold",   seconds:7 },
     { key:"exhale", seconds:8 }
   ];
 
+  const circle = document.getElementById('circle');
   const ring = document.getElementById('ring');
-  const bubble = document.getElementById('bubble');
+  const bgBreath = document.getElementById('bgBreath');
+
   const phaseLabel = document.getElementById('phaseLabel');
+  const roundLabel = document.getElementById('roundLabel');
   const countEl = document.getElementById('count');
-  const roundInfo = document.getElementById('roundInfo');
+  const cueEl = document.getElementById('cue');
+  const microEl = document.getElementById('micro');
+  const bar = document.getElementById('bar');
+
   const roundsInput = document.getElementById('rounds');
-  const soundSel = document.getElementById('sound');
-  const statusHint = document.getElementById('statusHint');
+  const totalTime = document.getElementById('totalTime');
 
   const startBtn = document.getElementById('startBtn');
   const pauseBtn = document.getElementById('pauseBtn');
   const resetBtn = document.getElementById('resetBtn');
 
-  let timer = null;
+  const soundMode = document.getElementById('soundMode');
+  const volume = document.getElementById('volume');
+  const volPct = document.getElementById('volPct');
+
   let running = false;
   let paused = false;
 
   let round = 1;
   let phaseIdx = 0;
-  let remaining = pattern[0].seconds;
-  let phaseTotal = pattern[0].seconds;
+
+  // phase timing
+  let phaseStartTs = 0;
+  let pauseStartTs = 0;
+  let pausedAccum = 0;
 
   // audio
   let audioCtx = null;
-
-  // haptics user option (implicit on, respects device)
-  let hapticsOn = true;
-
   function ensureAudio(){
-    if (soundSel.value === "off") return;
     if (!audioCtx){
       audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
-    if (audioCtx.state === "suspended"){
-      audioCtx.resume().catch(()=>{});
-    }
+    if (audioCtx.state === 'suspended') audioCtx.resume().catch(()=>{});
   }
-
   function beep(){
-    if (soundSel.value === "off") return;
+    const mode = soundMode.value;
+    if (mode === 'off') return;
+    ensureAudio();
+
+    const v = (parseInt(volume.value,10) || 0) / 100;
+    if (v <= 0) return;
+
+    const freq = (mode === 'clear') ? 1046.5 : 880; // C6 vs A5
+    const dur = (mode === 'clear') ? 0.09 : 0.07;
+
     try{
-      ensureAudio();
-      if (!audioCtx) return;
       const o = audioCtx.createOscillator();
       const g = audioCtx.createGain();
-      o.type = "sine";
-      o.frequency.value = 880;
 
+      o.type = "sine";
+      o.frequency.value = freq;
+
+      // small envelope to avoid click
       const now = audioCtx.currentTime;
       g.gain.setValueAtTime(0.0001, now);
-      g.gain.exponentialRampToValueAtTime(0.05, now + 0.01);
-      g.gain.exponentialRampToValueAtTime(0.0001, now + 0.10);
+      g.gain.exponentialRampToValueAtTime(Math.max(0.0002, 0.06 * v), now + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + dur);
 
       o.connect(g);
       g.connect(audioCtx.destination);
-
       o.start(now);
-      o.stop(now + 0.12);
-    }catch(e){}
-  }
-
-  // ✅ Haptics: subtle patterns
-  function vibrate(msOrPattern){
-    if (!hapticsOn) return;
-    try{
-      if (!("vibrate" in navigator)) return;
-      navigator.vibrate(msOrPattern);
+      o.stop(now + dur + 0.02);
     }catch(e){}
   }
 
   function maxRounds(){
     return Math.max(1, parseInt(roundsInput.value || '1', 10));
   }
+
+  function totalSecondsPerRound(){
+    return pattern.reduce((sum,p)=>sum+p.seconds,0);
+  }
+  function updateTotalTime(){
+    const s = totalSecondsPerRound() * maxRounds();
+    const m = Math.floor(s/60);
+    const r = s % 60;
+    totalTime.textContent = m>0 ? `${m}m ${String(r).padStart(2,'0')}s` : `${r}s`;
+  }
+
   function phaseKey(){
     return pattern[phaseIdx].key;
   }
-
-  function totalCycleSeconds(){
-    return pattern.reduce((s,p)=>s+p.seconds,0);
-  }
-  function elapsedInCycle(){
-    let e = 0;
-    for (let i=0;i<phaseIdx;i++) e += pattern[i].seconds;
-    e += (phaseTotal - remaining);
-    return Math.max(0, e);
+  function phaseSeconds(){
+    return pattern[phaseIdx].seconds;
   }
 
-  function setRingProgress(){
-    const cycle = totalCycleSeconds();
-    const deg = cycle ? (elapsedInCycle() / cycle) * 360 : 0;
-    ring.style.background =
-      `radial-gradient(circle at 50% 45%, rgba(255,255,255,.07), transparent 55%),
-       conic-gradient(var(--accent1) ${deg}deg, rgba(255,255,255,.06) 0deg)`;
+  function t(){
+    return I18N[L] || I18N.en;
   }
 
-  function animateBubbleForPhase(pKey, seconds){
-    bubble.getAnimations().forEach(a => a.cancel());
+  function refreshPhaseText(){
+    const tt = t();
+    const key = phaseKey();
+    const cueMap = { inhale: tt.cueInhale, hold: tt.cueHold, exhale: tt.cueExhale };
+    const cue = running ? (cueMap[key] || tt.cueReady) : tt.cueReady;
 
-    const base = 0.86;
-    const big  = 1.10;
-    const small= 0.78;
-
-    let kf;
-    if (pKey === "inhale"){
-      ring.classList.add("ringGlow");
-      kf = [{ transform: `scale(${base})` }, { transform: `scale(${big})` }];
-    }else if (pKey === "hold"){
-      ring.classList.add("ringGlow");
-      kf = [{ transform: `scale(${big})` }, { transform: `scale(${big})` }];
-    }else{
-      ring.classList.remove("ringGlow");
-      kf = [{ transform: `scale(${big})` }, { transform: `scale(${small})` }];
-    }
-
-    bubble.animate(kf, {
-      duration: Math.max(220, seconds*1000),
-      easing: "cubic-bezier(.2,.9,.2,1)",
-      fill: "forwards"
-    });
-  }
-
-  // ✅ Background phase gradient shift (subtle)
-  function applyPhaseBackground(pKey){
-    // choose weights
-    const root = getComputedStyle(document.documentElement);
-    const p1 = root.getPropertyValue("--p1").trim() || "rgba(126,231,194,.12)";
-    const p2 = root.getPropertyValue("--p2").trim() || "rgba(255,210,122,.10)";
-    const p3 = root.getPropertyValue("--p3").trim() || "rgba(99,102,241,.10)";
-
-    let A=p1, B=p2, C=p3;
-    let move = "translate3d(0,0,0)";
-    let opacity = 0.85;
-
-    if (pKey === "inhale"){
-      A = p1; B = "rgba(255,210,122,.06)"; C = "rgba(99,102,241,.06)";
-      move = "translate3d(0,-6px,0)";
-      opacity = 0.92;
-    } else if (pKey === "hold"){
-      A = "rgba(126,231,194,.07)"; B = p2; C = "rgba(99,102,241,.06)";
-      move = "translate3d(0,-2px,0)";
-      opacity = 0.88;
-    } else { // exhale
-      A = "rgba(126,231,194,.06)"; B = "rgba(255,210,122,.06)"; C = p3;
-      move = "translate3d(0,6px,0)";
-      opacity = 0.90;
-    }
-
-    document.body.style.setProperty("--phaseA", A);
-    document.body.style.setProperty("--phaseB", B);
-    document.body.style.setProperty("--phaseC", C);
-    // move via CSS variable-ish (use style on ::after by toggling body class? easiest: set on body dataset and adjust with inline style)
-    document.body.style.setProperty("--phaseMove", move);
-
-    // We can't directly set ::after transform via CSS var unless used, so we use a tiny trick:
-    document.body.dataset.phase = pKey;
-
-    // adjust opacity by setting a CSS custom property, used by a style injection
-    document.body.style.setProperty("--phaseOpacity", String(opacity));
-  }
-
-  // inject a tiny dynamic css that reads dataset + vars (no external files)
-  const styleDyn = document.createElement("style");
-  styleDyn.textContent = `
-    body::after{ opacity: var(--phaseOpacity, .85); }
-    body[data-phase="inhale"]::after{ transform: translate3d(0,-6px,0); }
-    body[data-phase="hold"]::after{ transform: translate3d(0,-2px,0); }
-    body[data-phase="exhale"]::after{ transform: translate3d(0,6px,0); }
-    body[data-phase="ready"]::after{ transform: translate3d(0,0,0); opacity: .85; }
-  `;
-  document.head.appendChild(styleDyn);
-
-  function render(){
-    const lang = document.documentElement.lang || "en";
-    const t = I18N[lang] || I18N.en;
+    cueEl.textContent = cue;
 
     if (!running){
-      phaseLabel.textContent = t.phase.ready;
-      countEl.textContent = "—";
-      roundInfo.textContent = `Round 1/${maxRounds()}`;
-      ring.classList.remove("ringGlow");
-      ring.style.background =
-        `radial-gradient(circle at 50% 45%, rgba(255,255,255,.07), transparent 55%),
-         conic-gradient(var(--accent1) 0deg, rgba(255,255,255,.06) 0deg)`;
-      bubble.getAnimations().forEach(a=>a.cancel());
-      bubble.style.transform = "scale(0.86)";
-      statusHint.textContent = t.hintReady;
-
-      applyPhaseBackground("ready");
+      phaseLabel.textContent = tt.ready;
       return;
     }
-
-    const pKey = phaseKey();
-    phaseLabel.textContent = t.phase[pKey];
-    countEl.textContent = String(Math.max(0, remaining));
-    roundInfo.textContent = `Round ${round}/${maxRounds()}`;
-    setRingProgress();
-    applyPhaseBackground(pKey);
+    phaseLabel.textContent = cue;
   }
 
-  function tick(){
-    if (!running || paused) return;
+  function refreshRoundLabel(){
+    roundLabel.textContent = `${(t().navLibrary === "라이브러리") ? "Round" : "Round"} ${round}/${maxRounds()}`;
+    // 위는 일부 언어에서 Round 번역까지 하고 싶으면 바꿔도 됨(현재는 통일)
+  }
 
-    render();
-
-    if (remaining <= 0){
-      // phase change
-      beep();
-
-      // ✅ haptics per phase transition (soft)
-      // short pulse on each phase change; slightly different pattern by next phase
-      const nextIdx = (phaseIdx + 1) % pattern.length;
-      const nextKey = pattern[nextIdx].key;
-      if (nextKey === "inhale") vibrate([18, 24, 18]);      // cue inhale
-      else if (nextKey === "hold") vibrate(18);             // cue hold
-      else vibrate([12, 18, 12]);                           // cue exhale
-
-      phaseIdx++;
-      if (phaseIdx >= pattern.length){
-        phaseIdx = 0;
-        round++;
-      }
-
-      if (round > maxRounds()){
-        stop(true);
-        return;
-      }
-
-      remaining = pattern[phaseIdx].seconds;
-      phaseTotal = remaining;
-
-      animateBubbleForPhase(phaseKey(), phaseTotal);
-      render();
-      return;
+  function updateMicroText(){
+    const tt = t();
+    if (!running){
+      microEl.textContent = tt.microReady;
+    } else if (paused){
+      microEl.textContent = tt.microPaused;
+    } else {
+      microEl.textContent = tt.microFollow;
     }
-
-    remaining -= 1;
   }
 
-  function setLang(lang){
-    if(!I18N[lang]) lang = "en";
-    localStorage.setItem("b24_lang", lang);
-    document.documentElement.lang = lang;
+  function setButtons(){
+    const tt = t();
+    if (!running){
+      startBtn.disabled = false;
+      startBtn.textContent = tt.start;
+      pauseBtn.disabled = true;
+      pauseBtn.textContent = tt.pause;
+    }else{
+      pauseBtn.disabled = false;
+      if (paused){
+        startBtn.disabled = false;
+        startBtn.textContent = tt.resume;
+        pauseBtn.textContent = tt.resume;
+      }else{
+        startBtn.disabled = true;
+        startBtn.textContent = tt.running;
+        pauseBtn.textContent = tt.pause;
+      }
+    }
+    resetBtn.textContent = tt.reset;
+  }
 
-    const t = I18N[lang];
-    document.getElementById("t_subhead").textContent = t.subhead;
-    document.getElementById("t_nav_library").textContent = t.nav.library;
-    document.getElementById("t_nav_guide").textContent = t.nav.guide;
-    document.getElementById("t_nav_about").textContent = t.nav.about;
+  function stopUI(completed=false){
+    const tt = t();
+    running = false;
+    paused = false;
 
-    document.getElementById("t_title").textContent = t.title;
-    document.getElementById("t_desc").textContent = t.desc;
+    countEl.textContent = "—";
+    bar.style.width = "0%";
 
-    document.getElementById("t_rounds").textContent = t.rounds;
-    document.getElementById("t_sound").textContent = t.sound;
-    document.getElementById("t_sound_off").textContent = t.soundOff;
-    document.getElementById("t_sound_soft").textContent = t.soundSoft;
-    document.getElementById("t_sound_note").textContent = t.soundNote;
+    cueEl.textContent = tt.cueReady;
+    phaseLabel.textContent = completed ? tt.done : tt.ready;
+    microEl.textContent = completed ? tt.microDone : tt.microReady;
 
-    document.getElementById("t_back").textContent = t.back;
-    document.getElementById("t_more_box").textContent = t.moreBox;
-    document.getElementById("t_more_446").textContent = t.more446;
+    // reset visuals
+    circle.style.transform = `scale(1)`;
+    ring.style.transform = `scale(1)`;
+    ring.style.opacity = `.55`;
+    bgBreath.style.transform = `scale(1)`;
+    bgBreath.style.opacity = `.9`;
 
-    document.getElementById("t_seoTitle").textContent = t.seoTitle;
-    document.getElementById("t_seoText").textContent = t.seoText;
-
-    document.getElementById("t_tipLabel").textContent = t.tipLabel;
-    document.getElementById("t_tipText").textContent = t.tipText;
-
-    document.getElementById("t_privacy").textContent = t.privacy;
-    document.getElementById("t_terms").textContent = t.terms;
-
-    // buttons
-    startBtn.textContent = t.buttons.start;
-    pauseBtn.textContent = t.buttons.pause;
-    resetBtn.textContent = t.buttons.reset;
-
-    // meta
-    setMeta(t.metaTitle, t.metaDesc);
-
-    render();
+    setButtons();
+    refreshRoundLabel();
   }
 
   function start(){
-    const lang = document.documentElement.lang || "en";
-    const t = I18N[lang] || I18N.en;
-
-    // mobile: enable audio on tap
+    // iOS/Safari: user gesture unlock
     ensureAudio();
-
-    if (running && !paused) return;
 
     if (!running){
       round = 1;
       phaseIdx = 0;
-      remaining = pattern[0].seconds;
-      phaseTotal = remaining;
-      animateBubbleForPhase(phaseKey(), phaseTotal);
-      applyPhaseBackground(phaseKey());
-      // ✅ tiny haptic on start
-      vibrate(15);
+      pausedAccum = 0;
+      phaseStartTs = performance.now();
+    } else if (paused){
+      // resume: adjust accumulated pause time
+      const now = performance.now();
+      pausedAccum += (now - pauseStartTs);
+      paused = false;
+    } else {
+      return;
     }
 
     running = true;
     paused = false;
 
-    startBtn.textContent = t.buttons.running;
-    startBtn.disabled = true;
-    pauseBtn.disabled = false;
+    // phase-change beep on start as a gentle cue (optional)
+    // beep();
 
-    statusHint.textContent = t.hintRun;
-
-    if (timer) clearInterval(timer);
-    timer = setInterval(tick, 1000);
-
-    tick();
+    setButtons();
+    refreshPhaseText();
+    refreshRoundLabel();
+    updateMicroText();
   }
 
-  function pause(){
+  function togglePause(){
     if (!running) return;
-    const lang = document.documentElement.lang || "en";
-    const t = I18N[lang] || I18N.en;
-
     paused = !paused;
-    pauseBtn.textContent = paused ? t.buttons.resume : t.buttons.pause;
-
-    startBtn.disabled = !paused;
-    startBtn.textContent = paused ? t.buttons.start : t.buttons.running;
-
-    statusHint.textContent = paused ? t.hintPaused : t.hintBack;
-
-    // ✅ haptic on pause/resume
-    vibrate(paused ? 10 : 12);
-  }
-
-  function stop(completed=false){
-    const lang = document.documentElement.lang || "en";
-    const t = I18N[lang] || I18N.en;
-
-    running = false;
-    paused = false;
-
-    if (timer) clearInterval(timer);
-    timer = null;
-
-    startBtn.disabled = false;
-    startBtn.textContent = t.buttons.start;
-    pauseBtn.disabled = true;
-    pauseBtn.textContent = t.buttons.pause;
-
-    phaseLabel.textContent = completed ? t.phase.done : t.phase.ready;
-    countEl.textContent = "—";
-    statusHint.textContent = completed ? t.hintDone : t.hintReady;
-
-    ring.classList.remove("ringGlow");
-    bubble.getAnimations().forEach(a=>a.cancel());
-    bubble.style.transform = "scale(0.86)";
-
-    applyPhaseBackground("ready");
-
-    // ✅ done haptic
-    if (completed) vibrate([18, 30, 18]);
-    render();
+    if (paused){
+      pauseStartTs = performance.now();
+    } else {
+      const now = performance.now();
+      pausedAccum += (now - pauseStartTs);
+    }
+    setButtons();
+    refreshPhaseText();
+    refreshRoundLabel();
+    updateMicroText();
   }
 
   function reset(){
-    vibrate(10);
-    stop(false);
+    stopUI(false);
+  }
+
+  function nextPhase(){
+    beep(); // ✅ phase change beep
+
+    phaseIdx++;
+    if (phaseIdx >= pattern.length){
+      phaseIdx = 0;
+      round++;
+    }
+    if (round > maxRounds()){
+      stopUI(true);
+      return false;
+    }
+    phaseStartTs = performance.now();
+    pausedAccum = 0;
+    refreshPhaseText();
+    refreshRoundLabel();
+    return true;
+  }
+
+  // smooth easing: 0..1 -> smooth in/out
+  function easeInOutSine(x){
+    return -(Math.cos(Math.PI * x) - 1) / 2;
+  }
+
+  // main render loop
+  function rafLoop(){
+    requestAnimationFrame(rafLoop);
+
+    if (!running){
+      // idle: tiny float to feel alive
+      const k = (performance.now() / 1000);
+      const idle = 1 + Math.sin(k * 1.2) * 0.006;
+      circle.style.transform = `scale(${idle.toFixed(4)})`;
+      ring.style.transform = `scale(${(idle*1.02).toFixed(4)})`;
+      return;
+    }
+    if (paused) return;
+
+    const now = performance.now();
+    const elapsed = (now - phaseStartTs - pausedAccum) / 1000;
+    const dur = phaseSeconds();
+
+    let p = dur > 0 ? (elapsed / dur) : 1;
+    if (p >= 1){
+      // snap to end UI, then advance phase
+      p = 1;
+    }
+
+    // countdown: show remaining seconds (ceil)
+    const remain = Math.max(0, Math.ceil(dur - elapsed));
+    countEl.textContent = String(remain);
+
+    // progress bar
+    const pct = Math.max(0, Math.min(1, p));
+    bar.style.width = `${(pct * 100).toFixed(1)}%`;
+
+    // BREATHING SCALE based on phase
+    const key = phaseKey();
+    let scale = 1.0;
+    let glow = 0.55;
+    let bgScale = 1.0;
+    let bgOp = 0.9;
+
+    if (key === "inhale"){
+      // grow: slow->fast->slow
+      const e = easeInOutSine(pct);
+      scale = 1.00 + e * 0.22;     // up to +22%
+      glow  = 0.48 + e * 0.32;
+      bgScale = 1.00 + e * 0.03;
+      bgOp = 0.88 + e * 0.10;
+    } else if (key === "hold"){
+      // subtle micro movement
+      const wobble = Math.sin((performance.now()/1000)*2.2) * 0.004;
+      scale = 1.22 + wobble;
+      glow  = 0.80;
+      bgScale = 1.03 + wobble*0.3;
+      bgOp = 0.98;
+    } else if (key === "exhale"){
+      // shrink: long smooth release (use ease)
+      const e = easeInOutSine(pct);
+      scale = 1.22 - e * 0.22;     // back to 1.00
+      glow  = 0.80 - e * 0.28;
+      bgScale = 1.03 - e * 0.03;
+      bgOp = 0.98 - e * 0.10;
+    }
+
+    circle.style.transform = `scale(${scale.toFixed(4)})`;
+    ring.style.transform = `scale(${(scale*1.05).toFixed(4)})`;
+    ring.style.opacity = `${glow.toFixed(3)}`;
+    bgBreath.style.transform = `scale(${bgScale.toFixed(4)})`;
+    bgBreath.style.opacity = `${bgOp.toFixed(3)}`;
+
+    // update labels
+    refreshPhaseText();
+    updateMicroText();
+    refreshRoundLabel();
+
+    // phase finish
+    if (elapsed >= dur){
+      // advance phase
+      nextPhase();
+    }
   }
 
   // events
   startBtn.addEventListener('click', start);
-  pauseBtn.addEventListener('click', pause);
+  pauseBtn.addEventListener('click', togglePause);
   resetBtn.addEventListener('click', reset);
-  roundsInput.addEventListener('change', () => render());
 
-  // language
-  const langSelect = document.getElementById("langSelect");
-  const initial = detectLang();
-  langSelect.value = initial;
-  langSelect.addEventListener("change", (e) => setLang(e.target.value));
+  roundsInput.addEventListener('change', () => {
+    updateTotalTime();
+    refreshRoundLabel();
+  });
+
+  volume.addEventListener('input', () => {
+    volPct.textContent = `${volume.value}%`;
+  });
+
+  soundMode.addEventListener('change', () => {
+    // optional: play a tiny confirmation beep when sound is enabled
+    if (soundMode.value !== 'off') beep();
+  });
 
   // init
   document.getElementById('y').textContent = new Date().getFullYear();
-  setLang(initial);
-  applyPhaseBackground("ready");
+  volPct.textContent = `${volume.value}%`;
+  updateTotalTime();
+
+  setLang(L, {pushUrl:true});
+  stopUI(false);
+  requestAnimationFrame(rafLoop);
 })();
 </script>
 </body>
