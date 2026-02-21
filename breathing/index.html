@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" translate="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Breathing Library | Breath24</title>
+  <meta name="description" content="Browse breathing exercises: 4-7-8, box breathing, 4-4-6, 5-5 coherent breathing, belly breathing, and alternate nostril breathing." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b0f17" />
+
+  <link rel="canonical" href="https://breath24.com/breathing/" />
+
+  <style>
+    :root{--bg:#0b0f17;--text:#eaf0ff;--muted:#a9b4d0;--line:rgba(255,255,255,.10);--btn:#1f2d4a;--btn2:#223559}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:980px;margin:0 auto;padding:22px 16px 44px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0 18px}
+    .brand{display:flex;gap:10px;align-items:center}
+    .logo{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg, rgba(126,231,194,.35), rgba(255,210,122,.25));border:1px solid var(--line)}
+    h1{margin:0;font-size:18px}
+    .sub{margin:2px 0 0;font-size:12px;color:var(--muted)}
+    .nav{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-size:13px;color:var(--muted)}
+    .hero{border:1px solid var(--line);border-radius:18px;padding:16px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03))}
+    .hero h2{margin:0;font-size:20px}
+    .hero p{margin:8px 0 0;color:var(--muted);line-height:1.5}
+    .grid{margin-top:12px;display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+    .card{grid-column:span 6;border:1px solid var(--line);border-radius:18px;padding:14px;background:rgba(255,255,255,.04)}
+    .card h3{margin:0;font-size:16px}
+    .card p{margin:6px 0 12px;color:var(--muted);font-size:13px;line-height:1.45}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 12px;border-radius:12px;background:var(--btn);border:1px solid var(--line);font-size:13px}
+    .btn:hover{background:var(--btn2)}
+    footer{margin-top:18px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--line)}
+    @media (max-width:720px){.card{grid-column:span 12}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <span class="logo" aria-hidden="true"></span>
+        <span>
+          <h1>Breath24</h1>
+          <div class="sub">Breathing library</div>
+        </span>
+      </a>
+      <nav class="nav">
+        <a class="pill" href="/">Home</a>
+        <a class="pill" href="/guide/">Guide</a>
+        <a class="pill" href="/about.html">About</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h2>Breathing Library</h2>
+      <p>Pick a pattern, set your rounds, and start. Each page is optimized for a different goal (sleep, focus, calm).</p>
+
+      <div class="grid">
+        <a class="card" href="/breathing/4-7-8/">
+          <h3>4-7-8 Breathing</h3>
+          <p>Inhale 4 • hold 7 • exhale 8 — popular for sleep and calming down fast.</p>
+          <span class="btn">Open</span>
+        </a>
+
+        <a class="card" href="/breathing/box/">
+          <h3>Box Breathing</h3>
+          <p>Inhale 4 • hold 4 • exhale 4 • hold 4 — steady rhythm for focus.</p>
+          <span class="btn">Open</span>
+        </a>
+
+        <a class="card" href="/breathing/4-4-6/">
+          <h3>4-4-6 Breathing</h3>
+          <p>Inhale 4 • hold 4 • exhale 6 — longer exhale helps reduce tension.</p>
+          <span class="btn">Open</span>
+        </a>
+
+        <a class="card" href="/breathing/5-5/">
+          <h3>5-5 Coherent Breathing</h3>
+          <p>Inhale 5 • exhale 5 — smooth pacing without holds (great daily baseline).</p>
+          <span class="btn">Open</span>
+        </a>
+
+        <a class="card" href="/breathing/belly/">
+          <h3>Belly (Diaphragmatic) Breathing</h3>
+          <p>Gentle inhale/exhale cues that encourage diaphragmatic breathing.</p>
+          <span class="btn">Open</span>
+        </a>
+
+        <a class="card" href="/breathing/alternate-nostril/">
+          <h3>Alternate Nostril Breathing</h3>
+          <p>Guided left/right nostril steps with a calm pace for clarity.</p>
+          <span class="btn">Open</span>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> Breath24</div>
+      <div>
+        <a href="/privacy.html">Privacy</a> ·
+        <a href="/terms.html">Terms</a>
+      </div>
+    </footer>
+  </div>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
