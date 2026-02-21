@@ -1,26 +1,186 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en" translate="no">
 <head>
-  <meta charset="utf-8">
-  <title>About | Breath</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>About Breath24 | Simple Breathing Timers</title>
+  <meta name="description" content="Breath24 is a lightweight set of breathing exercise timers designed to be fast, minimal, and privacy-friendly." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b0f17" />
+
+  <link rel="canonical" href="https://breath24.com/about.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="About Breath24" />
+  <meta property="og:description" content="Simple breathing timers: fast, minimal, privacy-friendly." />
+  <meta property="og:url" content="https://breath24.com/about.html" />
+
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --card:#121a2a;
+      --card2:#0f1524;
+      --text:#eaf0ff;
+      --muted:#a9b4d0;
+      --line:rgba(255,255,255,.10);
+      --btn:#1f2d4a;
+      --btn2:#223559;
+      --ok:#7ee7c2;
+      --warn:#ffd27a;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(126,231,194,.10), transparent 50%),
+                  radial-gradient(900px 500px at 90% 10%, rgba(255,210,122,.10), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:980px; margin:0 auto; padding:22px 16px 44px;}
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:8px 0 18px;
+    }
+    .brand{display:flex; align-items:center; gap:10px;}
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(126,231,194,.35), rgba(255,210,122,.25));
+      border:1px solid var(--line);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .brand h1{font-size:18px; margin:0; letter-spacing:.2px}
+    .brand p{margin:2px 0 0; font-size:12px; color:var(--muted)}
+    .nav{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
+    .pill{
+      padding:9px 12px; border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      font-size:13px; color:var(--muted);
+    }
+    .pill:hover{color:var(--text); border-color:rgba(255,255,255,.18)}
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px 16px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.25);
+    }
+    .panel h2{margin:0; font-size:22px}
+    .panel p{margin:10px 0 0; color:var(--muted); line-height:1.65}
+    .grid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:12px;
+    }
+    .card{
+      grid-column: span 6;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px;
+    }
+    .card h3{margin:0; font-size:16px}
+    .card p{margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.55}
+    .btnrow{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:14px;}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px; border-radius:12px;
+      background:var(--btn); border:1px solid var(--line);
+      font-size:13px; color:var(--text);
+    }
+    .btn:hover{background:var(--btn2)}
+    footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      padding-top:16px; border-top:1px solid var(--line);
+    }
+    .links{display:flex; gap:12px; flex-wrap:wrap;}
+    .links a{color:var(--muted)}
+    .links a:hover{color:var(--text)}
+    @media (max-width:720px){
+      .card{grid-column: span 12;}
+      .panel h2{font-size:20px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"AboutPage",
+    "name":"About Breath24",
+    "url":"https://breath24.com/about.html",
+    "description":"Breath24 is a lightweight set of breathing exercise timers designed to be fast, minimal, and privacy-friendly."
+  }
+  </script>
 </head>
-<body style="font-family: Arial, sans-serif; line-height:1.7; max-width:800px; margin:40px auto; padding:20px;">
 
-<h1>About Breath</h1>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <span class="logo" aria-hidden="true"></span>
+        <span>
+          <h1>Breath24</h1>
+          <p>Simple breathing timers</p>
+        </span>
+      </a>
+      <nav class="nav">
+        <a class="pill" href="/">Home</a>
+        <a class="pill" href="/breathing/">Breathing Library</a>
+        <a class="pill" href="/guide/">Guide</a>
+      </nav>
+    </header>
 
-<p>Breath는 스트레스 완화 및 집중 향상을 위한 호흡 가이드와 타이머 기능을 제공하는 웹 서비스입니다.</p>
+    <section class="panel">
+      <h2>About Breath24</h2>
+      <p>
+        Breath24 is a lightweight collection of breathing exercise timers.
+        The goal is simple: <b>fast to open</b>, <b>easy to use</b>, and <b>minimal distractions</b>.
+      </p>
+      <p>
+        Use it for sleep (4-7-8), focus (box breathing), a quick stress reset (4-4-6),
+        daily balance (5-5), or gentle relaxation (belly / alternate nostril).
+      </p>
 
-<p>본 사이트는 사용자가 쉽게 호흡 루틴을 실행할 수 있도록 설계되었습니다.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Why it’s different</h3>
+          <p>
+            No complex setup. No account. Just clean cues and a timer that works on mobile and desktop.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Privacy-first</h3>
+          <p>
+            This site is designed to be simple and privacy-friendly. See the Privacy page for details.
+          </p>
+        </div>
+      </div>
 
-<h2>운영 목적</h2>
-<p>현대인의 스트레스 관리와 자율신경 안정에 도움을 주는 간단한 도구를 제공하는 것이 목표입니다.</p>
+      <div class="btnrow">
+        <a class="btn" href="/breathing/">Open Breathing Library</a>
+        <a class="btn" href="/privacy.html">Privacy</a>
+        <a class="btn" href="/terms.html">Terms</a>
+      </div>
+    </section>
 
-<h2>연락처</h2>
-<p>문의: your-email@example.com</p>
+    <footer>
+      <div>© <span id="y"></span> Breath24</div>
+      <div class="links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+      </div>
+    </footer>
+  </div>
 
-<hr>
-<p>© 2026 Breath</p>
-
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
