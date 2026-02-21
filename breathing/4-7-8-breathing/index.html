@@ -1,1 +1,300 @@
-1
+<!doctype html>
+<html lang="en" translate="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>4-7-8 Breathing Timer (Sleep & Calm) | Breath24</title>
+  <meta name="description" content="Free 4-7-8 breathing timer: inhale 4 seconds, hold 7, exhale 8. Great for sleep and calming stress." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b0f17" />
+
+  <link rel="canonical" href="https://breath24.com/breathing/4-7-8/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="4-7-8 Breathing Timer | Breath24" />
+  <meta property="og:description" content="Inhale 4 • hold 7 • exhale 8 — a classic breathing exercise for sleep and calm." />
+  <meta property="og:url" content="https://breath24.com/breathing/4-7-8/" />
+
+  <style>
+    :root{
+      --bg:#0b0f17;--text:#eaf0ff;--muted:#a9b4d0;--line:rgba(255,255,255,.10);
+      --card:rgba(255,255,255,.05);--btn:#1f2d4a;--btn2:#223559;
+      --good:#7ee7c2;--warn:#ffd27a;--bad:#ff9aa5;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:860px;margin:0 auto;padding:18px 16px 40px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0 14px}
+    .brand{display:flex;gap:10px;align-items:center}
+    .logo{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg, rgba(126,231,194,.35), rgba(255,210,122,.25));border:1px solid var(--line)}
+    h1{margin:0;font-size:16px}
+    .sub{margin:2px 0 0;font-size:12px;color:var(--muted)}
+    .nav{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-size:13px;color:var(--muted)}
+    .panel{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));padding:16px}
+    .title{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .title h2{margin:0;font-size:20px}
+    .title p{margin:6px 0 0;color:var(--muted);line-height:1.5}
+    .timer{
+      margin-top:12px;
+      display:grid;grid-template-columns: 1fr;gap:12px;
+    }
+    .big{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(0,0,0,.18);
+      padding:16px;
+    }
+    .phase{font-size:13px;color:var(--muted);letter-spacing:.2px}
+    .count{font-size:54px;line-height:1;margin:8px 0 6px;font-weight:700}
+    .barWrap{height:10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);overflow:hidden}
+    .bar{height:100%;width:0%;background:linear-gradient(90deg, rgba(126,231,194,.85), rgba(255,210,122,.75))}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{
+      padding:10px 12px;border-radius:12px;background:var(--btn);
+      border:1px solid var(--line);color:var(--text);font-size:13px;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    }
+    .btn:hover{background:var(--btn2)}
+    .ctrl{
+      display:grid;grid-template-columns: repeat(12, 1fr);gap:10px;
+      margin-top:12px;
+    }
+    .field{grid-column: span 6;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+    label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}
+    input,select{
+      width:100%;padding:10px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);color:var(--text);font-size:14px;outline:none
+    }
+    .hint{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.45}
+    footer{margin-top:16px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line)}
+    @media (max-width:720px){
+      .count{font-size:48px}
+      .field{grid-column: span 12}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"HowTo",
+    "name":"4-7-8 Breathing",
+    "description":"Inhale 4 seconds, hold 7 seconds, exhale 8 seconds.",
+    "step":[
+      {"@type":"HowToStep","name":"Inhale","text":"Inhale through your nose for 4 seconds."},
+      {"@type":"HowToStep","name":"Hold","text":"Hold your breath for 7 seconds."},
+      {"@type":"HowToStep","name":"Exhale","text":"Exhale slowly for 8 seconds."}
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <span class="logo" aria-hidden="true"></span>
+        <span>
+          <h1>Breath24</h1>
+          <div class="sub">4-7-8 breathing</div>
+        </span>
+      </a>
+      <nav class="nav">
+        <a class="pill" href="/breathing/">Library</a>
+        <a class="pill" href="/guide/">Guide</a>
+        <a class="pill" href="/about.html">About</a>
+      </nav>
+    </header>
+
+    <section class="panel">
+      <div class="title">
+        <div>
+          <h2>4-7-8 Breathing Timer</h2>
+          <p>Inhale 4 • Hold 7 • Exhale 8. A simple rhythm many people use for sleep and calming stress.</p>
+        </div>
+      </div>
+
+      <div class="timer">
+        <div class="big">
+          <div class="phase" id="phaseLabel">Ready</div>
+          <div class="count" id="count">—</div>
+          <div class="barWrap" aria-hidden="true"><div class="bar" id="bar"></div></div>
+
+          <div class="row">
+            <button class="btn" id="startBtn">Start</button>
+            <button class="btn" id="pauseBtn" disabled>Pause</button>
+            <button class="btn" id="resetBtn">Reset</button>
+          </div>
+
+          <div class="ctrl">
+            <div class="field">
+              <label for="rounds">Rounds</label>
+              <input id="rounds" type="number" min="1" max="50" value="6" />
+            </div>
+            <div class="field">
+              <label for="sound">Sound</label>
+              <select id="sound">
+                <option value="off">Off</option>
+                <option value="soft" selected>Soft beep</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="hint" id="statusHint">Tip: Keep shoulders relaxed. If you feel dizzy, stop and breathe normally.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> Breath24</div>
+      <div>
+        <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a>
+      </div>
+    </footer>
+  </div>
+
+<script>
+(() => {
+  const pattern = [
+    { key:"inhale", label:"Inhale", seconds:4 },
+    { key:"hold",   label:"Hold",   seconds:7 },
+    { key:"exhale", label:"Exhale", seconds:8 }
+  ];
+
+  const phaseLabel = document.getElementById('phaseLabel');
+  const countEl = document.getElementById('count');
+  const bar = document.getElementById('bar');
+  const roundsInput = document.getElementById('rounds');
+  const soundSel = document.getElementById('sound');
+  const hint = document.getElementById('statusHint');
+
+  const startBtn = document.getElementById('startBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  let timer = null;
+  let running = false;
+  let paused = false;
+
+  let round = 1;
+  let phaseIdx = 0;
+  let remaining = pattern[0].seconds;
+  let phaseTotal = pattern[0].seconds;
+
+  function beep(){
+    if (soundSel.value === 'off') return;
+    try{
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sine';
+      o.frequency.value = 880;
+      g.gain.value = 0.03;
+      o.connect(g); g.connect(ctx.destination);
+      o.start();
+      setTimeout(() => { o.stop(); ctx.close(); }, 80);
+    }catch(e){}
+  }
+
+  function setUI(){
+    const p = pattern[phaseIdx];
+    phaseLabel.textContent = `${p.label}  •  Round ${round}/${Math.max(1, parseInt(roundsInput.value||'1',10))}`;
+    countEl.textContent = String(remaining);
+    const pct = phaseTotal ? ((phaseTotal - remaining) / phaseTotal) * 100 : 0;
+    bar.style.width = `${Math.max(0, Math.min(100, pct))}%`;
+  }
+
+  function tick(){
+    if (!running || paused) return;
+
+    setUI();
+
+    if (remaining <= 0){
+      // phase change
+      beep();
+      phaseIdx++;
+      if (phaseIdx >= pattern.length){
+        phaseIdx = 0;
+        round++;
+      }
+
+      const maxRounds = Math.max(1, parseInt(roundsInput.value||'1',10));
+      if (round > maxRounds){
+        stop(true);
+        return;
+      }
+
+      remaining = pattern[phaseIdx].seconds;
+      phaseTotal = remaining;
+      setUI();
+      return;
+    }
+
+    remaining -= 1;
+  }
+
+  function start(){
+    if (running && !paused) return;
+
+    if (!running){
+      round = 1;
+      phaseIdx = 0;
+      remaining = pattern[0].seconds;
+      phaseTotal = remaining;
+    }
+
+    running = true;
+    paused = false;
+
+    startBtn.textContent = "Running...";
+    startBtn.disabled = true;
+    pauseBtn.disabled = false;
+
+    hint.textContent = "Follow the cue. If uncomfortable, pause or reset.";
+    setUI();
+
+    timer = setInterval(tick, 1000);
+    tick();
+  }
+
+  function pause(){
+    if (!running) return;
+    paused = !paused;
+    pauseBtn.textContent = paused ? "Resume" : "Pause";
+    startBtn.disabled = paused ? false : true;
+    startBtn.textContent = paused ? "Start" : "Running...";
+    hint.textContent = paused ? "Paused. Resume when ready." : "Back to rhythm.";
+  }
+
+  function stop(completed=false){
+    running = false;
+    paused = false;
+    if (timer) clearInterval(timer);
+    timer = null;
+
+    startBtn.disabled = false;
+    startBtn.textContent = "Start";
+    pauseBtn.disabled = true;
+    pauseBtn.textContent = "Pause";
+
+    phaseLabel.textContent = completed ? "Done" : "Ready";
+    countEl.textContent = "—";
+    bar.style.width = "0%";
+    hint.textContent = completed ? "Nice. Return to normal breathing for a moment." : "Ready when you are.";
+  }
+
+  function reset(){
+    stop(false);
+  }
+
+  startBtn.addEventListener('click', start);
+  pauseBtn.addEventListener('click', pause);
+  resetBtn.addEventListener('click', reset);
+
+  document.getElementById('y').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
