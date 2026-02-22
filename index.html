@@ -42,10 +42,10 @@
     a{color:inherit; text-decoration:none}
     .wrap{max-width:980px; margin:0 auto; padding:22px 16px 44px;}
 
-    /* ===== Header (FINAL: 1줄 로고+아이콘네비 / 2줄 언어 고정) ===== */
+    /* ===== Header: 1줄 로고+아이콘네비 / 2줄 언어 ===== */
     header{
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content:space-between;
       gap:12px;
       padding:8px 0 12px;
@@ -68,7 +68,6 @@
     .brand h1{font-size:18px; margin:0; letter-spacing:.2px}
     .brand p{margin:2px 0 0; font-size:12px; color:var(--muted); line-height:1.25}
 
-    /* 오른쪽: (위) 아이콘 네비 / (아래) 언어 */
     .rightTop{
       display:flex;
       flex-direction:column;
@@ -87,7 +86,10 @@
       min-width:0;
     }
 
-    /* 아이콘 네비 버튼 */
+    /* =========================
+       ✅ 아이콘 네비 (CSS로 그림)
+       i18n이 textContent를 바꿔도 아이콘은 유지됨
+       ========================= */
     .iconPill{
       width:44px;
       height:40px;
@@ -99,6 +101,13 @@
       border:1px solid var(--line);
       color:var(--muted);
       flex:0 0 auto;
+      position:relative;
+      overflow:hidden;
+
+      /* ✅ i18n 텍스트는 숨기고(아이콘만 보이게) */
+      font-size:0;
+      line-height:0;
+
       transition: background .12s ease, border-color .12s ease, transform .12s ease, color .12s ease;
     }
     .iconPill:hover{
@@ -107,18 +116,31 @@
       color: var(--text);
       transform: translateY(-1px);
     }
-    .iconPill svg{width:18px;height:18px;opacity:.95}
 
-    /* a11y */
-    .srOnly{
-      position:absolute!important;
-      width:1px;height:1px;
-      padding:0;margin:-1px;
-      overflow:hidden;clip:rect(0,0,0,0);
-      white-space:nowrap;border:0;
+    .iconPill::before{
+      content:"";
+      width:18px;height:18px;
+      display:block;
+      background-repeat:no-repeat;
+      background-position:center;
+      background-size:18px 18px;
+      opacity:.95;
     }
 
-    /* 언어 (그대로 유지 + 아래 줄) */
+    /* Library (grid) */
+    #nav_library.iconPill::before{
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z' stroke='%23eaf0ff' stroke-width='1.7' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+    /* Guide (book) */
+    #nav_guide.iconPill::before{
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M7 4h10a2 2 0 0 1 2 2v13a1 1 0 0 1-1 1H7a2 2 0 0 0-2 2V6a2 2 0 0 1 2-2Z' stroke='%23eaf0ff' stroke-width='1.7' stroke-linejoin='round'/%3E%3Cpath d='M7 4v16' stroke='%23eaf0ff' stroke-width='1.7'/%3E%3C/svg%3E");
+    }
+    /* About (info) */
+    #nav_about.iconPill::before{
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z' stroke='%23eaf0ff' stroke-width='1.7'/%3E%3Cpath d='M12 10.5v6' stroke='%23eaf0ff' stroke-width='1.7' stroke-linecap='round'/%3E%3Cpath d='M12 7.5h.01' stroke='%23eaf0ff' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E");
+    }
+
+    /* ===== 언어 (아래줄, 현재 자리 유지) ===== */
     .langWrap{
       position:relative;
       display:flex;
@@ -216,12 +238,8 @@
     .links a{color:var(--muted); white-space:nowrap;}
     .links a:hover{color:var(--text)}
 
-    /* ✅ 모바일: 1줄은 로고+아이콘네비, 2줄 언어 유지 / nav만 스크롤 */
+    /* ✅ 모바일: nav만 가로 스크롤 / 언어는 아래 그대로 */
     @media (max-width:720px){
-      header{
-        align-items:flex-start;
-      }
-      .rightTop{gap:8px}
       .nav{
         max-width: 220px;
         overflow-x:auto;
@@ -262,37 +280,20 @@
       </a>
 
       <div class="rightTop">
-        <!-- 1줄: 아이콘 네비 -->
+        <!-- ✅ 네비는 아이콘(텍스트는 i18n이 바꿔도 font-size:0이라 안 보임) -->
         <nav class="nav" aria-label="Primary">
           <a class="iconPill" id="nav_library" href="/breathing/" aria-label="Breathing Library" title="Library">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z"
-                    stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-            </svg>
-            <span class="srOnly">Breathing Library</span>
+            Breathing Library
           </a>
-
           <a class="iconPill" id="nav_guide" href="/guide/" aria-label="Guide" title="Guide">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M7 4h10a2 2 0 0 1 2 2v13a1 1 0 0 1-1 1H7a2 2 0 0 0-2 2V6a2 2 0 0 1 2-2Z"
-                    stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-              <path d="M7 4v16" stroke="currentColor" stroke-width="1.7"/>
-            </svg>
-            <span class="srOnly">Guide</span>
+            Guide
           </a>
-
           <a class="iconPill" id="nav_about" href="/about.html" aria-label="About" title="About">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"
-                    stroke="currentColor" stroke-width="1.7"/>
-              <path d="M12 10.5v6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-              <path d="M12 7.5h.01" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-            </svg>
-            <span class="srOnly">About</span>
+            About
           </a>
         </nav>
 
-        <!-- 2줄: 언어(현재 자리 유지) -->
+        <!-- ✅ 언어는 현재 자리(한 줄 아래) 그대로 -->
         <div class="langWrap" aria-label="Language">
           <svg class="globe" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="rgba(234,240,255,.7)" stroke-width="1.6"/>
