@@ -1,1 +1,563 @@
-1
+<!doctype html>
+<html lang="en" translate="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Breathing Exercises Timer | Breath24</title>
+  <meta name="description" content="Free breathing exercise timers: 4-7-8, box breathing, 4-4-6, 5-5, belly breathing and alternate nostril. Simple, fast, and privacy-friendly." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b0f17" />
+
+  <link rel="canonical" href="https://breath24.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Breathing Exercises Timer | Breath24" />
+  <meta property="og:description" content="Free breathing exercise timers: 4-7-8, box, 4-4-6, 5-5, belly, alternate nostril." />
+  <meta property="og:url" content="https://breath24.com/" />
+
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --card:#121a2a;
+      --card2:#0f1524;
+      --text:#eaf0ff;
+      --muted:#a9b4d0;
+      --line:rgba(255,255,255,.10);
+      --btn:#1f2d4a;
+      --btn2:#223559;
+      --ok:#7ee7c2;
+      --warn:#ffd27a;
+    }
+    *{box-sizing:border-box}
+    html,body{width:100%; max-width:100%; overflow-x:hidden;}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(126,231,194,.10), transparent 50%),
+                  radial-gradient(900px 500px at 90% 10%, rgba(255,210,122,.10), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:980px; margin:0 auto; padding:22px 16px 44px;}
+
+    /* ===== Header layout ===== */
+    header{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      padding:8px 0 18px;
+      min-width:0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+      flex: 1 1 auto;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(126,231,194,.35), rgba(255,210,122,.25));
+      border:1px solid var(--line);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      flex:0 0 auto;
+    }
+    .brand h1{font-size:18px; margin:0; letter-spacing:.2px}
+    .brand p{margin:2px 0 0; font-size:12px; color:var(--muted)}
+
+    /* 오른쪽 상단 그룹: nav(최상단) + language(그 아래) */
+    .rightTop{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:10px;
+      flex: 0 0 auto;
+      min-width:0;
+    }
+
+    /* ✅ 우측 최상단 네비 */
+    .nav{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:nowrap;
+      justify-content:flex-end;
+      min-width:0;
+    }
+    .pill{
+      padding:9px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      font-size:13px;
+      color:var(--muted);
+      white-space:nowrap;
+      word-break:keep-all;
+      flex:0 0 auto;
+      transition: background .12s ease, border-color .12s ease, transform .12s ease;
+    }
+    .pill:hover{
+      background:rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.18);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    /* language row (우측) */
+    .langRow{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:10px;
+      flex-wrap:nowrap; /* ✅ 줄바꿈 금지 */
+      min-width:0;
+    }
+    .langLabel{
+      font-size:12px;
+      font-weight:800;
+      color:var(--muted);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      white-space:nowrap;
+      flex:0 0 auto;
+    }
+
+    /* ✅ 언어 드롭다운: 풀폭 금지 + 적당 폭 */
+    .langSelect{
+      padding:9px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      color:var(--text);
+      font-size:13px;
+      font-weight:800;
+      outline:none;
+
+      width: fit-content;        /* ✅ 콘텐츠 기반 */
+      min-width: 160px;
+      max-width: 220px;
+    }
+    .langSelect:focus-visible{
+      box-shadow: 0 0 0 3px rgba(126,231,194,.16);
+      border-color: rgba(255,255,255,.18);
+    }
+    option{ background:#0b0f17; color:#eaf0ff; }
+
+    .hero{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px 16px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.25);
+    }
+    .hero h2{margin:0; font-size:22px}
+    .hero p{margin:8px 0 0; color:var(--muted); line-height:1.5}
+    .grid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:12px;
+    }
+    .card{
+      grid-column: span 6;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px;
+      transition: transform .12s ease, border-color .12s ease;
+    }
+    .card:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18)}
+    .card h3{margin:0; font-size:16px}
+    .card p{margin:6px 0 12px; color:var(--muted); font-size:13px; line-height:1.45}
+    .btnrow{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px; border-radius:12px;
+      background:var(--btn); border:1px solid var(--line);
+      font-size:13px; color:var(--text);
+      white-space:nowrap;
+    }
+    .btn:hover{background:var(--btn2)}
+    .tag{
+      font-size:12px; color:var(--muted);
+      padding:6px 10px; border-radius:999px;
+      border:1px dashed rgba(255,255,255,.18);
+      background: rgba(0,0,0,.15);
+      white-space:nowrap;
+    }
+    footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      padding-top:16px; border-top:1px solid var(--line);
+    }
+    .links{display:flex; gap:12px; flex-wrap:wrap;}
+    .links a{color:var(--muted); white-space:nowrap;}
+    .links a:hover{color:var(--text)}
+
+    /* ✅ 모바일: "nav가 먼저" + 오른쪽 위 유지 */
+    @media (max-width:720px){
+      /* 핵심: 오른쪽(top) 그룹을 먼저 보여주기 */
+      header{
+        flex-wrap:wrap; /* 같은 줄 유지 실패 시 자연스럽게 아래로 */
+      }
+      .rightTop{
+        order:-1;               /* ✅ nav/언어가 먼저(상단) */
+        width:100%;
+        align-items:flex-end;   /* ✅ 오른쪽 정렬 */
+        gap:8px;
+      }
+      .brand{
+        order:0;
+        width:100%;
+      }
+
+      .nav{
+        width:100%;
+        justify-content:flex-end; /* ✅ 오른쪽 끝 */
+        overflow-x:auto;          /* ✅ 길면 가로 스크롤 */
+        -webkit-overflow-scrolling:touch;
+        padding-bottom:2px;
+      }
+      .nav::-webkit-scrollbar{display:none;}
+
+      .langRow{
+        width:100%;
+        justify-content:flex-end; /* ✅ 오른쪽 끝 */
+      }
+      .langSelect{
+        min-width: 140px;
+        max-width: 180px;
+      }
+
+      .card{grid-column: span 12;}
+      .hero h2{font-size:20px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"Breath24",
+    "url":"https://breath24.com/",
+    "description":"Free breathing exercise timers: 4-7-8, box breathing, 4-4-6, 5-5, belly breathing and alternate nostril."
+  }
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/" aria-label="Breath24 Home">
+        <span class="logo" aria-hidden="true"></span>
+        <span>
+          <h1>Breath24</h1>
+          <p id="brand_sub">Simple breathing timers • No account</p>
+        </span>
+      </a>
+
+      <!-- ✅ 우상단: nav + 언어 -->
+      <div class="rightTop">
+        <nav class="nav" aria-label="Primary">
+          <a class="pill" id="nav_library" href="/breathing/">Breathing Library</a>
+          <a class="pill" id="nav_guide" href="/guide/">Guide</a>
+          <a class="pill" id="nav_about" href="/about.html">About</a>
+        </nav>
+
+        <div class="langRow" aria-label="Language">
+          <div class="langLabel">🌐 <span id="lang_label">Language</span></div>
+          <select class="langSelect" id="langSelect" aria-label="Language select">
+            <option value="en" selected>Global (English)</option>
+            <option value="ko">한국어</option>
+            <option value="ja">日本語</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h2 id="hero_title">Breathing exercises — pick one and start</h2>
+      <p id="hero_sub">
+        A fast, minimal set of breathing timers you can use anywhere.
+        Choose a pattern for sleep, focus, calm, or stress relief.
+      </p>
+
+      <div class="grid">
+        <a class="card" href="/breathing/4-7-8-breathing/">
+          <h3 id="c1_title">4-7-8 Breathing</h3>
+          <p id="c1_desc">Classic sleep & calm pattern. Inhale 4 • hold 7 • exhale 8.</p>
+          <div class="btnrow">
+            <span class="btn" id="c1_btn">Start</span>
+            <span class="tag" id="c1_tag">sleep • relax</span>
+          </div>
+        </a>
+
+        <a class="card" href="/breathing/box-breathing/">
+          <h3 id="c2_title">Box Breathing</h3>
+          <p id="c2_desc">Balanced breathing for focus. Inhale 4 • hold 4 • exhale 4 • hold 4.</p>
+          <div class="btnrow">
+            <span class="btn" id="c2_btn">Start</span>
+            <span class="tag" id="c2_tag">focus • calm</span>
+          </div>
+        </a>
+
+        <a class="card" href="/breathing/4-4-6-breathing/">
+          <h3 id="c3_title">4-4-6 Breathing</h3>
+          <p id="c3_desc">Easy downshift. Inhale 4 • hold 4 • longer exhale 6.</p>
+          <div class="btnrow">
+            <span class="btn" id="c3_btn">Start</span>
+            <span class="tag" id="c3_tag">stress • reset</span>
+          </div>
+        </a>
+
+        <a class="card" href="/breathing/5-5-coherent-breathing/">
+          <h3 id="c4_title">5-5 Coherent Breathing</h3>
+          <p id="c4_desc">Steady rhythm. Inhale 5 • exhale 5 (no hold).</p>
+          <div class="btnrow">
+            <span class="btn" id="c4_btn">Start</span>
+            <span class="tag" id="c4_tag">balance • HRV</span>
+          </div>
+        </a>
+
+        <a class="card" href="/breathing/belly-breathing/">
+          <h3 id="c5_title">Belly Breathing</h3>
+          <p id="c5_desc">Diaphragmatic breathing with gentle pacing for relaxation.</p>
+          <div class="btnrow">
+            <span class="btn" id="c5_btn">Start</span>
+            <span class="tag" id="c5_tag">relax • posture</span>
+          </div>
+        </a>
+
+        <a class="card" href="/breathing/alternate-nostril-breathing/">
+          <h3 id="c6_title">Alternate Nostril</h3>
+          <p id="c6_desc">Nadi Shodhana-style pacing for calm attention (guided steps).</p>
+          <div class="btnrow">
+            <span class="btn" id="c6_btn">Start</span>
+            <span class="tag" id="c6_tag">calm • clarity</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> <span id="footer_brand">Breath24</span></div>
+      <div class="links">
+        <a id="footer_privacy" href="/privacy.html">Privacy</a>
+        <a id="footer_terms" href="/terms.html">Terms</a>
+        <a id="footer_about" href="/about.html">About</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // ===== i18n (en/ko/ja/es) =====
+    const STR = {
+      en: {
+        langLabel: "Language",
+        brandSub: "Simple breathing timers • No account",
+        navLibrary: "Breathing Library",
+        navGuide: "Guide",
+        navAbout: "About",
+        heroTitle: "Breathing exercises — pick one and start",
+        heroSub: "A fast, minimal set of breathing timers you can use anywhere. Choose a pattern for sleep, focus, calm, or stress relief.",
+        start: "Start",
+        c1: { title: "4-7-8 Breathing", desc: "Classic sleep & calm pattern. Inhale 4 • hold 7 • exhale 8.", tag: "sleep • relax" },
+        c2: { title: "Box Breathing", desc: "Balanced breathing for focus. Inhale 4 • hold 4 • exhale 4 • hold 4.", tag: "focus • calm" },
+        c3: { title: "4-4-6 Breathing", desc: "Easy downshift. Inhale 4 • hold 4 • longer exhale 6.", tag: "stress • reset" },
+        c4: { title: "5-5 Coherent Breathing", desc: "Steady rhythm. Inhale 5 • exhale 5 (no hold).", tag: "balance • HRV" },
+        c5: { title: "Belly Breathing", desc: "Diaphragmatic breathing with gentle pacing for relaxation.", tag: "relax • posture" },
+        c6: { title: "Alternate Nostril", desc: "Nadi Shodhana-style pacing for calm attention (guided steps).", tag: "calm • clarity" },
+        footerBrand: "Breath24",
+        footerPrivacy: "Privacy",
+        footerTerms: "Terms",
+        footerAbout: "About",
+        metaTitle: "Breathing Exercises Timer | Breath24",
+        metaDesc: "Free breathing exercise timers: 4-7-8, box breathing, 4-4-6, 5-5, belly breathing and alternate nostril. Simple, fast, and privacy-friendly.",
+        ogTitle: "Breathing Exercises Timer | Breath24",
+        ogDesc: "Free breathing exercise timers: 4-7-8, box, 4-4-6, 5-5, belly, alternate nostril."
+      },
+      ko: {
+        langLabel: "언어",
+        brandSub: "간단한 호흡 타이머 • 회원가입 없음",
+        navLibrary: "호흡 라이브러리",
+        navGuide: "가이드",
+        navAbout: "소개",
+        heroTitle: "호흡 운동 — 하나를 골라 바로 시작하세요",
+        heroSub: "어디서든 쓸 수 있는 빠르고 미니멀한 호흡 타이머입니다. 수면, 집중, 안정, 스트레스 완화에 맞는 패턴을 선택하세요.",
+        start: "시작",
+        c1: { title: "4-7-8 호흡", desc: "수면·안정에 좋은 클래식 패턴. 들숨 4 • 멈춤 7 • 날숨 8.", tag: "수면 • 이완" },
+        c2: { title: "박스 호흡", desc: "집중을 위한 균형 호흡. 들숨 4 • 멈춤 4 • 날숨 4 • 멈춤 4.", tag: "집중 • 안정" },
+        c3: { title: "4-4-6 호흡", desc: "쉽게 긴장 낮추기. 들숨 4 • 멈춤 4 • 더 긴 날숨 6.", tag: "스트레스 • 리셋" },
+        c4: { title: "5-5 코히런트 호흡", desc: "안정적인 리듬. 들숨 5 • 날숨 5 (멈춤 없음).", tag: "균형 • HRV" },
+        c5: { title: "복식 호흡", desc: "가볍게 페이스를 맞춘 복식호흡으로 이완을 돕습니다.", tag: "이완 • 자세" },
+        c6: { title: "교대 비공 호흡", desc: "차분한 집중을 위한 나디 쇼다나 스타일(가이드 포함).", tag: "안정 • 맑음" },
+        footerBrand: "Breath24",
+        footerPrivacy: "개인정보처리방침",
+        footerTerms: "이용약관",
+        footerAbout: "소개",
+        metaTitle: "호흡 운동 타이머 | Breath24",
+        metaDesc: "무료 호흡 운동 타이머: 4-7-8, 박스호흡, 4-4-6, 5-5, 복식호흡, 교대비공호흡. 빠르고 간단하며 개인정보 친화적.",
+        ogTitle: "호흡 운동 타이머 | Breath24",
+        ogDesc: "무료 호흡 타이머: 4-7-8, 박스, 4-4-6, 5-5, 복식, 교대비공."
+      },
+      ja: {
+        langLabel: "言語",
+        brandSub: "シンプルな呼吸タイマー • アカウント不要",
+        navLibrary: "呼吸ライブラリ",
+        navGuide: "ガイド",
+        navAbout: "紹介",
+        heroTitle: "呼吸エクササイズ — 選んですぐ開始",
+        heroSub: "どこでも使える、速くてミニマルな呼吸タイマー。睡眠・集中・落ち着き・ストレス軽減に合わせて選べます。",
+        start: "開始",
+        c1: { title: "4-7-8 呼吸", desc: "睡眠と落ち着きの定番。吸う4 • 止める7 • 吐く8。", tag: "睡眠 • リラックス" },
+        c2: { title: "ボックス呼吸", desc: "集中のためのバランス呼吸。吸う4 • 止める4 • 吐く4 • 止める4。", tag: "集中 • 落ち着き" },
+        c3: { title: "4-4-6 呼吸", desc: "簡単にクールダウン。吸う4 • 止める4 • 長く吐く6。", tag: "ストレス • リセット" },
+        c4: { title: "5-5 コヒーレント呼吸", desc: "安定リズム。吸う5 • 吐く5（止めない）。", tag: "バランス • HRV" },
+        c5: { title: "腹式呼吸", desc: "やさしいペースで行う腹式呼吸でリラックス。", tag: "リラックス • 姿勢" },
+        c6: { title: "片鼻呼吸（交互）", desc: "落ち着いた注意のためのナディ・ショーダナ（手順ガイド）。", tag: "落ち着き • 明晰" },
+        footerBrand: "Breath24",
+        footerPrivacy: "プライバシー",
+        footerTerms: "利用規約",
+        footerAbout: "紹介",
+        metaTitle: "呼吸エクササイズ タイマー | Breath24",
+        metaDesc: "無料の呼吸タイマー：4-7-8、ボックス、4-4-6、5-5、腹式、片鼻呼吸。シンプルで高速、プライバシー重視。",
+        ogTitle: "呼吸エクササイズ タイマー | Breath24",
+        ogDesc: "無料呼吸タイマー：4-7-8、ボックス、4-4-6、5-5、腹式、片鼻。"
+      },
+      es: {
+        langLabel: "Idioma",
+        brandSub: "Temporizadores simples • Sin cuenta",
+        navLibrary: "Biblioteca de respiración",
+        navGuide: "Guía",
+        navAbout: "Acerca de",
+        heroTitle: "Ejercicios de respiración — elige uno y empieza",
+        heroSub: "Un conjunto rápido y minimalista de temporizadores de respiración para usar en cualquier lugar. Elige un patrón para dormir, concentrarte, calmarte o aliviar el estrés.",
+        start: "Empezar",
+        c1: { title: "Respiración 4-7-8", desc: "Patrón clásico para dormir y calmar. Inhala 4 • mantén 7 • exhala 8.", tag: "sueño • relax" },
+        c2: { title: "Respiración en caja", desc: "Equilibrada para enfocarte. Inhala 4 • mantén 4 • exhala 4 • mantén 4.", tag: "enfoque • calma" },
+        c3: { title: "Respiración 4-4-6", desc: "Baja revoluciones fácil. Inhala 4 • mantén 4 • exhala más largo 6.", tag: "estrés • reinicio" },
+        c4: { title: "Respiración coherente 5-5", desc: "Ritmo estable. Inhala 5 • exhala 5 (sin pausa).", tag: "equilibrio • HRV" },
+        c5: { title: "Respiración abdominal", desc: "Respiración diafragmática con un ritmo suave para relajarte.", tag: "relax • postura" },
+        c6: { title: "Respiración alterna", desc: "Estilo Nadi Shodhana para calma y atención (pasos guiados).", tag: "calma • claridad" },
+        footerBrand: "Breath24",
+        footerPrivacy: "Privacidad",
+        footerTerms: "Términos",
+        footerAbout: "Acerca de",
+        metaTitle: "Temporizador de respiración | Breath24",
+        metaDesc: "Temporizadores gratis: 4-7-8, caja, 4-4-6, 5-5, abdominal y alterna. Simple, rápido y con privacidad.",
+        ogTitle: "Temporizador de respiración | Breath24",
+        ogDesc: "Temporizadores gratis: 4-7-8, caja, 4-4-6, 5-5, abdominal, alterna."
+      }
+    };
+
+    function detectLang(){
+      const qp = (new URL(location.href).searchParams.get("lang") || "").toLowerCase();
+      if(STR[qp]) return qp;
+
+      const manual = localStorage.getItem("b24_lang_manual") === "1";
+      const saved = localStorage.getItem("b24_lang");
+      if(manual && saved && STR[saved]) return saved;
+
+      const nav = (navigator.language || "").toLowerCase();
+      if(nav.startsWith("ko")) return "ko";
+      if(nav.startsWith("ja")) return "ja";
+      if(nav.startsWith("es")) return "es";
+      return "en";
+    }
+
+    let LANG = detectLang();
+    const t = ()=> STR[LANG] || STR.en;
+
+    function setMeta(tagName, attr, value, content){
+      const el = document.querySelector(`${tagName}[${attr}="${value}"]`);
+      if(el) el.setAttribute("content", content);
+    }
+
+    function applyLang(lang, isManual=false){
+      if(!STR[lang]) lang = "en";
+      LANG = lang;
+
+      if(isManual){
+        localStorage.setItem("b24_lang", lang);
+        localStorage.setItem("b24_lang_manual", "1");
+      }else{
+        localStorage.setItem("b24_lang", lang);
+      }
+
+      document.documentElement.lang = lang;
+      document.getElementById("langSelect").value = lang;
+
+      document.getElementById("lang_label").textContent = t().langLabel;
+      document.getElementById("brand_sub").textContent = t().brandSub;
+      document.getElementById("nav_library").textContent = t().navLibrary;
+      document.getElementById("nav_guide").textContent = t().navGuide;
+      document.getElementById("nav_about").textContent = t().navAbout;
+
+      document.getElementById("hero_title").textContent = t().heroTitle;
+      document.getElementById("hero_sub").textContent = t().heroSub;
+
+      document.getElementById("c1_title").textContent = t().c1.title;
+      document.getElementById("c1_desc").textContent  = t().c1.desc;
+      document.getElementById("c1_btn").textContent   = t().start;
+      document.getElementById("c1_tag").textContent   = t().c1.tag;
+
+      document.getElementById("c2_title").textContent = t().c2.title;
+      document.getElementById("c2_desc").textContent  = t().c2.desc;
+      document.getElementById("c2_btn").textContent   = t().start;
+      document.getElementById("c2_tag").textContent   = t().c2.tag;
+
+      document.getElementById("c3_title").textContent = t().c3.title;
+      document.getElementById("c3_desc").textContent  = t().c3.desc;
+      document.getElementById("c3_btn").textContent   = t().start;
+      document.getElementById("c3_tag").textContent   = t().c3.tag;
+
+      document.getElementById("c4_title").textContent = t().c4.title;
+      document.getElementById("c4_desc").textContent  = t().c4.desc;
+      document.getElementById("c4_btn").textContent   = t().start;
+      document.getElementById("c4_tag").textContent   = t().c4.tag;
+
+      document.getElementById("c5_title").textContent = t().c5.title;
+      document.getElementById("c5_desc").textContent  = t().c5.desc;
+      document.getElementById("c5_btn").textContent   = t().start;
+      document.getElementById("c5_tag").textContent   = t().c5.tag;
+
+      document.getElementById("c6_title").textContent = t().c6.title;
+      document.getElementById("c6_desc").textContent  = t().c6.desc;
+      document.getElementById("c6_btn").textContent   = t().start;
+      document.getElementById("c6_tag").textContent   = t().c6.tag;
+
+      document.getElementById("footer_brand").textContent = t().footerBrand;
+      document.getElementById("footer_privacy").textContent = t().footerPrivacy;
+      document.getElementById("footer_terms").textContent = t().footerTerms;
+      document.getElementById("footer_about").textContent = t().footerAbout;
+
+      document.title = t().metaTitle;
+      const desc = document.querySelector('meta[name="description"]');
+      if(desc) desc.setAttribute("content", t().metaDesc);
+
+      setMeta("meta","property","og:title", t().ogTitle);
+      setMeta("meta","property","og:description", t().ogDesc);
+    }
+
+    document.getElementById("langSelect").addEventListener("change", (e)=>{
+      applyLang(e.target.value, true);
+    });
+
+    applyLang(LANG, false);
+  </script>
+</body>
+</html>
