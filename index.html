@@ -42,7 +42,7 @@
     a{color:inherit; text-decoration:none}
     .wrap{max-width:980px; margin:0 auto; padding:22px 16px 44px;}
 
-    /* ===== Header: 1줄 로고+아이콘네비 / 2줄 언어(현재 자리) ===== */
+    /* ===== Header ===== */
     header{
       display:flex;
       align-items:flex-start;
@@ -59,37 +59,40 @@
       flex:1 1 auto;
     }
 
-    /* ✅ 로고: 네모박스(배경/테두리/그림자) 제거 + 숨(4초) 애니메이션 유지 */
+    /* ✅ Wave Logo: 배경/네모 없음 + 숨쉬듯(4초) + 글로우 */
     .logo{
       width:36px;
       height:36px;
       flex:0 0 auto;
-      display:grid;
-      place-items:center;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       background:transparent;
       border:none;
       box-shadow:none;
       overflow:visible;
       position:relative;
-    }
-    .logo svg{ width:36px; height:36px; display:block; }
 
-    .logo .breathe{
-      transform-origin: 18px 18px;
-      animation: breathe 4s ease-in-out infinite;
+      animation: breathe 4s cubic-bezier(.4,0,.2,1) infinite;
+      transform-origin:center;
     }
-    .logo .pulse{
-      transform-origin: 18px 18px;
-      animation: breathe 4s ease-in-out infinite;
-      opacity:.85;
+    .logo svg{
+      width:36px;
+      height:36px;
+      display:block;
+      filter: drop-shadow(0 0 4px rgba(126,231,194,.35));
     }
+
     @keyframes breathe{
-      0%   { transform: scale(1); opacity: .88; }
-      50%  { transform: scale(1.06); opacity: 1; }
-      100% { transform: scale(1); opacity: .88; }
+      0%   { transform: scale(1);    filter: drop-shadow(0 0 3px rgba(126,231,194,.25)); }
+      40%  { transform: scale(1.05); filter: drop-shadow(0 0 8px rgba(126,231,194,.60)); }
+      60%  { transform: scale(1.05); filter: drop-shadow(0 0 8px rgba(126,231,194,.60)); }
+      100% { transform: scale(1);    filter: drop-shadow(0 0 3px rgba(126,231,194,.25)); }
     }
+
     @media (prefers-reduced-motion: reduce){
-      .logo .breathe, .logo .pulse { animation:none !important; }
+      .logo{ animation:none !important; }
+      .logo svg{ filter:none !important; }
     }
 
     .brand h1{font-size:18px; margin:0; letter-spacing:.2px}
@@ -147,7 +150,7 @@
       opacity:.95;
     }
 
-    /* ===== 언어(아래줄, 현재 자리 유지) ===== */
+    /* ===== Language ===== */
     .langWrap{
       position:relative;
       display:flex;
@@ -245,7 +248,6 @@
     .links a{color:var(--muted); white-space:nowrap;}
     .links a:hover{color:var(--text)}
 
-    /* ✅ 모바일: nav만 가로 스크롤 / 언어는 아래 그대로 */
     @media (max-width:720px){
       .nav{
         max-width: 220px;
@@ -279,37 +281,17 @@
     <header>
       <a class="brand" href="/" aria-label="Breath24 Home">
 
-        <!-- ✅ 숨 애니메이션 로고 (배경 네모 rect 제거 완료) -->
+        <!-- ✅ Wave + Ring 로고 (배경 없음) -->
         <span class="logo" aria-hidden="true">
           <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Breath24 Logo">
-            <defs>
-              <radialGradient id="bgGlow" cx="30%" cy="20%" r="90%">
-                <stop offset="0%" stop-color="rgba(126,231,194,.55)"/>
-                <stop offset="55%" stop-color="rgba(255,210,122,.25)"/>
-                <stop offset="100%" stop-color="rgba(11,15,23,0)"/>
-              </radialGradient>
-
-              <radialGradient id="ringGlow" cx="50%" cy="50%" r="65%">
-                <stop offset="0%" stop-color="rgba(234,240,255,.10)"/>
-                <stop offset="70%" stop-color="rgba(126,231,194,.35)"/>
-                <stop offset="100%" stop-color="rgba(255,210,122,.28)"/>
-              </radialGradient>
-            </defs>
-
-            <!-- ✅ Soft background 네모 제거 (rect 삭제) -->
-
-            <!-- Pulse glow (breathing) -->
-            <circle class="pulse" cx="18" cy="18" r="13.2" fill="none" stroke="rgba(126,231,194,.35)" stroke-width="2.2"/>
-
-            <!-- Main ring (breathing) -->
-            <g class="breathe">
-              <circle cx="18" cy="18" r="11.6" fill="none" stroke="url(#ringGlow)" stroke-width="2.4"/>
-              <!-- small inner dot -->
-              <circle cx="18" cy="18" r="2.1" fill="rgba(234,240,255,.65)"/>
-              <!-- subtle swirl line -->
-              <path d="M12.4 18c1.6-3.2 5.8-5.1 9.3-3.6 3.1 1.3 4.1 4.3 2.6 6.6-1.6 2.5-5.3 3.7-8.2 2.3"
-                    fill="none" stroke="rgba(234,240,255,.55)" stroke-width="1.4" stroke-linecap="round"/>
-            </g>
+            <!-- ring -->
+            <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(126,231,194,.95)" stroke-width="2.6"/>
+            <!-- wave -->
+            <path d="M7 18c4-5 8 5 12 0s8-3 10 0"
+              fill="none"
+              stroke="rgba(111,211,255,.95)"
+              stroke-width="2.6"
+              stroke-linecap="round"/>
           </svg>
         </span>
 
