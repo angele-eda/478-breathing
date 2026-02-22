@@ -4,169 +4,914 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Terms of Service | Breath24</title>
-  <meta name="description" content="Terms of service for Breath24 breathing timers. Usage rules, disclaimers, and limitation of liability." />
+  <title>4-7-8 Breathing Timer (Sleep & Calm) | Breath24</title>
+  <meta name="description" content="Free 4-7-8 breathing timer: inhale 4 seconds, hold 7, exhale 8. Tap to start/pause. Great for sleep and calming stress." />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#0b0f17" />
-
-  <link rel="canonical" href="https://breath24.com/terms.html" />
+  <link rel="canonical" href="https://breath24.com/breathing/4-7-8-breathing/" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Terms of Service | Breath24" />
-  <meta property="og:description" content="Terms of service for Breath24." />
-  <meta property="og:url" content="https://breath24.com/terms.html" />
+  <meta property="og:title" content="4-7-8 Breathing Timer (Sleep & Calm) | Breath24" />
+  <meta property="og:description" content="Inhale 4 • hold 7 • exhale 8 — a classic breathing exercise for sleep and calm." />
+  <meta property="og:url" content="https://breath24.com/breathing/4-7-8-breathing/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4-7-8 Breathing Timer | Breath24" />
+  <meta name="twitter:description" content="Inhale 4 • hold 7 • exhale 8 — simple timer for sleep and calm." />
 
   <style>
     :root{
-      --bg:#0b0f17; --text:#eaf0ff; --muted:#a9b4d0; --line:rgba(255,255,255,.10);
-      --btn:#1f2d4a; --btn2:#223559;
+      --bg:#0b0f17;
+      --text:#eaf0ff;
+      --muted:#a9b4d0;
+      --line:rgba(255,255,255,.10);
+      --glass:rgba(255,255,255,.06);
+      --glass2:rgba(0,0,0,.22);
+      --btn:#1f2d4a;
+      --btn2:#223559;
+      --accent1: rgba(126,231,194,.22);
+      --accent2: rgba(255,210,122,.16);
     }
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background: radial-gradient(1200px 600px at 20% 0%, rgba(126,231,194,.10), transparent 50%),
-                  radial-gradient(900px 500px at 90% 10%, rgba(255,210,122,.10), transparent 55%),
-                  var(--bg);
       color:var(--text);
+      background:
+        radial-gradient(1100px 680px at 18% 0%, var(--accent1), transparent 55%),
+        radial-gradient(900px 560px at 88% 10%, var(--accent2), transparent 58%),
+        var(--bg);
     }
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:980px; margin:0 auto; padding:22px 16px 44px;}
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0 18px}
-    .brand{display:flex;align-items:center;gap:10px}
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px 16px 46px;
+    }
+
+    /* top bar */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 6px 0 14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width: 160px;
+    }
     .logo{
-      width:36px;height:36px;border-radius:12px;
-      background: linear-gradient(135deg, rgba(126,231,194,.35), rgba(255,210,122,.25));
+      width:40px;height:40px;border-radius:14px;
       border:1px solid var(--line);
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      background: linear-gradient(135deg, rgba(126,231,194,.35), rgba(255,210,122,.22));
+      box-shadow: 0 14px 40px rgba(0,0,0,.28);
+      flex:0 0 auto;
     }
-    .brand h1{font-size:18px;margin:0}
-    .brand p{margin:2px 0 0;font-size:12px;color:var(--muted)}
-    .nav{display:flex;gap:10px;flex-wrap:wrap}
+    .brand h1{margin:0;font-size:16px;letter-spacing:.2px}
+    .brand .sub{margin:2px 0 0;font-size:12px;color:var(--muted)}
+    .topRight{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
     .pill{
-      padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.06);
-      border:1px solid var(--line);font-size:13px;color:var(--muted)
-    }
-    .pill:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
-    .panel{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      padding:9px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
       border:1px solid var(--line);
-      border-radius:18px;
-      padding:18px 16px;
-      box-shadow: 0 18px 40px rgba(0,0,0,.25);
+      font-size:13px;
+      color:var(--muted);
+      white-space:nowrap;
     }
-    h2{margin:0;font-size:22px}
-    .meta{margin:6px 0 0;color:var(--muted);font-size:12px}
-    h3{margin:16px 0 6px;font-size:15px}
-    p,li{color:var(--muted);line-height:1.65;font-size:13px}
-    ul{margin:8px 0 0 18px}
-    .note{
-      margin-top:12px;padding:12px;border-radius:14px;
-      border:1px dashed rgba(255,255,255,.18);
-      background:rgba(0,0,0,.15);
-      color:var(--muted);font-size:12px;line-height:1.6;
+    .pill:hover{color:var(--text)}
+    .lang{
+      display:flex; align-items:center; gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      color: var(--text);
     }
-    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:10px 12px;border-radius:12px;background:var(--btn);
-      border:1px solid var(--line);font-size:13px
+    .lang .globe{ width:18px;height:18px; opacity:.9; }
+    select{
+      appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      border:0;
+      outline:none;
+      background:transparent;
+      color:var(--text);
+      font-size:13px;
+      padding-right:22px;
+      cursor:pointer;
     }
-    .btn:hover{background:var(--btn2)}
+    .langWrap{position:relative}
+    .langWrap:after{
+      content:"▼";
+      position:absolute;
+      right:10px;
+      top:50%;
+      transform:translateY(-50%);
+      font-size:10px;
+      color:var(--muted);
+      pointer-events:none;
+    }
+
+    /* main */
+    .hero{
+      text-align:center;
+      padding: 10px 0 14px;
+    }
+    .hero h2{
+      margin: 8px 0 6px;
+      font-size: 28px;
+      letter-spacing: .2px;
+    }
+    .hero p{
+      margin: 0 auto;
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    /* circle stage */
+    .stage{
+      margin: 18px auto 14px;
+      width: min(86vw, 520px);
+      aspect-ratio: 1 / 1;
+      display:grid;
+      place-items:center;
+      position:relative;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ✅ orb only changes: spacing + 1-line glow + idle breathing */
+    .orb{
+      position:absolute;
+      inset: 14px; /* ✅ 상하좌우 간격 */
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 40%, rgba(255,255,255,.06), rgba(0,0,0,.22) 62%, rgba(0,0,0,.32));
+      border: 1px solid rgba(126,231,194,.28); /* ✅ 1줄 글로우 라인 */
+      box-shadow:
+        0 30px 90px rgba(0,0,0,.42),
+        inset 0 0 0 1px rgba(255,255,255,.06),
+        0 0 18px rgba(126,231,194,.22),
+        0 0 44px rgba(126,231,194,.10);
+      transform: scale(1);
+      will-change: transform;
+      overflow:hidden;
+    }
+    .orb:before{
+      content:"";
+      position:absolute;
+      inset: 9%;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.10);
+      background: transparent;
+    }
+    .orb:after{
+      content:"";
+      position:absolute;
+      inset: 18%;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.07);
+      background: transparent;
+    }
+
+    /* ✅ idle breathing (준비상태에서만) */
+    .orb.idleBreath{
+      animation: idleBreath 6.8s cubic-bezier(.4,0,.2,1) infinite;
+    }
+    @keyframes idleBreath{
+      0%   { transform: scale(.985); }
+      50%  { transform: scale(1.015); }
+      100% { transform: scale(.985); }
+    }
+
+    .center{
+      position:absolute;
+      inset: 14px; /* ✅ orb와 같은 간격 */
+      display:grid;
+      place-items:center;
+      padding: 18% 12%;
+      text-align:center;
+    }
+    .metaLine{
+      position:absolute;
+      top: 18%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 13px;
+      color: rgba(234,240,255,.78);
+      letter-spacing: .2px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.10);
+      max-width: 90%;
+      white-space:nowrap;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background: rgba(255,255,255,.28);
+      border: 1px solid rgba(255,255,255,.16);
+      flex:0 0 auto;
+    }
+    .count{
+      font-size: 76px;
+      line-height: 1;
+      font-weight: 750;
+      letter-spacing: -1px;
+      margin-top: 4px;
+      color: rgba(234,240,255,.92);
+      text-shadow: 0 18px 50px rgba(0,0,0,.55);
+    }
+    .phaseText{
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: 650;
+      color: rgba(234,240,255,.85);
+    }
+    .hint{
+      margin-top: 12px;
+      font-size: 13px;
+      color: rgba(169,180,208,.95);
+      line-height: 1.45;
+    }
+
+    /* progress bar (subtle) */
+    .progressWrap{
+      width: min(86vw, 520px);
+      margin: 14px auto 10px;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+    }
+    .progress{
+      height:100%;
+      width: 0%;
+      border-radius: 999px;
+      background: rgba(126,231,194,.40);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.10);
+    }
+
+    /* settings accordion */
+    .settings{
+      width: min(92vw, 720px);
+      margin: 10px auto 0;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      overflow:hidden;
+    }
+    .settingsBtn{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 14px 14px;
+      background: transparent;
+      border:0;
+      color: var(--text);
+      cursor:pointer;
+      font-size: 14px;
+    }
+    .settingsBtn strong{
+      font-size: 16px;
+      letter-spacing:.2px;
+    }
+    .settingsBtn .summary{
+      color: rgba(234,240,255,.70);
+      font-size: 13px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 70%;
+    }
+    .settingsBtn .chev{
+      color: var(--muted);
+      font-size: 12px;
+      flex:0 0 auto;
+    }
+    .panel{
+      padding: 0 14px 14px;
+      display:none;
+    }
+    .panel.open{display:block}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .field{
+      grid-column: span 6;
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .field label{
+      display:block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .field input, .field select, .field button{
+      width:100%;
+      padding: 11px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      font-size: 14px;
+      outline:none;
+    }
+    .field select{appearance:auto}
+    .field .mini{
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(169,180,208,.95);
+      line-height: 1.45;
+    }
+    .actions{
+      margin-top: 10px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .smallBtn{
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      color: rgba(234,240,255,.85);
+      font-size: 13px;
+      cursor:pointer;
+    }
+    .smallBtn:hover{background: rgba(255,255,255,.08); color: var(--text);}
+
     footer{
-      margin-top:18px;color:var(--muted);font-size:12px;
-      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
-      padding-top:16px;border-top:1px solid var(--line)
+      width: min(92vw, 980px);
+      margin: 22px auto 0;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      color: var(--muted);
+      font-size: 12px;
     }
-    .links{display:flex;gap:12px;flex-wrap:wrap}
-    .links a{color:var(--muted)}
-    .links a:hover{color:var(--text)}
-    @media (max-width:720px){h2{font-size:20px}}
+    footer a{color: var(--muted)}
+    footer a:hover{color: var(--text)}
+
+    @media (max-width:720px){
+      .hero h2{font-size:24px}
+      .count{font-size:64px}
+      .field{grid-column: span 12}
+      .brand{min-width:auto}
+      .settingsBtn .summary{max-width: 62%;}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .orb{transition:none!important}
+      .orb.idleBreath{ animation:none !important; }
+    }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"4-7-8 Breathing Timer",
+    "url":"https://breath24.com/breathing/4-7-8-breathing/",
+    "description":"Free 4-7-8 breathing timer: inhale 4 seconds, hold 7 seconds, exhale 8 seconds. Tap to start/pause.",
+    "isPartOf":{"@type":"WebSite","name":"Breath24","url":"https://breath24.com/"}
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"HowTo",
+    "name":"4-7-8 Breathing",
+    "description":"Inhale 4 seconds, hold 7 seconds, exhale 8 seconds.",
+    "step":[
+      {"@type":"HowToStep","name":"Inhale","text":"Inhale through your nose for 4 seconds."},
+      {"@type":"HowToStep","name":"Hold","text":"Hold your breath for 7 seconds."},
+      {"@type":"HowToStep","name":"Exhale","text":"Exhale slowly for 8 seconds."}
+    ]
+  }
+  </script>
 </head>
 
 <body>
-<div class="wrap">
-  <header>
-    <a class="brand" href="/">
-      <span class="logo" aria-hidden="true"></span>
-      <span>
-        <h1>Breath24</h1>
-        <p>Terms of service</p>
-      </span>
-    </a>
-    <nav class="nav">
-      <a class="pill" href="/">Home</a>
-      <a class="pill" href="/breathing/">Breathing Library</a>
-      <a class="pill" href="/guide/">Guide</a>
-      <a class="pill" href="/about.html">About</a>
-    </nav>
-  </header>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <span class="logo" aria-hidden="true"></span>
+        <span>
+          <h1>Breath24</h1>
+          <div class="sub" id="brandSub">4-7-8 breathing</div>
+        </span>
+      </a>
 
-  <section class="panel">
-    <h2>Terms of Service</h2>
-    <div class="meta">Last updated: <span id="d"></span></div>
+      <div class="topRight">
+        <nav class="nav" aria-label="Primary">
+          <a class="pill" href="/breathing/" id="navLibrary">Library</a>
+          <a class="pill" href="/guide/" id="navGuide">Guide</a>
+          <a class="pill" href="/about.html" id="navAbout">About</a>
+        </nav>
 
-    <p>
-      By using Breath24, you agree to these terms. If you do not agree, please do not use the site.
-    </p>
+        <div class="langWrap">
+          <div class="lang" aria-label="Language">
+            <svg class="globe" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="rgba(234,240,255,.7)" stroke-width="1.6"/>
+              <path d="M2 12h20" stroke="rgba(234,240,255,.55)" stroke-width="1.6"/>
+              <path d="M12 2c3.2 3 3.2 17 0 20" stroke="rgba(234,240,255,.55)" stroke-width="1.6"/>
+              <path d="M12 2c-3.2 3-3.2 17 0 20" stroke="rgba(234,240,255,.55)" stroke-width="1.6"/>
+            </svg>
+            <select id="langSel" aria-label="Select language">
+              <option value="en">English</option>
+              <option value="ko">한국어</option>
+              <option value="ja">日本語</option>
+              <option value="es">Español</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </header>
 
-    <h3>1) Educational use only</h3>
-    <p>
-      Breath24 provides breathing timers for general informational and educational purposes only.
-      It is not medical advice, diagnosis, or treatment.
-    </p>
+    <section class="hero" aria-label="Intro">
+      <h2 id="titleH2">4-7-8 Breathing</h2>
+      <p id="subtitleP">Tap the circle to start. Follow inhale 4 • hold 7 • exhale 8. Great for sleep and calming down.</p>
+    </section>
 
-    <h3>2) Safety disclaimer</h3>
-    <ul>
-      <li>Stop immediately if you feel dizzy, short of breath, pain, or discomfort.</li>
-      <li>Do not practice breath holds if you have a medical condition that could be affected by breathing exercises.</li>
-      <li>If you have concerns, consult a qualified healthcare professional.</li>
-    </ul>
+    <!-- Tap area -->
+    <div class="stage" id="stage" role="button" tabindex="0" aria-label="Breathing circle">
+      <div class="orb idleBreath" id="orb" aria-hidden="true"></div>
 
-    <h3>3) No warranties</h3>
-    <p>
-      The site is provided “as is” without warranties of any kind. We do not guarantee uninterrupted or error-free operation.
-    </p>
+      <div class="center">
+        <div class="metaLine" id="metaLine">
+          <span class="dot" aria-hidden="true"></span>
+          <span id="metaText">Ready</span>
+        </div>
 
-    <h3>4) Limitation of liability</h3>
-    <p>
-      To the maximum extent permitted by law, Breath24 and its operators are not liable for any damages arising from your use of the site.
-    </p>
-
-    <h3>5) Changes</h3>
-    <p>
-      We may update these terms from time to time. Continued use of the site means you accept the updated terms.
-    </p>
-
-    <div class="note">
-      <b>Note:</b> If you add user accounts, payments, ads, or data collection later,
-      you should update these terms to match.
+        <div class="count" id="count" aria-live="polite">—</div>
+        <div class="phaseText" id="phaseText">Tap to start</div>
+        <div class="hint" id="hint">Tap again to pause/resume.</div>
+      </div>
     </div>
 
-    <div class="btnrow">
-      <a class="btn" href="/privacy.html">View Privacy</a>
-      <a class="btn" href="/about.html">About</a>
-      <a class="btn" href="/breathing/">Breathing Library</a>
+    <div class="progressWrap" aria-hidden="true">
+      <div class="progress" id="progress"></div>
     </div>
-  </section>
 
-  <footer>
-    <div>© <span id="y"></span> Breath24</div>
-    <div class="links">
-      <a href="/privacy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
-      <a href="/about.html">About</a>
-    </div>
-  </footer>
-</div>
+    <section class="settings" aria-label="Settings">
+      <button class="settingsBtn" id="settingsBtn" type="button" aria-expanded="false">
+        <strong id="settingsLabel">Settings</strong>
+        <span class="summary" id="settingsSummary">Rounds 6 • Sound On • Buffer 0.2s</span>
+        <span class="chev" id="chev">▼</span>
+      </button>
+
+      <div class="panel" id="settingsPanel">
+        <div class="grid">
+          <div class="field">
+            <label for="rounds" id="roundsLabel">Rounds</label>
+            <input id="rounds" type="number" min="1" max="50" value="6" inputmode="numeric" />
+            <div class="mini" id="roundsMini">Recommended: 4–8 rounds for sleep.</div>
+          </div>
+
+          <div class="field">
+            <label for="sound" id="soundLabel">Sound</label>
+            <select id="sound">
+              <option value="on">On (beep)</option>
+              <option value="off">Off</option>
+            </select>
+            <div class="mini" id="soundMini">If iPhone/Safari is silent, tap once to unlock audio.</div>
+          </div>
+
+          <div class="field">
+            <label for="buffer" id="bufferLabel">Buffer (seconds)</label>
+            <select id="buffer">
+              <option value="0">0</option>
+              <option value="0.2" selected>0.2</option>
+              <option value="0.4">0.4</option>
+              <option value="0.6">0.6</option>
+            </select>
+            <div class="mini" id="bufferMini">Short pause between phases (comfort).</div>
+          </div>
+
+          <div class="field">
+            <label id="actionsLabel">Actions</label>
+            <button id="resetBtn" type="button">Reset</button>
+            <div class="mini" id="actionsMini">Reset returns to Ready state.</div>
+          </div>
+        </div>
+
+        <div class="actions" aria-label="More timers">
+          <a class="smallBtn" href="/breathing/" id="backBtn">← Back to Library</a>
+          <a class="smallBtn" href="/breathing/box-breathing/" id="boxBtn">Box Breathing</a>
+          <a class="smallBtn" href="/breathing/4-4-6-breathing/" id="446Btn">4-4-6 Breathing</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> <span id="footerBrand">Breath24</span></div>
+      <div>
+        <a href="/privacy.html" id="privacyLink">Privacy</a> ·
+        <a href="/terms.html" id="termsLink">Terms</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ✅ i18n 공통 파일: 하위 루트에서도 안깨지게 절대경로 -->
+  <script src="/i18n/strings.js"></script>
+  <script src="/i18n/i18n.js"></script>
 
 <script>
-  document.getElementById('y').textContent = new Date().getFullYear();
-  const dt = new Date();
-  const pad = (n) => String(n).padStart(2,'0');
-  document.getElementById('d').textContent =
-    `${dt.getFullYear()}-${pad(dt.getMonth()+1)}-${pad(dt.getDate())}`;
+(() => {
+  /* ---------------------------------
+     i18n: 외부 언어팩 사용
+     - 기대: window.B24I18N 또는 window.applyI18N 같은 공통 함수
+  ----------------------------------*/
+  const langSel = document.getElementById("langSel");
+
+  // 공통: 저장된 언어 우선
+  function guessLang(){
+    const saved = localStorage.getItem("b24_lang");
+    if (saved) return saved;
+    const nav = (navigator.language || "en").toLowerCase();
+    if (nav.startsWith("ko")) return "ko";
+    if (nav.startsWith("ja")) return "ja";
+    if (nav.startsWith("es")) return "es";
+    return "en";
+  }
+
+  let LANG = guessLang();
+  langSel.value = LANG;
+
+  function applyLangExternal(){
+    // 1) 공통 i18n.js가 applyI18N(lang) 제공하는 경우
+    if (typeof window.applyI18N === "function") {
+      window.applyI18N(LANG);
+      return;
+    }
+    // 2) 공통 i18n.js가 window.B24I18N.translatePage(lang) 제공하는 경우
+    if (window.B24I18N && typeof window.B24I18N.translatePage === "function") {
+      window.B24I18N.translatePage(LANG);
+      return;
+    }
+    // 없으면 그냥 기본 텍스트 유지
+  }
+
+  langSel.addEventListener("change", () => {
+    LANG = langSel.value;
+    localStorage.setItem("b24_lang", LANG);
+    applyLangExternal();
+    // 러닝중 텍스트 갱신 필요하면 외부 i18n이 id 기반으로 처리함
+    updateSummary();
+    renderStaticTexts();
+  });
+
+  /* ---------------------------
+     Breathing logic
+  ----------------------------*/
+  const pattern = [
+    { key:"inhale", seconds:4 },
+    { key:"hold", seconds:7 },
+    { key:"exhale", seconds:8 }
+  ];
+
+  const stage = document.getElementById("stage");
+  const orb = document.getElementById("orb");
+  const metaText = document.getElementById("metaText");
+  const countEl = document.getElementById("count");
+  const phaseText = document.getElementById("phaseText");
+  const hintEl = document.getElementById("hint");
+  const progressEl = document.getElementById("progress");
+
+  const roundsInput = document.getElementById("rounds");
+  const soundSel = document.getElementById("sound");
+  const bufferSel = document.getElementById("buffer");
+  const resetBtn = document.getElementById("resetBtn");
+
+  // settings accordion
+  const settingsBtn = document.getElementById("settingsBtn");
+  const settingsPanel = document.getElementById("settingsPanel");
+  const settingsSummary = document.getElementById("settingsSummary");
+  const chev = document.getElementById("chev");
+
+  settingsBtn.addEventListener("click", () => {
+    const open = settingsPanel.classList.toggle("open");
+    settingsBtn.setAttribute("aria-expanded", String(open));
+    chev.textContent = open ? "▲" : "▼";
+  });
+
+  let audioCtx = null;
+  function initAudio(){
+    if (audioCtx) return;
+    try{
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }catch(e){ audioCtx = null; }
+  }
+  async function unlockAudio(){
+    if (!audioCtx) return;
+    try{
+      if (audioCtx.state === "suspended") await audioCtx.resume();
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      g.gain.value = 0.0001;
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start();
+      o.stop(audioCtx.currentTime + 0.02);
+    }catch(e){}
+  }
+  function beep(){
+    if (soundSel.value !== "on") return;
+    if (!audioCtx) return;
+    try{
+      const now = audioCtx.currentTime;
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = "sine";
+      o.frequency.setValueAtTime(880, now);
+      g.gain.setValueAtTime(0.0001, now);
+      g.gain.exponentialRampToValueAtTime(0.05, now + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + 0.08);
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start(now);
+      o.stop(now + 0.09);
+    }catch(e){}
+  }
+
+  // ✅ start haptic
+  function hapticStart(){
+    try{
+      if (!("vibrate" in navigator)) return;
+      navigator.vibrate([10, 20, 8]); // subtle
+    }catch(e){}
+  }
+
+  // state
+  let running = false;
+  let paused = false;
+
+  let round = 1;
+  let phaseIdx = 0;
+
+  // per-phase timing
+  let phaseStartMs = 0;
+  let phaseDurMs = 0;
+  let lastShownSecond = null;
+
+  // animation frame
+  let rafId = null;
+
+  function maxRounds(){
+    return Math.max(1, parseInt(roundsInput.value || "6", 10));
+  }
+  function bufferSec(){
+    const v = parseFloat(bufferSel.value || "0.2");
+    return isNaN(v) ? 0.2 : v;
+  }
+
+  // ✅ 외부 i18n이 없을 때 fallback (영문)
+  const FALLBACK = {
+    phase_inhale: "Inhale",
+    phase_hold: "Hold",
+    phase_exhale: "Exhale",
+    ready: "Ready",
+    tapStart: "Tap to start",
+    tapPause: "Tap again to pause/resume.",
+    paused: "Paused",
+    done: "Done",
+    doneHint: "Nice. Return to normal breathing for a moment.",
+    runningHint: "Follow the cue. If uncomfortable, pause or reset.",
+    metaFormat: (phase, r, max) => `${phase} • ${r}/${max}`
+  };
+
+  function t(key){
+    // 공통 i18n.js가 window.t(key, lang) 형태면 그거 사용
+    if (typeof window.t === "function") return window.t(key, LANG) ?? FALLBACK[key];
+    if (window.B24I18N && typeof window.B24I18N.t === "function") return window.B24I18N.t(key, LANG) ?? FALLBACK[key];
+    return FALLBACK[key];
+  }
+
+  function phaseLabel(key){
+    if (key === "inhale") return t("phase_inhale");
+    if (key === "hold") return t("phase_hold");
+    return t("phase_exhale");
+  }
+
+  function renderStaticTexts(){
+    if (!running){
+      metaText.textContent = t("ready");
+      phaseText.textContent = t("tapStart");
+      hintEl.textContent = t("tapPause");
+    }
+  }
+
+  function updateSummary(){
+    const r = maxRounds();
+    const snd = (soundSel.value === "on") ? "Sound On" : "Sound Off";
+    settingsSummary.textContent = `Rounds ${r} • ${snd} • Buffer ${bufferSec()}s`;
+  }
+
+  roundsInput.addEventListener("change", updateSummary);
+  soundSel.addEventListener("change", updateSummary);
+  bufferSel.addEventListener("change", updateSummary);
+
+  function setProgress(pct){
+    const clamped = Math.max(0, Math.min(100, pct));
+    progressEl.style.width = clamped.toFixed(2) + "%";
+  }
+
+  function setOrbScale(scale){
+    const s = Math.max(0.88, Math.min(1.12, scale));
+    orb.style.transform = `scale(${s})`;
+  }
+
+  function startPhase(idx){
+    const sec = pattern[idx].seconds;
+    phaseDurMs = sec * 1000;
+    phaseStartMs = performance.now();
+    lastShownSecond = null;
+    setProgress(0);
+  }
+
+  function toNextPhase(){
+    beep();
+
+    phaseIdx += 1;
+    if (phaseIdx >= pattern.length){
+      phaseIdx = 0;
+      round += 1;
+    }
+
+    if (round > maxRounds()){
+      stop(true);
+      return;
+    }
+
+    startPhase(phaseIdx);
+  }
+
+  function computeScale(key, t01){
+    if (key === "inhale"){
+      const e = 1 - Math.pow(1 - t01, 3);
+      return 0.94 + e * 0.14;
+    }
+    if (key === "exhale"){
+      const e = t01 < 0.5 ? 2*t01*t01 : 1 - Math.pow(-2*t01+2,2)/2;
+      return 1.08 - e * 0.16;
+    }
+    return 1.00;
+  }
+
+  function formatMeta(){
+    const key = pattern[phaseIdx].key;
+    const label = phaseLabel(key);
+    const fmt = t("metaFormat");
+    metaText.textContent = (typeof fmt === "function") ? fmt(label, round, maxRounds()) : `${label} • ${round}/${maxRounds()}`;
+  }
+
+  function frame(){
+    if (!running || paused) return;
+
+    const now = performance.now();
+    const elapsed = now - phaseStartMs;
+
+    const key = pattern[phaseIdx].key;
+    const phaseSec = pattern[phaseIdx].seconds;
+    const t01 = Math.max(0, Math.min(1, elapsed / phaseDurMs));
+
+    setOrbScale(computeScale(key, t01));
+    setProgress(t01 * 100);
+
+    const remain = Math.max(0, Math.ceil(phaseSec - elapsed/1000));
+    if (remain !== lastShownSecond){
+      lastShownSecond = remain;
+      countEl.textContent = String(remain);
+      phaseText.textContent = phaseLabel(key);
+      hintEl.textContent = t("runningHint");
+      formatMeta();
+    }
+
+    if (elapsed >= phaseDurMs){
+      const b = bufferSec() * 1000;
+      setTimeout(() => {
+        if (!running || paused) return;
+        toNextPhase();
+        rafId = requestAnimationFrame(frame);
+      }, b);
+      return;
+    }
+
+    rafId = requestAnimationFrame(frame);
+  }
+
+  function start(){
+    initAudio();
+
+    if (!running){
+      // ✅ 시작 시: idle 숨쉬기 끄고, 진동
+      orb.classList.remove("idleBreath");
+      hapticStart();
+
+      round = 1;
+      phaseIdx = 0;
+      running = true;
+      paused = false;
+      unlockAudio();
+      startPhase(phaseIdx);
+      formatMeta();
+      phaseText.textContent = phaseLabel(pattern[phaseIdx].key);
+      hintEl.textContent = t("runningHint");
+      countEl.textContent = String(pattern[phaseIdx].seconds);
+      rafId = requestAnimationFrame(frame);
+      return;
+    }
+
+    if (running && paused){
+      paused = false;
+      unlockAudio();
+      hintEl.textContent = t("runningHint");
+      const currentRemain = parseInt(countEl.textContent || "0", 10);
+      const secTotal = pattern[phaseIdx].seconds;
+      const elapsedApprox = (secTotal - currentRemain) * 1000;
+      phaseStartMs = performance.now() - Math.max(0, Math.min(phaseDurMs-1, elapsedApprox));
+      rafId = requestAnimationFrame(frame);
+    }
+  }
+
+  function pause(){
+    if (!running) return;
+    paused = true;
+    hintEl.textContent = t("tapPause");
+    phaseText.textContent = t("paused");
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+  }
+
+  function stop(completed=false){
+    running = false;
+    paused = false;
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+
+    setOrbScale(1.0);
+    setProgress(0);
+
+    // ✅ 준비상태로 돌아오면 idle 숨쉬기 다시 켬
+    orb.classList.add("idleBreath");
+
+    metaText.textContent = completed ? t("done") : t("ready");
+    countEl.textContent = "—";
+    phaseText.textContent = completed ? t("done") : t("tapStart");
+    hintEl.textContent = completed ? t("doneHint") : t("tapPause");
+  }
+
+  function toggleStartPause(){
+    initAudio();
+    unlockAudio();
+
+    if (!running) { start(); return; }
+    if (running && !paused) { pause(); return; }
+    if (running && paused) { start(); return; }
+  }
+
+  stage.addEventListener("click", toggleStartPause);
+  stage.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleStartPause();
+    }
+  });
+
+  resetBtn.addEventListener("click", () => stop(false));
+
+  document.getElementById("y").textContent = new Date().getFullYear();
+
+  // init: 외부 i18n 적용
+  applyLangExternal();
+  updateSummary();
+  stop(false);
+})();
 </script>
 </body>
 </html>
