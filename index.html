@@ -42,13 +42,13 @@
     a{color:inherit; text-decoration:none}
     .wrap{max-width:980px; margin:0 auto; padding:22px 16px 44px;}
 
-    /* ===== Header (UPDATED: 한 줄 + 네비 아이콘 + 언어는 기존 자리 유지) ===== */
+    /* ===== Header (FINAL: 1줄 로고+아이콘네비 / 2줄 언어 고정) ===== */
     header{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
-      padding:8px 0 18px;
+      padding:8px 0 12px;
       min-width:0;
     }
     .brand{
@@ -68,11 +68,11 @@
     .brand h1{font-size:18px; margin:0; letter-spacing:.2px}
     .brand p{margin:2px 0 0; font-size:12px; color:var(--muted); line-height:1.25}
 
-    /* 오른쪽 한 줄: 아이콘 네비 + 언어(오른쪽 끝) */
-    .topRight{
+    /* 오른쪽: (위) 아이콘 네비 / (아래) 언어 */
+    .rightTop{
       display:flex;
-      align-items:center;
-      justify-content:flex-end;
+      flex-direction:column;
+      align-items:flex-end;
       gap:10px;
       flex:0 0 auto;
       min-width:0;
@@ -118,7 +118,7 @@
       white-space:nowrap;border:0;
     }
 
-    /* 언어: 3번 스타일(글로브 + 드롭다운) / 현재 자리(오른쪽 끝) */
+    /* 언어 (그대로 유지 + 아래 줄) */
     .langWrap{
       position:relative;
       display:flex;
@@ -216,17 +216,14 @@
     .links a{color:var(--muted); white-space:nowrap;}
     .links a:hover{color:var(--text)}
 
-    /* ✅ 모바일: 한 줄이 깨지면 nav만 스크롤(언어는 고정) */
+    /* ✅ 모바일: 1줄은 로고+아이콘네비, 2줄 언어 유지 / nav만 스크롤 */
     @media (max-width:720px){
       header{
-        flex-wrap:nowrap;
-        align-items:center;
+        align-items:flex-start;
       }
-      .topRight{
-        gap:8px;
-      }
+      .rightTop{gap:8px}
       .nav{
-        max-width: calc(100vw - 16px - 160px); /* 언어 영역 남기고 nav만 */
+        max-width: 220px;
         overflow-x:auto;
         -webkit-overflow-scrolling:touch;
         padding-bottom:2px;
@@ -236,7 +233,6 @@
         min-width:110px;
         max-width:140px;
       }
-
       .card{grid-column: span 12;}
       .hero h2{font-size:20px}
     }
@@ -255,7 +251,7 @@
 
 <body>
   <div class="wrap">
-    <!-- ===== Header (UPDATED) ===== -->
+
     <header>
       <a class="brand" href="/" aria-label="Breath24 Home">
         <span class="logo" aria-hidden="true"></span>
@@ -265,10 +261,10 @@
         </span>
       </a>
 
-      <div class="topRight">
+      <div class="rightTop">
+        <!-- 1줄: 아이콘 네비 -->
         <nav class="nav" aria-label="Primary">
           <a class="iconPill" id="nav_library" href="/breathing/" aria-label="Breathing Library" title="Library">
-            <!-- grid icon -->
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z"
                     stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
@@ -277,7 +273,6 @@
           </a>
 
           <a class="iconPill" id="nav_guide" href="/guide/" aria-label="Guide" title="Guide">
-            <!-- book icon -->
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M7 4h10a2 2 0 0 1 2 2v13a1 1 0 0 1-1 1H7a2 2 0 0 0-2 2V6a2 2 0 0 1 2-2Z"
                     stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
@@ -287,7 +282,6 @@
           </a>
 
           <a class="iconPill" id="nav_about" href="/about.html" aria-label="About" title="About">
-            <!-- info icon -->
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"
                     stroke="currentColor" stroke-width="1.7"/>
@@ -298,6 +292,7 @@
           </a>
         </nav>
 
+        <!-- 2줄: 언어(현재 자리 유지) -->
         <div class="langWrap" aria-label="Language">
           <svg class="globe" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="rgba(234,240,255,.7)" stroke-width="1.6"/>
