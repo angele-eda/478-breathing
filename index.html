@@ -42,7 +42,7 @@
     a{color:inherit; text-decoration:none}
     .wrap{max-width:980px; margin:0 auto; padding:22px 16px 44px;}
 
-    /* ===== Header: 1줄 로고+아이콘네비 / 2줄 언어 ===== */
+    /* ===== Header: 1줄 로고+아이콘네비 / 2줄 언어(현재 자리) ===== */
     header{
       display:flex;
       align-items:flex-start;
@@ -66,6 +66,7 @@
       flex:0 0 auto;
     }
     .brand h1{font-size:18px; margin:0; letter-spacing:.2px}
+    .brand p{margin:2px 0 0; font-size:12px; color:var(--muted); line-height:1.25}
 
     .rightTop{
       display:flex;
@@ -85,65 +86,41 @@
       min-width:0;
     }
 
-    /* =========================
-       ✅ 아이콘 네비 (CSS로 그림)
-       i18n이 textContent를 바꿔도 아이콘은 유지됨
-       ========================= */
+    /* ✅ 스샷처럼: 이모지 아이콘 동그라미 버튼 */
     .iconPill{
-      width:42px;
-      height:42px;
+      width:44px;
+      height:40px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      border-radius:999px; /* ✅ 동그라미 */
-      background:rgba(255,255,255,.075); /* ✅ 더 앱스럽게 조금 진하게 */
-      border:1px solid rgba(255,255,255,.12);
-      color:var(--muted);
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      color:var(--text);
       flex:0 0 auto;
       position:relative;
       overflow:hidden;
 
-      /* ✅ i18n 텍스트 숨기기(아이콘만) */
+      /* i18n이 텍스트 바꿔도 아이콘만 보이게 */
       font-size:0;
       line-height:0;
 
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-
-      transition: background .12s ease, border-color .12s ease, transform .12s ease, color .12s ease, box-shadow .12s ease;
+      transition: background .12s ease, border-color .12s ease, transform .12s ease;
     }
     .iconPill:hover{
-      background:rgba(255,255,255,.10);
+      background:rgba(255,255,255,.08);
       border-color: rgba(255,255,255,.18);
-      color: var(--text);
       transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(0,0,0,.25);
     }
-
     .iconPill::before{
-      content:"";
-      width:18px;height:18px;
-      display:block;
-      background-repeat:no-repeat;
-      background-position:center;
-      background-size:18px 18px;
+      content: attr(data-icon);
+      font-size:18px;
+      line-height:1;
+      transform: translateY(-.5px);
       opacity:.95;
     }
 
-    /* Library (grid) */
-    #nav_library.iconPill::before{
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z' stroke='%23eaf0ff' stroke-width='1.7' stroke-linejoin='round'/%3E%3C/svg%3E");
-    }
-    /* Guide (open book ✅ 추천 아이콘) */
-    #nav_guide.iconPill::before{
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M3 5a2 2 0 0 1 2-2h6v18H5a2 2 0 0 0-2 2V5Zm18 0a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 1 2 2V5Z' stroke='%23eaf0ff' stroke-width='1.7' stroke-linejoin='round'/%3E%3C/svg%3E");
-    }
-    /* About (info) */
-    #nav_about.iconPill::before{
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z' stroke='%23eaf0ff' stroke-width='1.7'/%3E%3Cpath d='M12 10.5v6' stroke='%23eaf0ff' stroke-width='1.7' stroke-linecap='round'/%3E%3Cpath d='M12 7.5h.01' stroke='%23eaf0ff' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E");
-    }
-
-    /* ===== 언어 (아래줄, 현재 자리 유지) ===== */
+    /* ===== 언어(아래줄, 현재 자리 유지) ===== */
     .langWrap{
       position:relative;
       display:flex;
@@ -272,28 +249,22 @@
 
 <body>
   <div class="wrap">
-
     <header>
       <a class="brand" href="/" aria-label="Breath24 Home">
         <span class="logo" aria-hidden="true"></span>
         <span>
           <h1>Breath24</h1>
-          <!-- ✅ 로고 아래 문구(회원가입 없음) 제거 -->
+          <!-- ✅ 로고 밑 문구: 회원가입 없음 제거, 문구 유지 -->
+          <p id="brand_sub">Simple breathing timers</p>
         </span>
       </a>
 
       <div class="rightTop">
-        <!-- ✅ 네비는 아이콘(텍스트는 i18n이 바꿔도 font-size:0이라 안 보임) -->
+        <!-- ✅ 스샷처럼 이모지 아이콘 네비 -->
         <nav class="nav" aria-label="Primary">
-          <a class="iconPill" id="nav_library" href="/breathing/" aria-label="Breathing Library" title="Library">
-            Breathing Library
-          </a>
-          <a class="iconPill" id="nav_guide" href="/guide/" aria-label="Guide" title="Guide">
-            Guide
-          </a>
-          <a class="iconPill" id="nav_about" href="/about.html" aria-label="About" title="About">
-            About
-          </a>
+          <a class="iconPill" id="nav_library" data-icon="📚" href="/breathing/" aria-label="Library" title="Library">Library</a>
+          <a class="iconPill" id="nav_guide" data-icon="📖" href="/guide/" aria-label="Guide" title="Guide">Guide</a>
+          <a class="iconPill" id="nav_about" data-icon="ℹ️" href="/about.html" aria-label="About" title="About">About</a>
         </nav>
 
         <!-- ✅ 언어는 현재 자리(한 줄 아래) 그대로 -->
