@@ -51,7 +51,13 @@
       padding:8px 0 18px;
       min-width:0;
     }
-    .brand{display:flex; align-items:center; gap:10px; min-width:0; flex: 1 1 auto;}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+      flex: 1 1 auto;
+    }
     .logo{
       width:36px; height:36px; border-radius:12px;
       background: linear-gradient(135deg, rgba(126,231,194,.35), rgba(255,210,122,.25));
@@ -62,7 +68,7 @@
     .brand h1{font-size:18px; margin:0; letter-spacing:.2px}
     .brand p{margin:2px 0 0; font-size:12px; color:var(--muted)}
 
-    /* 오른쪽 상단 그룹 */
+    /* 오른쪽 상단 그룹: nav(최상단) + language(그 아래) */
     .rightTop{
       display:flex;
       flex-direction:column;
@@ -72,6 +78,7 @@
       min-width:0;
     }
 
+    /* ✅ 우측 최상단 네비 */
     .nav{
       display:flex;
       gap:10px;
@@ -80,15 +87,23 @@
       justify-content:flex-end;
       min-width:0;
     }
-
     .pill{
-      padding:9px 12px; border-radius:999px;
+      padding:9px 12px;
+      border-radius:999px;
       background:rgba(255,255,255,.06);
       border:1px solid var(--line);
-      font-size:13px; color:var(--muted);
+      font-size:13px;
+      color:var(--muted);
       white-space:nowrap;
       word-break:keep-all;
       flex:0 0 auto;
+      transition: background .12s ease, border-color .12s ease, transform .12s ease;
+    }
+    .pill:hover{
+      background:rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.18);
+      color: var(--text);
+      transform: translateY(-1px);
     }
 
     /* language row (우측) */
@@ -101,17 +116,24 @@
       min-width:0;
     }
     .langLabel{
-      font-size:12px; font-weight:800; color:var(--muted);
-      display:flex; align-items:center; gap:8px;
-      padding:9px 12px; border-radius:999px;
-      border:1px solid var(--line); background:rgba(255,255,255,.04);
+      font-size:12px;
+      font-weight:800;
+      color:var(--muted);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
       white-space:nowrap;
       flex:0 0 auto;
     }
 
-    /* ✅ 드롭바를 "가로 한줄 꽉"이 아니라 적당한 크기로 */
+    /* ✅ 드롭바를 "가로 한줄 꽉"이 아니라 적당한 크기 */
     .langSelect{
-      padding:9px 12px; border-radius:999px;
+      padding:9px 12px;
+      border-radius:999px;
       background:rgba(255,255,255,.06);
       border:1px solid var(--line);
       color:var(--text);
@@ -119,7 +141,8 @@
       font-weight:800;
       outline:none;
 
-      width: auto;
+      /* 핵심: 풀폭 금지 + 적당한 폭 */
+      width: fit-content;
       min-width: 160px;
       max-width: 220px;
     }
@@ -182,19 +205,13 @@
     .links a{color:var(--muted); white-space:nowrap;}
     .links a:hover{color:var(--text)}
 
-    /* ✅ 모바일: 오른쪽 요소는 그대로 우측 정렬 + nav는 한줄 스크롤 */
+    /* ✅ 모바일: nav는 우상단 유지 + 한줄 스크롤 / 언어 드롭은 적당폭 */
     @media (max-width:720px){
       .card{grid-column: span 12;}
       .hero h2{font-size:20px}
 
-      header{
-        align-items:flex-start;
-        gap:12px;
-      }
-      .rightTop{
-        gap:8px;
-        max-width: 52%;
-      }
+      /* 우측 그룹이 너무 커지는 걸 방지 */
+      .rightTop{max-width: 56%; gap:8px;}
 
       .nav{
         overflow-x:auto;
@@ -209,11 +226,12 @@
       }
     }
 
-    /* 아주 좁은 화면: 우측그룹이 아래로 */
+    /* 아주 좁은 화면: 브랜드 위, 우측 그룹 아래로 내려도 우측정렬 유지 */
     @media (max-width:420px){
       header{
         flex-direction:column;
         align-items:stretch;
+        gap:10px;
       }
       .rightTop{
         align-items:flex-end;
