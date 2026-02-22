@@ -59,7 +59,7 @@
       flex:1 1 auto;
     }
 
-    /* ✅ Wave Logo: 배경/네모 없음 + 숨쉬듯(4초) + 글로우 */
+    /* ✅ Wave Logo: 배경/네모 없음 + 숨쉬듯(4초) + 글로우(초미세) */
     .logo{
       width:36px;
       height:36px;
@@ -75,19 +75,22 @@
 
       animation: breathe 4s cubic-bezier(.4,0,.2,1) infinite;
       transform-origin:center;
+      will-change: transform;
     }
     .logo svg{
       width:36px;
       height:36px;
       display:block;
-      filter: drop-shadow(0 0 4px rgba(126,231,194,.35));
+      /* ✅ 기본 글로우는 "거의 안 보이게" */
+      filter: drop-shadow(0 0 1.5px rgba(126,231,194,.18));
     }
 
+    /* ✅ 숨쉬기: 스케일만 + 글로우는 초미세 변화(과한 번쩍임 X) */
     @keyframes breathe{
-      0%   { transform: scale(1);    filter: drop-shadow(0 0 3px rgba(126,231,194,.25)); }
-      40%  { transform: scale(1.05); filter: drop-shadow(0 0 8px rgba(126,231,194,.60)); }
-      60%  { transform: scale(1.05); filter: drop-shadow(0 0 8px rgba(126,231,194,.60)); }
-      100% { transform: scale(1);    filter: drop-shadow(0 0 3px rgba(126,231,194,.25)); }
+      0%   { transform: scale(1); }
+      40%  { transform: scale(1.05); }
+      60%  { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
 
     @media (prefers-reduced-motion: reduce){
