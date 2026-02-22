@@ -59,20 +59,21 @@
       flex:1 1 auto;
     }
 
-    /* ✅ 로고: 숨(4초) 애니메이션 */
+    /* ✅ 로고: 네모박스(배경/테두리/그림자) 제거 + 숨(4초) 애니메이션 유지 */
     .logo{
-      width:36px; height:36px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      width:36px;
+      height:36px;
       flex:0 0 auto;
       display:grid;
       place-items:center;
-      overflow:hidden;
-      background: rgba(255,255,255,.03);
+      background:transparent;
+      border:none;
+      box-shadow:none;
+      overflow:visible;
       position:relative;
     }
     .logo svg{ width:36px; height:36px; display:block; }
+
     .logo .breathe{
       transform-origin: 18px 18px;
       animation: breathe 4s ease-in-out infinite;
@@ -278,7 +279,7 @@
     <header>
       <a class="brand" href="/" aria-label="Breath24 Home">
 
-        <!-- ✅ 숨 애니메이션 로고 (B 느낌: 글로우 링) -->
+        <!-- ✅ 숨 애니메이션 로고 (배경 네모 rect 제거 완료) -->
         <span class="logo" aria-hidden="true">
           <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Breath24 Logo">
             <defs>
@@ -295,8 +296,7 @@
               </radialGradient>
             </defs>
 
-            <!-- Soft background -->
-            <rect x="0" y="0" width="36" height="36" rx="12" fill="url(#bgGlow)"/>
+            <!-- ✅ Soft background 네모 제거 (rect 삭제) -->
 
             <!-- Pulse glow (breathing) -->
             <circle class="pulse" cx="18" cy="18" r="13.2" fill="none" stroke="rgba(126,231,194,.35)" stroke-width="2.2"/>
@@ -315,20 +315,17 @@
 
         <span>
           <h1>Breath24</h1>
-          <!-- ✅ 로고 밑 문구 (회원가입 없음 제거한 상태) -->
           <p id="brand_sub">Simple breathing timers</p>
         </span>
       </a>
 
       <div class="rightTop">
-        <!-- ✅ 스샷처럼 이모지 아이콘 네비 -->
         <nav class="nav" aria-label="Primary">
           <a class="iconPill" id="nav_library" data-icon="📚" href="/breathing/" aria-label="Library" title="Library">Library</a>
           <a class="iconPill" id="nav_guide" data-icon="📖" href="/guide/" aria-label="Guide" title="Guide">Guide</a>
           <a class="iconPill" id="nav_about" data-icon="ℹ️" href="/about.html" aria-label="About" title="About">About</a>
         </nav>
 
-        <!-- ✅ 언어는 현재 자리(한 줄 아래) 그대로 -->
         <div class="langWrap" aria-label="Language">
           <svg class="globe" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="rgba(234,240,255,.7)" stroke-width="1.6"/>
