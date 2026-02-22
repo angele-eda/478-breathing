@@ -42,10 +42,10 @@
     a{color:inherit; text-decoration:none}
     .wrap{max-width:980px; margin:0 auto; padding:22px 16px 44px;}
 
-    /* ===== Header (UPDATED) ===== */
+    /* ===== Header (UPDATED: 로고/네비 한 줄 + 언어는 아래 우측) ===== */
     header{
       display:flex;
-      align-items:center;
+      align-items:center;             /* ✅ 로고/네비 수평 일직선 */
       justify-content:space-between;
       gap:14px;
       padding:8px 0 18px;
@@ -68,11 +68,11 @@
     .brand h1{font-size:18px; margin:0; letter-spacing:.2px}
     .brand p{margin:2px 0 0; font-size:12px; color:var(--muted); line-height:1.25}
 
-    /* 오른쪽: nav + lang 한 줄(오른쪽 끝 고정) */
-    .topRight{
+    /* 오른쪽: nav(위) + lang(아래) */
+    .rightTop{
       display:flex;
-      align-items:center;
-      justify-content:flex-end;
+      flex-direction:column;
+      align-items:flex-end;
       gap:10px;
       flex:0 0 auto;
       min-width:0;
@@ -105,7 +105,7 @@
       transform: translateY(-1px);
     }
 
-    /* 언어: 3번 스타일(글로브 + 드롭다운) / 오른쪽 정렬 고정 */
+    /* 언어: 3번 스타일(글로브 + 드롭다운) / nav 아래 우측 */
     .langWrap{
       position:relative;
       display:flex;
@@ -122,13 +122,6 @@
       width:18px;height:18px;
       opacity:.9;
       flex:0 0 auto;
-    }
-    .langLabel{
-      font-size:12px;
-      font-weight:800;
-      color:var(--muted);
-      margin-right:2px;
-      display:none; /* ✅ 상단은 더 미니멀하게: 필요하면 block으로 바꿔 */
     }
     .langSelect{
       appearance:none;
@@ -210,19 +203,21 @@
     .links a{color:var(--muted); white-space:nowrap;}
     .links a:hover{color:var(--text)}
 
-    /* ✅ 모바일: nav는 상단에 “오른쪽 스크롤” 유지 + 언어는 바로 아래(우측) */
+    /* ✅ 모바일: nav는 맨 위 오른쪽 스크롤 + 언어는 바로 아래 우측 */
     @media (max-width:720px){
       header{
         flex-wrap:wrap;
         align-items:flex-start;
       }
-      .topRight{
+
+      /* 오른쪽 그룹을 먼저(상단) */
+      .rightTop{
         width:100%;
         order:-1;
-        justify-content:flex-end;
-        flex-wrap:wrap;
+        align-items:flex-end;
         gap:8px;
       }
+
       .nav{
         width:100%;
         justify-content:flex-end;
@@ -231,17 +226,17 @@
         padding-bottom:2px;
       }
       .nav::-webkit-scrollbar{display:none;}
+
       .brand{
         width:100%;
         order:0;
       }
-      .langWrap{
-        margin-left:auto;
-      }
+
       .langSelect{
-        min-width: 130px;
-        max-width: 180px;
+        min-width:130px;
+        max-width:180px;
       }
+
       .card{grid-column: span 12;}
       .hero h2{font-size:20px}
     }
@@ -271,7 +266,7 @@
         </span>
       </a>
 
-      <div class="topRight">
+      <div class="rightTop">
         <nav class="nav" aria-label="Primary">
           <a class="pill" id="nav_library" href="/breathing/">Breathing Library</a>
           <a class="pill" id="nav_guide" href="/guide/">Guide</a>
@@ -286,7 +281,6 @@
             <path d="M12 2c-3.2 3-3.2 17 0 20" stroke="rgba(234,240,255,.55)" stroke-width="1.6"/>
           </svg>
 
-          <!-- (원하면 표시) <span class="langLabel" id="lang_label">Language</span> -->
           <select class="langSelect" id="langSelect" aria-label="Language select">
             <option value="en" selected>Global (English)</option>
             <option value="ko">한국어</option>
@@ -372,7 +366,6 @@
   </div>
 
   <script>
-    // year
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 
