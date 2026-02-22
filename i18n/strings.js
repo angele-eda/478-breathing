@@ -7,7 +7,8 @@
   window.B24_STRINGS = {
     en: {
       langLabel: "Language",
-      brandSub: "Simple breathing timers • No account",
+      // ✅ "• No account" 제거
+      brandSub: "Simple breathing timers",
       navLibrary: "Breathing Library",
       navGuide: "Guide",
       navAbout: "About",
@@ -57,7 +58,8 @@
 
     ko: {
       langLabel: "언어",
-      brandSub: "간단한 호흡 타이머 • 회원가입 없음",
+      // ✅ "• 회원가입 없음" 제거
+      brandSub: "간단한 호흡 타이머",
       navLibrary: "호흡 라이브러리",
       navGuide: "가이드",
       navAbout: "소개",
@@ -83,7 +85,8 @@
 
     ja: {
       langLabel: "言語",
-      brandSub: "シンプルな呼吸タイマー • アカウント不要",
+      // ✅ "• アカウント不要" 제거
+      brandSub: "シンプルな呼吸タイマー",
       navLibrary: "呼吸ライブラリ",
       navGuide: "ガイド",
       navAbout: "紹介",
@@ -109,7 +112,8 @@
 
     es: {
       langLabel: "Idioma",
-      brandSub: "Temporizadores simples • Sin cuenta",
+      // ✅ "• Sin cuenta" 제거
+      brandSub: "Temporizadores simples",
       navLibrary: "Biblioteca de respiración",
       navGuide: "Guía",
       navAbout: "Acerca de",
