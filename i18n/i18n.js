@@ -1,8 +1,5 @@
 /* /i18n/i18n.js
    Breath24 shared i18n logic (global)
-   - Works with your current index.html IDs
-   - Keeps user selection via localStorage
-   - Supports ?lang=ko
 */
 (function () {
   "use strict";
@@ -14,7 +11,7 @@
   const LS_MANUAL = "b24_lang_manual";
 
   function detectLang() {
-    const qp = (new URL(location.href)).searchParams.get("lang");
+    const qp = new URL(location.href).searchParams.get("lang");
     const q = (qp || "").toLowerCase();
     if (q && STR[q]) return q;
 
@@ -52,12 +49,10 @@
       localStorage.setItem(LS_LANG, lang);
     }
 
-    // Keep select in sync
     const sel = byId("langSelect");
     if (sel) sel.value = lang;
 
     // Header
-    setText("lang_label", t.langLabel);
     setText("brand_sub", t.brandSub);
     setText("nav_library", t.navLibrary);
     setText("nav_guide", t.navGuide);
@@ -106,10 +101,9 @@
   }
 
   // Init
-  const initial = detectLang();
-  applyLang(initial, false);
+  applyLang(detectLang(), false);
 
-  // Bind select change (if exists)
+  // Bind select change
   const sel = byId("langSelect");
   if (sel) {
     sel.addEventListener("change", (e) => {
@@ -117,7 +111,6 @@
     });
   }
 
-  // Optional: expose small API for other pages
   window.B24_I18N = {
     apply: (lang) => applyLang(lang, true),
     current: () => document.documentElement.lang || "en",
