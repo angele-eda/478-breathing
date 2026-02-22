@@ -41,12 +41,17 @@
     }
     a{color:inherit; text-decoration:none}
     .wrap{max-width:980px; margin:0 auto; padding:22px 16px 44px;}
+
+    /* ===== Header layout (요청: nav 우상단 / 언어 우측) ===== */
     header{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; padding:8px 0 18px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      padding:8px 0 18px;
       min-width:0;
     }
-    .brand{display:flex; align-items:center; gap:10px; min-width:0;}
+    .brand{display:flex; align-items:center; gap:10px; min-width:0; flex: 1 1 auto;}
     .logo{
       width:36px; height:36px; border-radius:12px;
       background: linear-gradient(135deg, rgba(126,231,194,.35), rgba(255,210,122,.25));
@@ -56,10 +61,45 @@
     }
     .brand h1{font-size:18px; margin:0; letter-spacing:.2px}
     .brand p{margin:2px 0 0; font-size:12px; color:var(--muted)}
-    .nav{display:flex; gap:10px; align-items:center; flex-wrap:wrap; min-width:0;}
 
-    /* language row */
-    .langRow{display:flex; align-items:center; gap:10px; flex-wrap:wrap; min-width:0;}
+    /* 오른쪽 상단 그룹 */
+    .rightTop{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:10px;
+      flex: 0 0 auto;
+      min-width:0;
+    }
+
+    .nav{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:nowrap;
+      justify-content:flex-end;
+      min-width:0;
+    }
+
+    .pill{
+      padding:9px 12px; border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      font-size:13px; color:var(--muted);
+      white-space:nowrap;
+      word-break:keep-all;
+      flex:0 0 auto;
+    }
+
+    /* language row (우측) */
+    .langRow{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:10px;
+      flex-wrap:nowrap;
+      min-width:0;
+    }
     .langLabel{
       font-size:12px; font-weight:800; color:var(--muted);
       display:flex; align-items:center; gap:8px;
@@ -68,6 +108,8 @@
       white-space:nowrap;
       flex:0 0 auto;
     }
+
+    /* ✅ 드롭바를 "가로 한줄 꽉"이 아니라 적당한 크기로 */
     .langSelect{
       padding:9px 12px; border-radius:999px;
       background:rgba(255,255,255,.06);
@@ -76,26 +118,16 @@
       font-size:13px;
       font-weight:800;
       outline:none;
-      min-width: 180px;
-      max-width:100%;
+
+      width: auto;
+      min-width: 160px;
+      max-width: 220px;
     }
     .langSelect:focus-visible{
       box-shadow: 0 0 0 3px rgba(126,231,194,.16);
       border-color: rgba(255,255,255,.18);
     }
     option{ background:#0b0f17; color:#eaf0ff; }
-
-    .pill{
-      padding:9px 12px; border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--line);
-      font-size:13px; color:var(--muted);
-
-      /* ✅ 세로 쪼개짐 방지 */
-      white-space: nowrap;
-      word-break: keep-all;
-      flex: 0 0 auto;
-    }
 
     .hero{
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
@@ -150,34 +182,46 @@
     .links a{color:var(--muted); white-space:nowrap;}
     .links a:hover{color:var(--text)}
 
+    /* ✅ 모바일: 오른쪽 요소는 그대로 우측 정렬 + nav는 한줄 스크롤 */
     @media (max-width:720px){
       .card{grid-column: span 12;}
       .hero h2{font-size:20px}
-      .langSelect{min-width: 150px;}
 
-      /* ✅ 모바일에서 헤더를 2줄 느낌으로 안정화 */
       header{
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
+        align-items:flex-start;
+        gap:12px;
+      }
+      .rightTop{
+        gap:8px;
+        max-width: 52%;
       }
 
-      /* ✅ 메뉴는 한 줄 유지 + 가로 스크롤 */
       .nav{
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 2px;
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+        padding-bottom:2px;
       }
       .nav::-webkit-scrollbar{display:none;}
 
-      /* ✅ 언어도 한 줄 + select는 꽉 */
-      .langRow{
-        justify-content: space-between;
-      }
       .langSelect{
-        width: 100%;
-        min-width: 0;
+        min-width: 140px;
+        max-width: 180px;
+      }
+    }
+
+    /* 아주 좁은 화면: 우측그룹이 아래로 */
+    @media (max-width:420px){
+      header{
+        flex-direction:column;
+        align-items:stretch;
+      }
+      .rightTop{
+        align-items:flex-end;
+        max-width:100%;
+      }
+      .langRow{
+        width:100%;
+        justify-content:flex-end;
       }
     }
   </style>
@@ -204,20 +248,23 @@
         </span>
       </a>
 
-      <nav class="nav" aria-label="Primary">
-        <a class="pill" id="nav_library" href="/breathing/">Breathing Library</a>
-        <a class="pill" id="nav_guide" href="/guide/">Guide</a>
-        <a class="pill" id="nav_about" href="/about.html">About</a>
-      </nav>
+      <!-- ✅ 우상단: nav + 언어 -->
+      <div class="rightTop">
+        <nav class="nav" aria-label="Primary">
+          <a class="pill" id="nav_library" href="/breathing/">Breathing Library</a>
+          <a class="pill" id="nav_guide" href="/guide/">Guide</a>
+          <a class="pill" id="nav_about" href="/about.html">About</a>
+        </nav>
 
-      <div class="langRow" aria-label="Language">
-        <div class="langLabel">🌐 <span id="lang_label">Language</span></div>
-        <select class="langSelect" id="langSelect" aria-label="Language select">
-          <option value="en" selected>Global (English)</option>
-          <option value="ko">한국어</option>
-          <option value="ja">日本語</option>
-          <option value="es">Español</option>
-        </select>
+        <div class="langRow" aria-label="Language">
+          <div class="langLabel">🌐 <span id="lang_label">Language</span></div>
+          <select class="langSelect" id="langSelect" aria-label="Language select">
+            <option value="en" selected>Global (English)</option>
+            <option value="ko">한국어</option>
+            <option value="ja">日本語</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
       </div>
     </header>
 
@@ -403,7 +450,6 @@
       const qp = (new URL(location.href).searchParams.get("lang") || "").toLowerCase();
       if(STR[qp]) return qp;
 
-      // if user once chose language, keep it
       const manual = localStorage.getItem("b24_lang_manual") === "1";
       const saved = localStorage.getItem("b24_lang");
       if(manual && saved && STR[saved]) return saved;
@@ -426,6 +472,7 @@
     function applyLang(lang, isManual=false){
       if(!STR[lang]) lang = "en";
       LANG = lang;
+
       if(isManual){
         localStorage.setItem("b24_lang", lang);
         localStorage.setItem("b24_lang_manual", "1");
@@ -436,18 +483,15 @@
       document.documentElement.lang = lang;
       document.getElementById("langSelect").value = lang;
 
-      // top texts
       document.getElementById("lang_label").textContent = t().langLabel;
       document.getElementById("brand_sub").textContent = t().brandSub;
       document.getElementById("nav_library").textContent = t().navLibrary;
       document.getElementById("nav_guide").textContent = t().navGuide;
       document.getElementById("nav_about").textContent = t().navAbout;
 
-      // hero
       document.getElementById("hero_title").textContent = t().heroTitle;
       document.getElementById("hero_sub").textContent = t().heroSub;
 
-      // cards
       document.getElementById("c1_title").textContent = t().c1.title;
       document.getElementById("c1_desc").textContent  = t().c1.desc;
       document.getElementById("c1_btn").textContent   = t().start;
@@ -478,13 +522,11 @@
       document.getElementById("c6_btn").textContent   = t().start;
       document.getElementById("c6_tag").textContent   = t().c6.tag;
 
-      // footer
       document.getElementById("footer_brand").textContent = t().footerBrand;
       document.getElementById("footer_privacy").textContent = t().footerPrivacy;
       document.getElementById("footer_terms").textContent = t().footerTerms;
       document.getElementById("footer_about").textContent = t().footerAbout;
 
-      // meta (title/desc + OG)
       document.title = t().metaTitle;
       const desc = document.querySelector('meta[name="description"]');
       if(desc) desc.setAttribute("content", t().metaDesc);
@@ -497,13 +539,7 @@
       applyLang(e.target.value, true);
     });
 
-    // init
     applyLang(LANG, false);
-  </script>
-
-  <script>
-    // year
-    document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
